@@ -1,7 +1,6 @@
-package bookingStuff;
-import java.util.*;
+package booking;
 
-/** userProfile.java
+/** booking.userProfile.java
  * @author Joseph Salama
  * @version 1.0
  */

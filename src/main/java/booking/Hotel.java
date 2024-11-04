@@ -1,7 +1,9 @@
+package booking;
+
 import java.util.*;
 
 /**
- * The Hotel class represents a hotel containing a collection of rooms.
+ * The booking.Hotel class represents a hotel containing a collection of rooms.
  * It provides methods to add rooms, retrieve all rooms, 
  * get available rooms, and display hotel information.
  */
@@ -11,7 +13,7 @@ public class Hotel {
     private List<Room> rooms; // List of rooms in the hotel
 
     /**
-     * Constructor to create a Hotel object with a name and location.
+     * Constructor to create a booking.Hotel object with a name and location.
      * @param name the name of the hotel
      * @param location the location of the hotel
      */
@@ -55,7 +57,7 @@ public class Hotel {
      * Displays the hotel's information, including the name, location, and rooms.
      */
     public void displayHotelInfo() {
-        System.out.println("Hotel Name: " + name);
+        System.out.println("Name: " + name);
         System.out.println("Location: " + location);
         System.out.println("Rooms:");
         for (Room room : rooms) {

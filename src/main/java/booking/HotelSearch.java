@@ -1,7 +1,9 @@
+package booking;
+
 import java.util.*;
 
 /**
- * The HotelSearch class provides functionality to search for hotelList based on 
+ * The booking.HotelSearch class provides functionality to search for hotelList based on
  * room availability and a maximum price limit.
  */
 class HotelSearch {

@@ -1,7 +1,7 @@
-import java.util.*;
+package booking;
 
 /**
- * The Room class represents a room in a hotel. It contains details 
+ * The booking.Room class represents a room in a hotel. It contains details
  * about the room's price, availability, and room type.
  */
 public class Room {
@@ -10,7 +10,7 @@ public class Room {
     private RoomType roomType; // Type of the room (e.g., Single, Double)
 
     /**
-     * Constructor to create a Room object with price, availability, and room type.
+     * Constructor to create a booking.Room object with price, availability, and room type.
      * @param price the price of the room
      * @param isAvailable whether the room is available
      * @param roomType the type of the room
@@ -50,6 +50,6 @@ public class Room {
      * @return a string describing the room
      */
     public String toString() {
-        return "Price: $" + price + ", Available: " + isAvailable + ", Room Type: " + roomType;
+        return "Price: $" + price + ", Available: " + isAvailable + ", booking.Room Type: " + roomType;
     }
 }
