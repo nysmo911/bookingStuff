@@ -9,7 +9,7 @@ A service for making booking the perfect hotel easy!
    `git clone`
 
 
-2. Go to project directory and verify version of maven wrapper
+2. Go to project directory and verify version of maven wrapper:
   
     `./mvnw -v`
 
