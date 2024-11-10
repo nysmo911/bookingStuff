@@ -1,30 +1,34 @@
 package booking;
 
 import java.util.*;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
-
-//import java.io.*;
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//Import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.JsonNode;
+import static booking.dbConnection.getInstance;
+import static com.mongodb.client.model.Filters.eq;
+import org.bson.Document;
 
 
 
 public class App {
+
     public static void main(String[] args) {
+        //Create instance of database connection
+        MongoDatabase database = getInstance().getDatabase();
+
+        //Gather user input
         Scanner userInput = new Scanner(System.in);
         System.out.println("Welcome to bookingStuff!\nPlease enter a city name to view our hotel selection!");
-
         String cityName = userInput.nextLine();
-        if (cityName.equals("Los Angeles")) {
-            System.out.println("3 Hotels in Los Angeles:\n1.Marriot\n2.Grand America\n3.Motel 6\n:");
+
+        //Search database for first hotel with matching city
+        MongoCollection<Document> collection = database.getCollection("hotels");
+        Document searchResult = collection.find(eq("city", cityName)).first();
+        if (searchResult != null) {
+            System.out.println(searchResult.toJson());
         } else {
-            System.out.println("No Hotels available in your area.\n");
+            System.out.println("Awww we don't support that city yet :(....but maybe one day!");
         }
 
-        Hotel myHotel = new Hotel("Example Hotel", "Los Angeles");
-        myHotel.displayHotelInfo();
-
     }
-
 }
