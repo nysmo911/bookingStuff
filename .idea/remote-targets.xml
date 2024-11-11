@@ -12,6 +12,11 @@
             <option name="versionString" value="3.8.7" />
           </config>
         </ContributedStateBase>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/home/brandy/.jdks/openjdk-23.0.1" />
+          </config>
+        </ContributedStateBase>
       </target>
     </targets>
   </component>

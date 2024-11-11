@@ -12,8 +12,18 @@
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
-          <mainClass>HelloFX</mainClass>
+          <mainClass>booking.Main</mainClass>
+          <options>
+            <option>--add-modules=javafx.controls,javafx.fxml</option>
+          </options>
         </configuration>
       </plugin>
       <plugin>
@@ -35,7 +45,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>booking.App</mainClass>
+              <mainClass>booking.Main</mainClass>
             </manifest>
           </archive>
         </configuration>

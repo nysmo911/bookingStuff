@@ -4,26 +4,19 @@ A service for making booking the perfect hotel easy!
 
 ### To run:
 
-1. Clone to your local machine
+1. In terminal, go to project directory
    
-   `git clone`
+         `cd bookingStuff`
 
 
-2. Go to project directory and verify version of maven wrapper:
-  
-    `./mvnw -v`
+2. Ensure local has up-to-date version
+
+         `git pull`
 
 
-3. Running the following command to compile package: 
+3. Run following command
 
-    `./mvnw clean compile package`
-
-
-
-4. Run .jar file
-
-    `java -jar target/bookingStuff-1.0-SNAPSHOT.jar`
-
+         `./mvnw clean javafx:run`
 
 
 
