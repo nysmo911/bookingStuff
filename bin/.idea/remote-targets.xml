@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="WSL" type="wsl" uuid="d7e50f2e-399e-41ef-a003-10e405f08626">
+        <config>
+          <option name="distributionMsId" value="Ubuntu" />
+        </config>
+        <ContributedStateBase type="MavenRuntime">
+          <config>
+            <option name="homePath" value="/usr/share/maven" />
+            <option name="versionString" value="3.8.7" />
+          </config>
+        </ContributedStateBase>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/home/brandy/.jdks/openjdk-23.0.1" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>
