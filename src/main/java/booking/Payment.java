@@ -76,19 +76,36 @@ public class Payment {
     public double getAmount() {
         return amount;
     }
-
+    /**
+     * getPaymentMethod
+     * @return paymentMethod preferred payment method by user
+     */
     public String getPaymentMethod() {
         return paymentMethod;
     }
-
+    /**
+     * getPaymentDate
+     * @return paymentDate date payment was made
+     */
     public Date getPaymentDate() {
         return paymentDate;
     }
-
+    /**
+     * getPaymentStatus
+     * @return paymentStatus payment completed or not
+     */
     public String getPaymentStatus() {
         return paymentStatus;
     }
-
+    /**
+     * toString
+     * @return paymentId
+     * @return bookingId
+     * @return amount
+     * @return paymentMethod
+     * @return paymentDate
+     * @return paymentStatus
+     */
     // Optional: Override toString() for easy display of payment info
     @Override
     public String toString() {
