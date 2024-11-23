@@ -6,6 +6,10 @@ import java.util.*;
  * The booking.Hotel class represents a hotel containing a collection of rooms.
  * It provides methods to add rooms, retrieve all rooms, 
  * get available rooms, and display hotel information.
+ *
+ * @author Elina Hossain
+ * @version 1.0
+ * @date 10/27/2024
  */
 public class Hotel {
     private String name;    // The name of the hotel

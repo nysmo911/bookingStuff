@@ -5,6 +5,10 @@ import java.util.*;
 /**
  * The booking.HotelSearch class provides functionality to search for hotelList based on
  * room availability and a maximum price limit.
+ *
+ *  @author Elina Hossain
+ *  @version 1.0
+ *  @date 10/31/2024
  */
 class HotelSearch {
 

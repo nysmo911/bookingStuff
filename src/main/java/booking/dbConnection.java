@@ -10,9 +10,13 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 /**
- * booking.dbConnection.java
+ * The booking.dbConnection class establishes a connection to the database.
+ * This allows other class & methods within booking to create instances of this database object without having to
+ * establish connection each time the database needs to be accessed.
+ *
  *  @author Brandon Brenes
  *  @version 1.0
+ *  @date 11/09/2024
  */
 public class dbConnection {
 
