@@ -3,6 +3,8 @@ package booking;
 /**
  * The booking.Room class represents a room in a hotel. It contains details
  * about the room's price, availability, and room type.
+ * @author Elina Hossain
+ * @version 1.0
  */
 public class Room {
     private double price;     // Price of the room per night

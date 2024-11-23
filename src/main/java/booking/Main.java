@@ -7,7 +7,12 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
 import java.io.IOException;
-
+/**
+ * booking.main.java is the entry point of our application. It extends application
+ * from javafx.
+ * @author Brandon Brenes
+ * @version 1.0
+ */
 public class Main extends Application {
 
     private static Scene scene;
