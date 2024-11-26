@@ -91,37 +91,6 @@ public class DbConnection {
         return database;
     }
 
-    // Get the "users" collection
-    public MongoCollection<Document> getUsersCollection() {
-        return database.getCollection(userProfiles);
-    }
-
-    // Insert a user into MongoDB
-    public void insertUser(userProfile user) {
-        MongoCollection<Document> collection = getUsersCollection();
-        collection.insertOne(user.toDocument());
-        System.out.println("User inserted into MongoDB.");
-    }
-
-    // Retrieve a user by username
-    public userProfile getUserByName(String userName) {
-        MongoCollection<Document> collection = getUsersCollection();
-        Document doc = collection.find(Filters.eq("userName", userName)).first();
-        if (doc != null) {
-            return userProfile.fromDocument(doc);
-        }
-        return null; // Return null if user not found
-    }
-
-    // Update a user's email
-    public void updateUserEmail(String userId, String newEmail) {
-        MongoCollection<Document> collection = getUsersCollection();
-        collection.updateOne(
-                Filters.eq("userName", userName),
-                new Document("$set", new Document("email", newEmail))
-        );
-    }
-
 }
 
 
