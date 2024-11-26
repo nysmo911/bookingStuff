@@ -5,12 +5,16 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.FindIterable;
+import javafx.fxml.FXMLLoader;
 import org.bson.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.bson.conversions.Bson;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 import static booking.dbConnection.getInstance;
@@ -23,6 +27,8 @@ public class Controller {
     private TextField searchTextField;
     @FXML
     private Button searchButton;
+    @FXML
+    private Button signinButton;
 
     public void submit(ActionEvent event) {
         //Create instance of the database
@@ -53,6 +59,25 @@ public class Controller {
             searchTextField.setText("Awww we don't support that city yet :(....but maybe one day!");
         }
 
+    }
+
+    public void handleSignInAction(ActionEvent event) {
+        try{
+            // Loads Sign In Page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("signInPage.fxml"));
+            System.out.println("Loading SignInPage.fxml");
+            Parent root = loader.load();
+            System.out.println("SignInPage.fxml loaded successfully");
+
+            // Creates a new STage for Sign-In
+            Stage stage = new Stage();
+            stage.setTitle("Sign In");
+            stage.setScene(new Scene(root));
+            stage.show();
+            System.out.println("Sign-In stage displayed");
+        }   catch (Exception e) {
+            e.printStackTrace(); //used for debugging
+        }
     }
 
 
