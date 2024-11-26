@@ -6,9 +6,17 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
 
+/**
+ * booking.main.java is the entry point of our application. It extends application
+ * from javafx.
+ * @author Brandon Brenes
+ * @version 1.0
+ */
 public class Main extends Application {
 
     private static Scene scene;
@@ -39,6 +47,8 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+
+
 }
 
 

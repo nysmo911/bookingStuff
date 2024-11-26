@@ -4,6 +4,8 @@ package booking;
  * The booking.RoomType class represents the type of a room in a hotel.
  * It includes the room's name (e.g., Single, Double, Suite) 
  * and the capacity of that room type.
+ * @author Elina Hossain
+ * @version 1.0
  */
 public class RoomType {
     private String typeName;   // The name of the room type (e.g., Single, Double, Suite)

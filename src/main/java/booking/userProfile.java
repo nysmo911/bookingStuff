@@ -1,8 +1,10 @@
 package booking;
-
+import org.bson.Document;
+import java.util.List;
+import org.bson.Document;
 /** booking.userProfile.java
  * @author Joseph Salama
- * @version 1.0
+ * @version 2.0
  */
 
 public class userProfile {
@@ -11,8 +13,8 @@ public class userProfile {
 	private String lName;
 	private String email;
 	private String userName;
-	private int cardNumber;
 	private String password;
+	private List<String> reservationHistory;
 	
 	
 	/**
@@ -22,35 +24,16 @@ public class userProfile {
 	 * @param email User's Email
 	 * @param userName User's Username
 	 * @param password User's Password
-	 * @param cardNumber User's card number
 	 */
-	public userProfile(String fName, String lName, String email, String userName, String password, int cardNumber)
+	public userProfile(String fName, String lName, String email, String userName, String password, List<String> reservationHistory)
 	{
 	    this.fName = fName;
 	    this.lName = lName;
 	    this.email = email;
 	    this.userName = userName;
 	    this.password = password;
-	    this.cardNumber = cardNumber;
+		this.reservationHistory = reservationHistory;
 	    System.out.println("New User has been created.");
-	}
-	
-	/**
-	 * Method used to print all of User's Data
-	 * @return null
-	 */
-	public String printInfo() {
-		System.out.print("Firstname:   ");
-		System.out.println(fName);
-		System.out.print("Lastname:    ");
-		System.out.println(lName);
-		System.out.print("Username:    ");
-		System.out.println(userName);
-		System.out.print("Password:    ");
-		System.out.println(password);
-		System.out.print("Card Number: ");
-		System.out.println(cardNumber);
-		return null;
 	}
 	
 	/**
@@ -60,6 +43,14 @@ public class userProfile {
 	public String getFName() {
 		return fName;
 	}
+
+	/**
+	 * Method used for setting fname
+	 * @param fName User's First Name
+	 */
+	public void setFName(String fName) {
+		this.fName = fName;
+	}
 	
 	/**
 	 * Method used for getting lname
@@ -67,6 +58,14 @@ public class userProfile {
 	 */
 	public String getLName() {
 		return lName;
+	}
+
+	/**
+	 * Method used for setting lname
+	 * @param lName User's Last Name
+	 */
+	public void setLName(String lName) {
+		this.lName = lName;
 	}
 	
 	/**
@@ -76,6 +75,14 @@ public class userProfile {
 	public String getEmail() {
 		return email;
 	}
+
+	/**
+	 * Method used for setting email
+	 * @param email User's email
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	/**
 	 * Method used for getting userName
@@ -83,6 +90,14 @@ public class userProfile {
 	 */
 	public String getUserName() {
 		return userName;
+	}
+
+	/**
+	 * Method used for setting userName
+	 * @param userName User's username
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	/**
@@ -92,39 +107,52 @@ public class userProfile {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	/**
-	 * Method used for getting cardNumber
-	 * @return cardNumber
+	 * Method used for setting userName
+	 * @param password User's password
 	 */
-	public int getCardNumber() {
-		return cardNumber;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
+
 	/**
-	 * method used to update user's fname
-	 * @param newName temp variable used to update fname
+	 * Method used for getting Reservation History
+	 * @return reservationHistory
 	 */
-	public void updateFName(String newName) {
-		this.fName = newName;
+	public List<String> getReservationHistory() {
+		return reservationHistory;
 	}
-	
+
 	/**
-	 * method used to update user's lname
-	 * @param newName temp variable used to update lname
+	 * Method used for setting userName
+	 * @param reservationHistory User's reservationHistory
 	 */
-	public void updateLName(String newName) {
-		this.lName = newName;
+	public void setReservationHistory(List<String> reservationHistory) {
+		this.reservationHistory = reservationHistory;
 	}
-	
-	/**
-	 * method used to update user's cardNumber
-	 * @param newNumber temp variable used to update cardNumber
-	 */
-	public void updateCardNumber(int newNumber) {
-		this.cardNumber = newNumber;
+
+	// Convert User object to MongoDB Document
+	public Document toDocument() {
+		return new Document("user_id", this.userName)
+				.append("firstname", this.fName)
+				.append("lastname", this.lName)
+				.append("username", this.userName)
+				.append("password", this.password)
+				.append("email", this.email)
+				.append("reservation_history", this.reservationHistory);
 	}
-	
-	
+
+	// Convert MongoDB Document to User object
+	public static userProfile fromDocument(Document doc) {
+		return new userProfile(
+				doc.getString("fName"),
+				doc.getString("lName"),
+				doc.getString("email"),
+				doc.getString("userName"),
+				doc.getString("password"),
+				(List<String>) doc.get("reservation_history")
+		);
+	}
 	
 }
