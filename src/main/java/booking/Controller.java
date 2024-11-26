@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import org.bson.conversions.Bson;
 
 
-import static booking.dbConnection.getInstance;
+import static booking.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
 /**
