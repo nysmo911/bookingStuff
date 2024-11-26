@@ -13,19 +13,35 @@ import java.util.*;
  */
 public class Hotel {
     private String name;    // The name of the hotel
-    private String location; // The location of the hotel
+    private String city;    // The location (city) of the hotel
+    private String state; //The location (state) of the hotel
+    private int numOfAvailableRooms; //number of available rooms
     private List<Room> rooms; // List of rooms in the hotel
 
     /**
      * Constructor to create a booking.Hotel object with a name and location.
      * @param name the name of the hotel
-     * @param location the location of the hotel
+     * @param city the location(city) of the hotel
+     * @param state
+     * @param numOfAvailableRooms
+     * @param rooms
      */
-    public Hotel(String name, String location) {
+    public Hotel(String name, String city, String state, int numOfAvailableRooms, List<Room> rooms) {
         this.name = name;
-        this.location = location;
+        this.city = city;
+        this.state = state;
+        this.numOfAvailableRooms = numOfAvailableRooms;
         this.rooms = new ArrayList<>();
     }
+
+    public Hotel(String name, String city, String state) {
+        this.name = name;
+        this.city = city;
+        this.state = state;
+        this.numOfAvailableRooms = 0;
+        this.rooms = new ArrayList<>();
+    }
+
 
     /**
      * Adds a room to the hotel's list of rooms.
@@ -62,7 +78,7 @@ public class Hotel {
      */
     public void displayHotelInfo() {
         System.out.println("Name: " + name);
-        System.out.println("Location: " + location);
+        System.out.println("Location: " + city + ", " + state);
         System.out.println("Rooms:");
         for (Room room : rooms) {
             System.out.println(room);
@@ -78,10 +94,23 @@ public class Hotel {
     }
 
     /**
-     * Retrieves the location of the hotel.
-     * @return the hotel location
+     * Retrieves the location(city) of the hotel.
+     * @return the hotel city
      */
-    public String getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
+
+    /**
+     * Retrieves the location(state) of the hotel.
+     * @return the hotel city
+     */
+    public String getState() {return state;}
+
+    /**
+     * Retrieves the location(city) of the hotel.
+     * @return the hotel city
+     */
+    public int getNumOfAvailableRooms() {return numOfAvailableRooms;}
 }
+

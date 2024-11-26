@@ -21,7 +21,7 @@ import com.mongodb.client.model.Filters;
  *  @version 1.0
  *  @date 11/09/2024
  */
-public class dbConnection {
+public class DbConnection {
 
 
     /**
@@ -49,18 +49,18 @@ public class dbConnection {
     {
         settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(connectionString))
-                //  .serverApi(serverApi)
+                // .serverApi(serverApi)
                 .build();
     }
 
-    private static dbConnection instance;
+    private static DbConnection instance;
     private MongoClient mongoClient;
     private MongoDatabase database;
 
     /**
      * Private constructor
      */
-    private dbConnection() {
+    private DbConnection() {
         connect();
     }
 
@@ -68,9 +68,9 @@ public class dbConnection {
      * Gets the instance
      * @return instance
      */
-    public static dbConnection getInstance() {
+    public static DbConnection getInstance() {
         if (instance == null) {
-          instance = new dbConnection();
+          instance = new DbConnection();
         }
         return instance;
     }
