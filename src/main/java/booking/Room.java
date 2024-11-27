@@ -1,5 +1,4 @@
 package booking;
-import java.util.*;
 
 /**
  * The Room class represents a room in a hotel.
@@ -63,8 +62,9 @@ public class Room {
      * Returns a string representation of the room, including price, availability, type, and capacity.
      * @return a string describing the room
      */
+    @Override
     public String toString() {
-        return "Price: $" + price + ", Available: " + isAvailable +
-                ", Room Type: " + typeName + ", Capacity: " + capacity;
-    }
+        return "Price: $" + price + ", Available: " + isAvailable + ", Room Type: " + typeName + ", Capacity: " + getCapacity();
+}
+
 }
