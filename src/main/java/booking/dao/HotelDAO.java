@@ -1,11 +1,15 @@
 package booking.dao;
 
 import booking.model.Hotel;
+import booking.model.Room;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
@@ -27,7 +31,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
     @Override
     public void add(Hotel hotel) {
         //Check to see proposed addition to database is already in the database by calling getMethod
-        if (this.get(hotel.getName()) == null) {
+        if (this.get(hotel.getName()) != null) {
             System.out.println("Hotel already exists");
         }
 
@@ -64,10 +68,9 @@ public class HotelDAO implements GenericDAO<Hotel> {
             String name = searchResult.getString("name");
             String city = searchResult.getString("city");
             String state = searchResult.getString("state");
-            //int number_of_rooms = searchResult.getInteger("number_of_rooms");
-            //List<Room> rooms = new ArrayList<>(); //adjust this later;
-            Hotel newHotel = new Hotel(name, city, state);
-            return newHotel;
+            int number_of_rooms = searchResult.getInteger("number_of_rooms");
+            List<Room> rooms = new ArrayList<>(); //adjust this later;
+            return new Hotel(name, city, state, number_of_rooms, rooms);
         }
 
     }
