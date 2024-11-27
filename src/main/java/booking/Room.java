@@ -1,26 +1,30 @@
 package booking;
+import java.util.*;
 
 /**
  * The Room class represents a room in a hotel.
- * It contains details about the room's price, availability, and room type.
+ * It contains details about the room's price, availability, type, and capacity.
  * @author Elina Hossain
  * @version 1.0
  */
 public class Room {
     private double price;          // Price of the room per night
     private boolean isAvailable;   // Indicates if the room is available
-    private RoomType roomType;     // Type of the room (e.g., Single, Double)
+    private String typeName;       // The name of the room type (e.g., Single, Double, Suite)
+    private int capacity;          // The maximum capacity of this room
 
     /**
-     * Constructor to create a booking.Room object with price, availability, and room type.
+     * Constructor to create a Room object with price, availability, type, and capacity.
      * @param price the price of the room
      * @param isAvailable whether the room is available
-     * @param roomType the type of the room
+     * @param typeName the type of the room
+     * @param capacity the maximum capacity of the room
      */
-    public Room(double price, boolean isAvailable, RoomType roomType) {
+    public Room(double price, boolean isAvailable, String typeName, int capacity) {
         this.price = price;
         this.isAvailable = isAvailable;
-        this.roomType = roomType;
+        this.typeName = typeName;
+        this.capacity = capacity;
     }
 
     /**
@@ -40,62 +44,27 @@ public class Room {
     }
 
     /**
-     * Retrieves the room type.
-     * @return the room type
+     * Retrieves the name of the room type.
+     * @return the room type name
      */
-    public RoomType getRoomType() {
-        return roomType;
+    public String getTypeName() {
+        return typeName;
     }
 
     /**
-     * Returns a string representation of the room, including price, availability, and room type.
+     * Retrieves the capacity of the room.
+     * @return the room capacity
+     */
+    public int getCapacity() {
+        return capacity;
+    }
+
+    /**
+     * Returns a string representation of the room, including price, availability, type, and capacity.
      * @return a string describing the room
      */
     public String toString() {
-        return "Price: $" + price + ", Available: " + isAvailable + ", Room Type: " + roomType;
-    }
-
-    /**
-     * The RoomType class represents the type of a room in a hotel.
-     * It includes the room's name (e.g., Single, Double, Suite)
-     * and the capacity of that room type.
-     */
-    public static class RoomType {
-        private String typeName;   // The name of the room type (e.g., Single, Double, Suite)
-        private int capacity;      // The maximum capacity of this room type
-
-        /**
-         * Constructor to create a RoomType object with a name and capacity.
-         * @param typeName the name of the room type
-         * @param capacity the capacity of the room
-         */
-        public RoomType(String typeName, int capacity) {
-            this.typeName = typeName;
-            this.capacity = capacity;
-        }
-
-        /**
-         * Retrieves the name of the room type.
-         * @return the room type name
-         */
-        public String getTypeName() {
-            return typeName;
-        }
-
-        /**
-         * Retrieves the capacity of the room type.
-         * @return the room capacity
-         */
-        public int getCapacity() {
-            return capacity;
-        }
-
-        /**
-         * Returns a string representation of the room type, including name and capacity.
-         * @return a string describing the room type
-         */
-        public String toString() {
-            return typeName + ", Capacity: " + capacity;
-        }
+        return "Price: $" + price + ", Available: " + isAvailable +
+                ", Room Type: " + typeName + ", Capacity: " + capacity;
     }
 }
