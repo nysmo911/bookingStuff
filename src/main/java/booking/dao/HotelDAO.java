@@ -1,14 +1,13 @@
-package booking;
+package booking.dao;
 
+import booking.model.Hotel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import java.util.ArrayList;
-import java.util.List;
 
-import static booking.DbConnection.getInstance;
+import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
 /**

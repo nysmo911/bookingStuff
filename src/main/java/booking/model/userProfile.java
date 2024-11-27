@@ -1,8 +1,8 @@
-package booking;
+package booking.model;
 import org.bson.Document;
 import java.util.List;
-import org.bson.Document;
-/** booking.userProfile.java
+
+/** booking.model.userProfile.java
  * @author Joseph Salama
  * @version 2.0
  */

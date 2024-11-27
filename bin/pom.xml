@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>booking Stuff</name>
-    <description>booking.Hotel booking service</description>
+    <description>booking.model.Hotel booking service</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -73,7 +73,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                        <mainClass>booking.Main</mainClass>
+                        <mainClass>booking.application.Main</mainClass>
                     <options>
                         <option>--add-modules=javafx.controls,javafx.fxml</option>
                     </options>
@@ -93,7 +93,7 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>booking.Main</mainClass> <!-- your main class -->
+                                    <mainClass>booking.application.Main</mainClass> <!-- your main class -->
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -108,7 +108,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>booking.Main</mainClass>
+                            <mainClass>booking.application.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

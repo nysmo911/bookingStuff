@@ -1,9 +1,9 @@
-package booking;
+package booking.model;
 
 import java.util.*;
 
 /**
- * The booking.Hotel class represents a hotel containing a collection of rooms.
+ * The booking.model.Hotel class represents a hotel containing a collection of rooms.
  * It provides methods to add rooms, retrieve all rooms, 
  * get available rooms, and display hotel information.
  *
@@ -19,7 +19,7 @@ public class Hotel {
     private List<Room> rooms; // List of rooms in the hotel
 
     /**
-     * Constructor to create a booking.Hotel object with a name and location.
+     * Constructor to create a booking.model.Hotel object with a name and location.
      * @param name the name of the hotel
      * @param city the location(city) of the hotel
      * @param state

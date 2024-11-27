@@ -1,9 +1,9 @@
-package booking;
+package booking.model;
 
 import java.util.*;
 
 /**
- * The booking.HotelSearch class provides functionality to search for hotelList based on
+ * The booking.model.HotelSearch class provides functionality to search for hotelList based on
  * room availability and a maximum price limit.
  *
  *  @author Elina Hossain

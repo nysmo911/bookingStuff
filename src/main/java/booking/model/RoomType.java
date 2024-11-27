@@ -1,7 +1,7 @@
-package booking;
+package booking.model;
 
 /**
- * The booking.RoomType class represents the type of a room in a hotel.
+ * The booking.model.RoomType class represents the type of a room in a hotel.
  * It includes the room's name (e.g., Single, Double, Suite) 
  * and the capacity of that room type.
  * @author Elina Hossain
@@ -12,7 +12,7 @@ public class RoomType {
     private int capacity;      // The maximum capacity of this room type
 
     /**
-     * Constructor to create a booking.RoomType object with a name and capacity.
+     * Constructor to create a booking.model.RoomType object with a name and capacity.
      * @param typeName the name of the room type
      * @param capacity the capacity of the room
      */
