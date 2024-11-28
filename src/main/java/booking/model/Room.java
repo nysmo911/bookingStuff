@@ -1,26 +1,29 @@
-package booking.model;
+package booking;
 
 /**
- * The booking.model.Room class represents a room in a hotel. It contains details
- * about the room's price, availability, and room type.
+ * The Room class represents a room in a hotel.
+ * It contains details about the room's price, availability, type, and capacity.
  * @author Elina Hossain
  * @version 1.0
  */
 public class Room {
-    private double price;     // Price of the room per night
-    private boolean isAvailable; // Indicates if the room is available
-    private RoomType roomType; // Type of the room (e.g., Single, Double)
+    private double price;          // Price of the room per night
+    private boolean isAvailable;   // Indicates if the room is available
+    private String typeName;       // The name of the room type (e.g., Single, Double, Suite)
+    private int capacity;          // The maximum capacity of this room
 
     /**
-     * Constructor to create a booking.model.Room object with price, availability, and room type.
+     * Constructor to create a Room object with price, availability, type, and capacity.
      * @param price the price of the room
      * @param isAvailable whether the room is available
-     * @param roomType the type of the room
+     * @param typeName the type of the room
+     * @param capacity the maximum capacity of the room
      */
-    public Room(double price, boolean isAvailable, RoomType roomType) {
+    public Room(double price, boolean isAvailable, String typeName, int capacity) {
         this.price = price;
         this.isAvailable = isAvailable;
-        this.roomType = roomType;
+        this.typeName = typeName;
+        this.capacity = capacity;
     }
 
     /**
@@ -40,18 +43,28 @@ public class Room {
     }
 
     /**
-     * Retrieves the room type.
-     * @return the room type
+     * Retrieves the name of the room type.
+     * @return the room type name
      */
-    public RoomType getRoomType() {
-        return roomType;
+    public String getTypeName() {
+        return typeName;
     }
 
     /**
-     * Returns a string representation of the room, including price, availability, and room type.
+     * Retrieves the capacity of the room.
+     * @return the room capacity
+     */
+    public int getCapacity() {
+        return capacity;
+    }
+
+    /**
+     * Returns a string representation of the room, including price, availability, type, and capacity.
      * @return a string describing the room
      */
+    @Override
     public String toString() {
-        return "Price: $" + price + ", Available: " + isAvailable + ", booking.model.Room Type: " + roomType;
-    }
+        return "Price: $" + price + ", Available: " + isAvailable + ", Room Type: " + typeName + ", Capacity: " + getCapacity();
+}
+
 }
