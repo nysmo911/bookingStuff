@@ -1,4 +1,4 @@
-package booking;
+package booking.model;
 
 /**
  * The Room class represents a room in a hotel.
