@@ -74,7 +74,7 @@ public class HomepageController {
     public void handleSignInAction(ActionEvent event) {
         try{
             // Loads Sign In Page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/signInPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/@signInPage.fxml"));
             System.out.println("Loading SignInPage.fxml");
             Parent root = loader.load();
             System.out.println("SignInPage.fxml loaded successfully");

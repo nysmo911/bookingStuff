@@ -31,7 +31,7 @@ public class Hotel {
         this.city = city;
         this.state = state;
         this.numOfAvailableRooms = numOfAvailableRooms;
-        this.rooms = new ArrayList<>();
+        this.rooms = rooms;
     }
 
     public Hotel(String name, String city, String state) {
@@ -108,8 +108,8 @@ public class Hotel {
     public String getState() {return state;}
 
     /**
-     * Retrieves the location(city) of the hotel.
-     * @return the hotel city
+     * Retrieves the number of available rooms.
+     * @return number of Available Rooms
      */
     public int getNumOfAvailableRooms() {return numOfAvailableRooms;}
 }

@@ -7,10 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
@@ -25,31 +22,40 @@ public class HotelDAO implements GenericDAO<Hotel> {
     //Private instance of db (from DbConnection)
     private MongoDatabase db = getInstance().getDatabase();
     //Private collection
-    private MongoCollection<Document> collection = db.getCollection("hotels");
+    final private MongoCollection<Document> collection = db.getCollection("hotels");
 
-
+    /**
+     * Receives a Hotel object as an argument and adds to the database if duplicate isn't found.
+     * @param hotel
+     * @return Boolean
+     */
     @Override
     public void add(Hotel hotel) {
-        //Check to see proposed addition to database is already in the database by calling getMethod
-        if (this.get(hotel.getName()) != null) {
-            System.out.println("Hotel already exists");
-        }
+        //Need dedupe
 
-        //Otherwise, add hotel to the database
-        collection.insertOne( new Document()
-                .append("id", new Object())
-                .append("name", hotel.getName())
-                .append("city", hotel.getCity())
-                .append("state", hotel.getState())
-                .append("number_of_rooms", hotel.getNumOfAvailableRooms())
-                .append("room_types", hotel.getRooms())
-        );
+        try {
+            collection.insertOne( new Document()
+
+                    .append("name", hotel.getName())
+                    .append("city", hotel.getCity())
+                    .append("state", hotel.getState())
+                    .append("number_of_rooms", hotel.getNumOfAvailableRooms())
+                    .append("room_types", hotel.getRooms())
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
 
+    /**
+     * Searches the Database for the first database entry matching the passed string. Returns the found entry in the form of a Hotel object.
+     * @param hotelName
+     * @return Hotel
+     */
     @Override
-    public Hotel get(String hotelName) {;
+    public Hotel get(String hotelName) {
         //Create Projections
         Bson projection = Projections.fields(
                 Projections.include("name" , "city", "state"),
@@ -58,20 +64,19 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
         //Execute the query
        Document searchResult = collection.find(eq("name", hotelName)).projection(projection).first();
-
-        //return null if no Hotel was found
-        if (searchResult == null) {
-          return null;
-        }
-         //else return a new hotel object
-        else {
+            try {
             String name = searchResult.getString("name");
             String city = searchResult.getString("city");
             String state = searchResult.getString("state");
-            int number_of_rooms = searchResult.getInteger("number_of_rooms");
-            List<Room> rooms = new ArrayList<>(); //adjust this later;
-            return new Hotel(name, city, state, number_of_rooms, rooms);
-        }
+            //int number_of_rooms = searchResult.getInteger("number_of_rooms"); //check for null values
+            List<Room> rooms = searchResult.getList("room_types", Room.class);
+            return new Hotel(name, city, state, 5, rooms);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
 
     }
 
@@ -80,17 +85,38 @@ public class HotelDAO implements GenericDAO<Hotel> {
         //complete later
    // }
 
+    /**
+     * Updates database entry matching the name of the passed Hotel object, with the passed Hotel object.
+     * @param hotel
+     * @return void
+     */
     @Override
     public void update(Hotel hotel) {
-        //find hotel by name in database using this.getMethod
-        //replace with new hotel
+        Document doc = new Document(new Document()
+                .append("name", hotel.getName())
+                .append("city", hotel.getCity())
+                .append("state", hotel.getState())
+                .append("number_of_rooms", hotel.getNumOfAvailableRooms())
+                .append("room_types", hotel.getRooms())
+        );
+        try {
+            collection.replaceOne(eq("name", hotel.getName()), doc);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
+    /**
+     * Deletes first database entry with a name that matches the string parameter
+     * @param name
+     */
     @Override
     public void delete(String name) {
-        //find hotel by name using this.getMethod
-        //replace hotel
-
+        try {
+            collection.deleteOne(eq("name", name));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
