@@ -1,4 +1,4 @@
-package booking;
+package booking.controller;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -16,18 +16,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-import static booking.DbConnection.getInstance;
+import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
 /**
- * The booking.Controller class provides the functionality to the first page of our application, namely the search bar.
- *
+ * The booking.controller.HomepageController class provides the functionality to the first page of our application.
  * @author Brandon Brenes
  * @version 1.0
  * @date 11/11/2024
  */
 
-public class Controller {
+public class HomepageController {
     /**
      * Private TextField and button objects (imported from javafx.scene.control)
      */
@@ -75,7 +74,7 @@ public class Controller {
     public void handleSignInAction(ActionEvent event) {
         try{
             // Loads Sign In Page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("signInPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/@signInPage.fxml"));
             System.out.println("Loading SignInPage.fxml");
             Parent root = loader.load();
             System.out.println("SignInPage.fxml loaded successfully");

@@ -5,7 +5,7 @@
   <artifactId>bookingStuff</artifactId>
   <name>booking Stuff</name>
   <version>1.0-SNAPSHOT</version>
-  <description>booking.Hotel booking service</description>
+  <description>booking.model.Hotel booking service</description>
   <build>
     <plugins>
       <plugin>
@@ -20,7 +20,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>booking.Main</mainClass>
+          <mainClass>booking.application.Main</mainClass>
           <options>
             <option>--add-modules=javafx.controls,javafx.fxml</option>
           </options>
@@ -45,7 +45,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>booking.Main</mainClass>
+              <mainClass>booking.application.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
