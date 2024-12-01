@@ -57,19 +57,19 @@
                   <TextField layoutX="175.0" layoutY="335.0" prefHeight="125.0" prefWidth="397.0" />
                   <TextField layoutX="174.0" layoutY="510.0" prefHeight="125.0" prefWidth="397.0" />
                   <ButtonBar layoutX="14.0" layoutY="174.0" prefHeight="40.0" prefWidth="200.0" />
-                 <!-- The Plaza Hotel Button triggers The Plaza Hotel page -->
+                 <!-- The Venetian Resort Button triggers The Venetian Resort page -->
                 <Button fx:id="TheVenetianResort" layoutX="175.0" layoutY="139.0" mnemonicParsing="false" onAction="#handleHotelPageActionLV1" text="The Venetian Resort">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                      </font>
                   </Button>
-                 <!-- The St. Regis Button triggers The St. Regis Hotel page -->
+                 <!-- The Bellagio Hotel Button triggers The Bellagio Hotel page -->
                   <Button fx:id="BellagioHotel" layoutX="175.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleHotelPageActionLV2" text="Bellagio Hotel &amp; Casino">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                      </font>
                   </Button>
-                 <!-- The Standard Button triggers The Standard Hotel page -->
+                 <!-- The Caesars Palace Button triggers The Caesars Palace Hotel page -->
                   <Button fx:id="CaesarsPalace" layoutX="175.0" layoutY="484.0" mnemonicParsing="false" onAction="#handleHotelPageActionLV3" text="Caesars Palace">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
