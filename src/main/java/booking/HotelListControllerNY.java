@@ -46,8 +46,9 @@ public class HotelListControllerNY {
     }
 
 
+
     @FXML
-    public void handleHotelPageAction1(ActionEvent event) {
+    public void handleHotelPageActionNY1(ActionEvent event) {
         try {
             // Load and display HotelPage
             Parent root = FXMLLoader.load(getClass().getResource("/booking/fxml/HotelPage.fxml"));
@@ -61,7 +62,7 @@ public class HotelListControllerNY {
     }
 
     @FXML
-    public void handleHotelPageAction2(ActionEvent event) {
+    public void handleHotelPageActionNY2(ActionEvent event) {
         try {
             // Load and display HotelPage
             Parent root = FXMLLoader.load(getClass().getResource("/booking/fxml/HotelPage.fxml"));
@@ -75,7 +76,7 @@ public class HotelListControllerNY {
     }
 
     @FXML
-    public void handleHotelPageAction3(ActionEvent event) {
+    public void handleHotelPageActionNY3(ActionEvent event) {
         try {
             // Load and display HotelPage
             Parent root = FXMLLoader.load(getClass().getResource("/booking/fxml/HotelPage.fxml"));

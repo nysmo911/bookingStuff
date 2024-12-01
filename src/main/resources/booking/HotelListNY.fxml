@@ -58,24 +58,24 @@
                   <TextField layoutX="174.0" layoutY="510.0" prefHeight="125.0" prefWidth="397.0" />
                   <ButtonBar layoutX="14.0" layoutY="174.0" prefHeight="40.0" prefWidth="200.0" />
                  <!-- The Plaza Hotel Button triggers The Plaza Hotel page -->
-                <Button fx:id="ThePlazaHotel" layoutX="175.0" layoutY="139.0" mnemonicParsing="false" onAction="#handleHotelPageAction1" text="The Plaza Hotel">
+                <Button fx:id="ThePlazaHotel" layoutX="175.0" layoutY="139.0" mnemonicParsing="false" onAction="#handleHotelPageActionNY1" text="The Plaza Hotel">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                      </font>
                   </Button>
                  <!-- The St. Regis Button triggers The St. Regis Hotel page -->
-                  <Button fx:id="TheStRegis" layoutX="175.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleHotelPageAction2" text="The St. Regis New York">
+                  <Button fx:id="TheStRegis" layoutX="175.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleHotelPageActionNY2" text="The St. Regis New York">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                      </font>
                   </Button>
                  <!-- The Standard Button triggers The Standard Hotel page -->
-                  <Button fx:id="TheStandard" layoutX="175.0" layoutY="484.0" mnemonicParsing="false" onAction="#handleHotelPageAction3" text="The Standard, High Line">
+                  <Button fx:id="TheStandard" layoutX="175.0" layoutY="484.0" mnemonicParsing="false" onAction="#handleHotelPageActionNY3" text="The Standard, High Line">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="14.0" layoutY="107.0" text="Showing search results for New York:">
+                  <Label layoutX="14.0" layoutY="107.0" text="Showing search results for New York City, New York:">
                      <font>
                         <Font name="Baskerville Old Face" size="14.0" />
                      </font>
