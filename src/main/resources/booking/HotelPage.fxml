@@ -24,21 +24,12 @@
                         <Image url="@../../../../../2097084_1525191165.jpg" />
                      </image>
                   </ImageView>
-                  <TextField layoutX="182.0" layoutY="63.0" prefHeight="33.0" prefWidth="190.0" promptText="Where are you going?">
-                     <font>
-                        <Font name="Berlin Sans FB" size="14.0" />
-                     </font>
-                  </TextField>
-                  <Button layoutX="388.0" layoutY="67.0" mnemonicParsing="false" text="search">
-                     <font>
-                        <Font name="Berlin Sans FB" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="487.0" layoutY="14.0" mnemonicParsing="false" text="View Profile">
-                     <font>
-                        <Font name="Berlin Sans FB" size="14.0" />
-                     </font>
-                  </Button>
+                  <!-- View Profile Button triggers Sign In page -->
+                       <Button fx:id="ViewProfile" layoutX="487.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSignInAction" text="View Profile">
+                           <font>
+                           <Font name="Berlin Sans FB" size="14.0" />
+                           </font>
+                        </Button>
                   <ImageView fitHeight="67.0" fitWidth="175.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../OneDrive/Pictures/Screenshots/Screenshot%202024-11-26%20174347.png" />
@@ -75,6 +66,11 @@
                   </TextField>
                   <Button layoutX="303.0" layoutY="252.0" mnemonicParsing="false" onAction="#changeImage" text="&gt;" />
                   <Button layoutX="243.0" layoutY="252.0" mnemonicParsing="false" onAction="#changeImage" text="&lt;" />
+                  <Button layoutX="228.0" layoutY="78.0" mnemonicParsing="false" text="Back to Search Page">
+                     <font>
+                        <Font name="Berlin Sans FB" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
         </content>
