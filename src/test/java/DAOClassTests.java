@@ -14,14 +14,13 @@ public class DAOClassTests {
     //HotelDAO instance
     HotelDAO testDAO = new HotelDAO();
 
-    @Disabled("Disabled to test the delete method thoroughly")
+    //@Disabled("Disabled to test the delete method thoroughly")
     @Test
     public void addToDatabaseTest(){
         //Create instance of Hotel
         List<Room> testRooms = new ArrayList<Room>();
-        testRooms.add(new Room(55, true, "Testing", 5));
-        testRooms.add(new Room(100, false, "moreExpensiveTesting", 7));
-        Hotel testHotel = new Hotel("myTestHotel", "Salt Lake City", "UT", 5, testRooms);
+        testRooms.add(new Room(125, "Corner Room with two queen beds", true, "Double Queen", 5));
+        Hotel testHotel = new Hotel("newTestHotel", "Salt Lake City", "UT", 5, testRooms);
 
         //Execute the addMethod
         testDAO.add(testHotel);
@@ -41,6 +40,17 @@ public class DAOClassTests {
         //Assert that resulting hotel equals searched hotel
         Assertions.assertEquals(testHotel.getName(), "The Plaza Hotel");
         System.out.println(testHotel);
+    }
+
+    @Test
+    public void getIDDatabaseTest(){
+        //Get ID for specified document
+        String pulledID = testDAO.getID("The Plaza Hotel");
+        System.out.println(pulledID);
+
+        //Assert the resulting string equals the ID
+        Assertions.assertEquals(pulledID, "672c31bbad59ab497e2f39d9");
+
     }
 
     @Test

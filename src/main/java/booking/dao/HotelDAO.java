@@ -32,6 +32,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
     @Override
     public void add(Hotel hotel) {
         //Need dedupe
+        //Update to create reference to room
 
         try {
             collection.insertOne( new Document()
@@ -80,7 +81,32 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     }
 
-   // @Override
+    /**
+     * Searches for a hotel document with a matching name and returns the ID
+     *
+     * @param hotelName
+     * @return String
+     */
+    public String getID(String hotelName) {
+        //Query using passed parameter
+        Document queryDoc = collection.find(eq("name", hotelName)).first();
+
+        // Check if null
+        if (queryDoc == null) {
+            return null;
+        }
+        // Assign resulting Document to queryDoc and extract ID
+            Object objectID = queryDoc.get("_id");
+            String stringID = objectID.toString();
+            return stringID;
+
+
+
+    }
+
+
+
+        // @Override
     //public List<Hotel> getAll() {
         //complete later
    // }
