@@ -15,6 +15,7 @@ import static com.mongodb.client.model.Filters.eq;
  * HotelDAO implements GenericDAO as an abstraction between the Hotel Class and database operations
  *
  * @author Brandon Brenes
+ * @date   11/26/2024
  * @version 1.0
  **/
 public class HotelDAO implements GenericDAO<Hotel> {
@@ -30,13 +31,14 @@ public class HotelDAO implements GenericDAO<Hotel> {
      * @return Boolean
      */
     @Override
-    public void add(Hotel hotel) {
+    public void add(Hotel hotel){
         //Need dedupe
         //Update to create reference to room
 
+        //Create Room
+
         try {
             collection.insertOne( new Document()
-
                     .append("name", hotel.getName())
                     .append("city", hotel.getCity())
                     .append("state", hotel.getState())
@@ -85,9 +87,9 @@ public class HotelDAO implements GenericDAO<Hotel> {
      * Searches for a hotel document with a matching name and returns the ID
      *
      * @param hotelName
-     * @return String
+     * @return Object
      */
-    public String getID(String hotelName) {
+    public Object getID(String hotelName) {
         //Query using passed parameter
         Document queryDoc = collection.find(eq("name", hotelName)).first();
 
@@ -95,21 +97,13 @@ public class HotelDAO implements GenericDAO<Hotel> {
         if (queryDoc == null) {
             return null;
         }
-        // Assign resulting Document to queryDoc and extract ID
-            Object objectID = queryDoc.get("_id");
-            String stringID = objectID.toString();
-            return stringID;
+        // return resulting Object
+            Object hotelID = queryDoc.get("_id");
+            return hotelID;
 
 
 
     }
-
-
-
-        // @Override
-    //public List<Hotel> getAll() {
-        //complete later
-   // }
 
     /**
      * Updates database entry matching the name of the passed Hotel object, with the passed Hotel object.
@@ -118,12 +112,14 @@ public class HotelDAO implements GenericDAO<Hotel> {
      */
     @Override
     public void update(Hotel hotel) {
-        Document doc = new Document(new Document()
+        //Create updated Document from Hotel Object
+        //Eventually create another update class so individual fields can be edited instead of the whole doc (take in an ID)
+        Document doc = new Document()
                 .append("name", hotel.getName())
                 .append("city", hotel.getCity())
                 .append("state", hotel.getState())
                 .append("number_of_rooms", hotel.getNumOfAvailableRooms())
-                .append("room_types", hotel.getRooms())
+                .append("room_types", hotel.getRooms()
         );
         try {
             collection.replaceOne(eq("name", hotel.getName()), doc);

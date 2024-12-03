@@ -17,7 +17,7 @@ public class HotelTests {
         Hotel testHotel = new Hotel("Test Hotel", "New York", "NY");
 
         // Act: Add a new room with the adjusted constructor
-        Room testRoom = new Room(101, "testdesc", true, "guestroom", 5);
+        Room testRoom = new Room("GuestRoom", "testdesc", true, 95, 5);
         testHotel.addRoom(testRoom);
 
         // Assert: The room list should now contain the added room
@@ -29,8 +29,8 @@ public class HotelTests {
     public void getRoomsTest() {
         // Arrange: Create a hotel with a list of rooms
         List<Room> testRooms = new ArrayList<>();
-        Room room1 = new Room(101, "Room 1", true, "Standard", 2);
-        Room room2 = new Room(102, "Room 2", false, "Deluxe", 4);
+        Room room1 = new Room("Standard", "Room 1", true, 101, 2);
+        Room room2 = new Room("Deluxe", "Room 2", false, 102, 4);
         testRooms.add(room1);
         testRooms.add(room2);
         Hotel testHotel = new Hotel("Test Hotel", "New York", "NY", 2, testRooms);
@@ -48,8 +48,8 @@ public class HotelTests {
     public void getAvailableRoomsTest() {
         // Arrange: Create a hotel with both available and unavailable rooms
         List<Room> testRooms = new ArrayList<>();
-        Room room1 = new Room(101, "Room 1", true, "Standard", 2);
-        Room room2 = new Room(102, "Room 2", false, "Deluxe", 4);
+        Room room1 = new Room("Standard", "Room 1", true,101 , 2);
+        Room room2 = new Room("Deluxe", "Room 2", false, 101 , 4);
         testRooms.add(room1);
         testRooms.add(room2);
         Hotel testHotel = new Hotel("Test Hotel", "New York", "NY", 1, testRooms);
@@ -66,7 +66,7 @@ public class HotelTests {
     @Test
     public void displayHotelInfoTest() {
         // Arrange: Create a hotel with one room
-        Room testRoom = new Room(101, "Room 1", true, "Standard", 2);
+        Room testRoom = new Room("Standard", "Room 1", true,101 , 2);
         Hotel testHotel = new Hotel("Test Hotel", "New York", "NY");
         testHotel.addRoom(testRoom);
 

@@ -21,11 +21,11 @@ public class Room {
      * @param isAvailable whether the room is available
      * @param capacity the maximum capacity of the room
      */
-    public Room(double price, String description, boolean isAvailable, String typeName, int capacity) {
+    public Room(String typeName, String description, boolean isAvailable, double price, int capacity) {
         this.typeName = typeName;
         this.description = description;
-        this.price = price;
         this.isAvailable = isAvailable;
+        this.price = price;
         this.capacity = capacity;
     }
 
