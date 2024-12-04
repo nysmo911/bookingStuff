@@ -21,9 +21,10 @@ public class HotelDAOTest {
     @Test
     public void addToDatabaseTest(){
         //Create instance of Hotel
-        List<Room> testRooms = new ArrayList<Room>();
-        testRooms.add(new Room("Double Queen", "Corner Room with two queen beds", true, 50, 5));
-        Hotel testHotel = new Hotel("COOLHOTEL", "PARK CITY", "UT", 5, testRooms);
+        List<Room> testRooms = new ArrayList<>();
+        testRooms.add(new Room("Park View East", "Corner Suite with immaculate views of Central Park", true, 550, 4));
+        testRooms.add(new Room("The Pent", "Entire floor doused in Venetian charm", true, 6000, 10));
+        Hotel testHotel = new Hotel("The York", "New York City", "NY", 3, testRooms);
 
         //Execute the addMethod
         TestDAO.add(testHotel);

@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import java.util.ArrayList;
 import java.util.List;
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
@@ -24,26 +25,37 @@ public class HotelDAO implements GenericDAO<Hotel> {
     private MongoDatabase db = getInstance().getDatabase();
     //Private collection
     final private MongoCollection<Document> collection = db.getCollection("hotels");
+    RoomDAO roomDAO = new RoomDAO();
 
     /**
      * Receives a Hotel object as an argument and adds to the database if duplicate isn't found.
      * @param hotel
-     * @return Boolean
      */
     @Override
     public void add(Hotel hotel){
         //Need dedupe
-        //Update to create reference to room
+        //Initialize List of Room Objects, and List of Document Objects
+        List<Room> hotelRooms = hotel.getRooms();
+        List<Document> roomReferences = new ArrayList<>();
 
-        //Create Room
+        //Using RoomId, create reference object for each room
+        for (Room room : hotelRooms) {
+            roomDAO.add(room);
+            Object roomRefID = roomDAO.getRoomID(room.getTypeName());
+            roomReferences.add(new Document("RoomObjectID", roomRefID)
+                    .append("name", room.getTypeName())
+                    .append("isAvailable", room.isAvailable()));
+        }
 
+        //Create new Hotel document and add to database
         try {
             collection.insertOne( new Document()
                     .append("name", hotel.getName())
                     .append("city", hotel.getCity())
                     .append("state", hotel.getState())
-                    .append("number_of_rooms", hotel.getNumOfAvailableRooms())
-                    .append("room_types", hotel.getRooms())
+                    .append("number_of_rooms", hotel.getRooms().size())
+                    .append("number_of_available_rooms", hotel.getNumOfAvailableRooms())
+                    .append("room_references", roomReferences)
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +73,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
     public Hotel get(String hotelName) {
         //Create Projections
         Bson projection = Projections.fields(
-                Projections.include("name" , "city", "state"),
+                //Projections.include("name" , "city", "state"),
                 Projections.excludeId()
         );
 
@@ -71,9 +83,18 @@ public class HotelDAO implements GenericDAO<Hotel> {
             String name = searchResult.getString("name");
             String city = searchResult.getString("city");
             String state = searchResult.getString("state");
-            //int number_of_rooms = searchResult.getInteger("number_of_rooms"); //check for null values
-            List<Room> rooms = searchResult.getList("room_types", Room.class);
-            return new Hotel(name, city, state, 5, rooms);
+            int number_of_available_rooms = searchResult.getInteger("number_of_available_rooms"); //check for null values
+            List<Document> roomReferences = searchResult.getList("room_references", Document.class);
+            List<Room> resultRooms = new ArrayList<>();
+
+            //Use Room references to query room collection
+            for (Document roomReference : roomReferences) {
+                String roomRefID = roomReference.getObjectId("RoomObjectID").toString();
+                resultRooms.add(roomDAO.get(roomRefID));
+
+            }
+
+            return new Hotel(name, city, state, number_of_available_rooms, resultRooms);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -118,7 +139,8 @@ public class HotelDAO implements GenericDAO<Hotel> {
                 .append("name", hotel.getName())
                 .append("city", hotel.getCity())
                 .append("state", hotel.getState())
-                .append("number_of_rooms", hotel.getNumOfAvailableRooms())
+                .append("number_of_rooms", hotel.getRooms().size())
+                .append("number_of_available_rooms", hotel.getNumOfAvailableRooms())
                 .append("room_types", hotel.getRooms()
         );
         try {
