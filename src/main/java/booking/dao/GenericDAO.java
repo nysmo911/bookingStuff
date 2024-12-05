@@ -19,11 +19,8 @@ public interface GenericDAO<Thing> {
     //Get method
     Thing get(String name);
 
-    //Get all method
-   // List<Thing> getAll();
-
     //Update
-    void update(Thing thing);
+    <OtherThing> void update(Thing thing, String fieldName, OtherThing fieldValue) throws IllegalArgumentException;
 
     //Delete
     void delete(String name);

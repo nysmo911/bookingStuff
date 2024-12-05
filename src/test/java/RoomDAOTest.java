@@ -58,7 +58,7 @@ public class RoomDAOTest {
         Room updatedRoom = new Room("The Suite", "An upgraded version of The Suite", true, 220, 5 );
 
         //Call update method
-        RoomDAO.update(updatedRoom);
+        RoomDAO.update(updatedRoom, "description", "An even more upgraded BLAH");
 
         //Assert that room has been updated
         Room resultRoom = RoomDAO.get(updatedRoom.getTypeName());

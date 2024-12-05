@@ -5,6 +5,7 @@ import booking.model.Room;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import static booking.util.DbConnection.getInstance;
@@ -23,7 +24,6 @@ public class RoomDAO implements GenericDAO<Room> {
     private MongoDatabase db = getInstance().getDatabase();
     //Private collection
     final private MongoCollection<Document> collection = db.getCollection("rooms");
-
 
     /**
      * Translates a Room object into an acceptable format and inserts that into the database
@@ -60,8 +60,9 @@ public class RoomDAO implements GenericDAO<Room> {
             return null;
         }
         //Return resulting Object
-        Object roomID = queryDoc.get("_id");
-        return roomID;
+        Object result = queryDoc.get("_id");
+        return result;
+
 
     }
 
@@ -80,6 +81,10 @@ public class RoomDAO implements GenericDAO<Room> {
 
         //Execute the query
         Document searchResult = collection.find(eq("name", roomName)).projection(projection).first();
+
+                if (searchResult == null) {
+                    return null;
+                }
                 try {
                     String name = searchResult.getString("name");
                     String description = searchResult.getString("description");
@@ -91,28 +96,58 @@ public class RoomDAO implements GenericDAO<Room> {
                 catch (Exception e) {
                        e.printStackTrace();
                 }
-
                 return null;
     }
 
+    /**
+     * Updates a single field, specified by the fieldName parameter, with the fieldValue parameter
+     * fieldName (fieldValue type) must be one of the following:(String) name, (Double) price, (String) description,(int) capacity, or (Boolean) isAvailable
+     * @param room
+     * @param fieldName
+     * @param fieldValue
+     */
+    @Override
+    public <Thing> void update(Room room, String fieldName, Thing fieldValue) throws IllegalArgumentException {
+        //Ensure fieldName is a valid field
+        if (fieldName != "name" && fieldName != "description" && fieldName != "price" && fieldName != "capacity" && fieldName != "isAvailable") {
+            throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: name, name, price, description, capacity, or isAvailable");
+        }
+
+        //Get roomID
+        Object roomID = this.getRoomID(room.getTypeName());
+
+        //Create filter and update
+        Document filter = new Document("_id", roomID);
+        Document update = new Document("$set", new Document(fieldName,fieldValue));
+
+        //Execute update
+        try{
+            collection.updateOne(filter, update);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Check if availability field was affected and update the associated hotel
+       // if (fieldName == "isAvailable"){
+            //Update Room Reference field in respective Hotel Document
+            //collection.updateOne()
+        }
 
     /**
-     * Updates database entry matching the name of the passed Room object, with the passed Hotel object.
+     * Replaces database entry matching the name of the passed Room object, with the passed Hotel object.
      * 'typeName' in Room must match the name of an existing database item
      *
      * @param room
      */
-    @Override
-    public void update(Room room) {
-       //Create updated Document to replace current room
-        //Eventually create another update class so individual fields can be edited instead of the whole doc (take in an ID)
+    public void replace(Room room) {
+        //Create updated Document to replace current room
         Document updatedDoc = new Document()
                 .append("name", room.getTypeName())
                 .append("price", room.getPrice())
                 .append("description", room.getDescription())
                 .append("capacity", room.getCapacity())
                 .append("isAvailable", room.isAvailable()
-            );
+                );
 
         //Execute Query
         try {
@@ -121,8 +156,9 @@ public class RoomDAO implements GenericDAO<Room> {
         catch (Exception e) {
             e.printStackTrace();
         }
-            
     }
+
+
     /**
      * Deletes first database entry with a name that matches the string parameter
      * @param typeName
@@ -136,4 +172,7 @@ public class RoomDAO implements GenericDAO<Room> {
             e.printStackTrace();
         }
     }
+
+
 }
+
