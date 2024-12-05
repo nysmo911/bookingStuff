@@ -7,21 +7,50 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.SignInController">
    <children>
       <AnchorPane prefHeight="402.0" prefWidth="600.0">
          <children>
-            <Label layoutX="147.0" layoutY="118.0" text="Username" />
-            <Label layoutX="149.0" layoutY="192.0" text="Password" />
-            <TextField fx:id="usernameField" layoutX="226.0" layoutY="114.0" promptText="Username" />
-            <TextField fx:id="passwordField" layoutX="226.0" layoutY="188.0" promptText="Password" />
-            <Button fx:id="signInButton" layoutX="274.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleLogin" text="Sign In" />
-            <Label layoutX="246.0" layoutY="49.0" text="Please Sign In">
+            <Label layoutX="176.0" layoutY="141.0" text="USERNAME:">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Impact" size="20.0" />
+               </font></Label>
+            <Label layoutX="171.0" layoutY="214.0" text="PASSWORD:">
+               <font>
+                  <Font name="Impact" size="20.0" />
+               </font></Label>
+            <TextField fx:id="usernameField" layoutX="270.0" layoutY="140.0" promptText="Username">
+               <font>
+                  <Font name="Impact" size="13.0" />
+               </font></TextField>
+            <TextField fx:id="passwordField" layoutX="270.0" layoutY="214.0" promptText="Password">
+               <font>
+                  <Font name="Impact" size="13.0" />
+               </font></TextField>
+            <Button fx:id="signInButton" layoutX="283.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleLogin" text="SIGN IN">
+               <font>
+                  <Font name="Impact" size="13.0" />
+               </font></Button>
+            <Label layoutX="231.0" layoutY="2.0" text="Welcome" textAlignment="CENTER">
+               <font>
+                  <Font name="Birds of Paradise - Personal use Only" size="56.0" />
                </font>
             </Label>
+            <Label layoutX="244.0" layoutY="69.0" text="PLEASE SIGN IN" textAlignment="CENTER" textFill="#c63434">
+               <font>
+                  <Font name="Impact" size="23.0" />
+               </font>
+            </Label>
+            <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleHomepage" text="&lt; BACK">
+               <font>
+                  <Font name="Impact" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="signUpButton" layoutX="470.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleSignUp" text="CREATE ACCOUNT">
+               <font>
+                  <Font name="Impact" size="13.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
