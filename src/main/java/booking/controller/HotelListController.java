@@ -43,7 +43,7 @@ public class HotelListController {
         }
     }
 
-    // Refactored to a single method to handle hotel page navigation
+    //hotel page navigation
     private void loadHotelPage() {
         try {
             // Load and display HotelPage
