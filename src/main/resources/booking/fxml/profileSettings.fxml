@@ -23,14 +23,16 @@
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
             <ListView layoutX="14.0" layoutY="13.0" prefHeight="295.0" prefWidth="405.0" />
-            <Label layoutX="29.0" layoutY="47.0" text="Full Name:" />
-            <TextField layoutX="94.0" layoutY="43.0" prefHeight="26.0" prefWidth="302.0" />
-            <Label layoutX="29.0" layoutY="76.0" text="Address:" />
-            <TextField layoutX="94.0" layoutY="72.0" prefHeight="26.0" prefWidth="302.0" />
-            <Label layoutX="29.0" layoutY="121.0" text="Password:" />
-            <TextField layoutX="130.0" layoutY="116.0" prefHeight="26.0" prefWidth="266.0" />
-            <Label layoutX="29.0" layoutY="153.0" text="NewPassword:" />
-            <TextField layoutX="130.0" layoutY="148.0" prefHeight="26.0" prefWidth="266.0" />
+            <Label layoutX="29.0" layoutY="47.0" text="First Name:" />
+            <TextField fx:id="fNameField" layoutX="94.0" layoutY="43.0" prefHeight="26.0" prefWidth="302.0" />
+            <Label layoutX="29.0" layoutY="76.0" text="Last Name:" />
+            <TextField fx:id="LNameField" layoutX="94.0" layoutY="72.0" prefHeight="26.0" prefWidth="302.0" />
+            <Label layoutX="29.0" layoutY="119.0" text="Address:" />
+            <TextField layoutX="94.0" layoutY="115.0" prefHeight="26.0" prefWidth="302.0" />
+            <Label layoutX="29.0" layoutY="159.0" text="Password:" />
+            <TextField layoutX="130.0" layoutY="154.0" prefHeight="26.0" prefWidth="266.0" />
+            <Label layoutX="29.0" layoutY="191.0" text="NewPassword:" />
+            <TextField layoutX="130.0" layoutY="186.0" prefHeight="26.0" prefWidth="266.0" />
             <VBox layoutX="454.0" layoutY="22.0" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
