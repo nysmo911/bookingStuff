@@ -5,6 +5,9 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.FindIterable;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import org.bson.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+import java.io.IOException;
 
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
@@ -33,9 +38,44 @@ public class HomepageController {
     @FXML
     private TextField searchTextField;
     @FXML
-    private Button searchButton;
-    @FXML
     private Button signinButton;
+    @FXML
+    private AnchorPane loggedOutPane;
+    @FXML
+    private AnchorPane loggedInPane;
+    @FXML
+    private Label welcomeLabel;
+    @FXML
+    private Button dashboardButton;
+
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    private String loggedInUser = null;
+
+    public void initialize() {
+        refreshUI();
+    }
+
+    public void refreshUI() {
+        if (UserSession.getInstance().isLoggedIn()) {
+            loggedOutPane.setVisible(false);
+            loggedOutPane.setManaged(false);
+
+            loggedInPane.setVisible(true);
+            loggedInPane.setManaged(true);
+            loggedInUser = UserSession.getInstance().getLoggedInUser();
+
+            welcomeLabel.setText("Welcome, " + loggedInUser + "!");
+        } else {
+            loggedOutPane.setVisible(true);
+            loggedOutPane.setManaged(true);
+
+            loggedInPane.setVisible(false);
+            loggedInPane.setManaged(false);
+        }
+    }
 
     /**
      *
@@ -71,23 +111,14 @@ public class HomepageController {
 
     }
 
-    public void handleSignInAction(ActionEvent event) {
-        try{
+    public void handleSignInAction(ActionEvent event) throws IOException {
             // Loads Sign In Page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/@signInPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/booking/fxml/signInPage.fxml"));
             System.out.println("Loading SignInPage.fxml");
-            Parent root = loader.load();
-            System.out.println("SignInPage.fxml loaded successfully");
-
-            // Creates a new STage for Sign-In
-            Stage stage = new Stage();
-            stage.setTitle("Sign In");
-            stage.setScene(new Scene(root));
+            stage = (Stage) signinButton.getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
             stage.show();
-            System.out.println("Sign-In stage displayed");
-        }   catch (Exception e) {
-            e.printStackTrace(); //used for debugging
-        }
     }
 
 

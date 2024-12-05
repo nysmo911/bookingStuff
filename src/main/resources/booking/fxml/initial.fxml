@@ -32,82 +32,42 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.HomepageController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.HomepageController">
+   <children>
+      <AnchorPane fx:id="loggedOutPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <TextField fx:id="searchTextField" layoutX="139.0" layoutY="163.0" onAction="#submit" prefHeight="25.0" prefWidth="305.0" promptText="Enter a City Name">
+            <Button fx:id="signinButton" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSignInAction" text="Sign In" />
+            <Label layoutX="206.0" layoutY="15.0" text="BookingStuff">
                <font>
-                  <Font name="Monospaced Regular" size="12.0" />
+                  <Font size="33.0" />
                </font>
-            </TextField>
-            <Text layoutX="168.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to bookingStuff!" textAlignment="CENTER" wrappingWidth="304.63671875">
-               <font>
-                  <Font name="Monospaced Regular" size="19.0" />
-               </font>
-            </Text>
-            <Button fx:id="searchButton" layoutX="459.0" layoutY="163.0" mnemonicParsing="false" text="Search">
-               <effect>
-                  <Blend />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="NONE" />
-               </cursor>
-            </Button>
-            <Button fx:id="signinButton" layoutX="574.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSignInAction" text="Sign In" />
+            </Label>
+            <TextField fx:id="searchTextField" layoutX="148.0" layoutY="77.0" onAction="#submit" prefHeight="25.0" prefWidth="305.0" promptText="Enter A City Name" />
+            <ListView layoutX="149.0" layoutY="116.0" prefHeight="231.0" prefWidth="305.0" />
          </children>
-    </AnchorPane>
-  </children>
-</VBox>
+      </AnchorPane>
+      <AnchorPane fx:id="loggedInPane" prefHeight="400.0" prefWidth="600.0" visible="false">
+         <children>
+            <Button fx:id="dashboardButton" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" text="Dashboard" />
+            <Label alignment="TOP_CENTER" layoutX="206.0" layoutY="15.0" text="BookingStuff">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <TextField fx:id="searchTextField1" layoutX="148.0" layoutY="120.0" onAction="#submit" prefHeight="25.0" prefWidth="305.0" promptText="Enter A City Name" />
+            <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="405.0" layoutY="14.0" prefHeight="21.0" prefWidth="183.0" text="Welcome, Joephis!">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
