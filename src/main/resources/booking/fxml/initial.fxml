@@ -34,7 +34,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -49,8 +50,14 @@
                   <Font size="33.0" />
                </font>
             </Label>
-            <TextField fx:id="searchTextField" layoutX="148.0" layoutY="77.0" onAction="#submit" prefHeight="25.0" prefWidth="305.0" promptText="Enter A City Name" />
-            <ListView layoutX="149.0" layoutY="116.0" prefHeight="231.0" prefWidth="305.0" />
+            <TextField fx:id="searchTextField1" layoutX="12.0" layoutY="75.0" onAction="#submit" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" />
+            <TableView layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0">
+              <columns>
+                <TableColumn prefWidth="294.0" text="Hotel" />
+                  <TableColumn prefWidth="140.0" text="City" />
+                <TableColumn prefWidth="140.0" text="State" />
+              </columns>
+            </TableView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="loggedInPane" prefHeight="400.0" prefWidth="600.0" visible="false">
@@ -61,12 +68,19 @@
                   <Font size="33.0" />
                </font>
             </Label>
-            <TextField fx:id="searchTextField1" layoutX="148.0" layoutY="120.0" onAction="#submit" prefHeight="25.0" prefWidth="305.0" promptText="Enter A City Name" />
             <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="405.0" layoutY="14.0" prefHeight="21.0" prefWidth="183.0" text="Welcome, Joephis!">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
+            <TextField fx:id="searchTextField" layoutX="12.0" layoutY="75.0" onAction="#submit" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" />
+            <TableView layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0">
+               <columns>
+                  <TableColumn prefWidth="294.0" text="Hotel" />
+                  <TableColumn prefWidth="140.0" text="City" />
+                  <TableColumn prefWidth="140.0" text="State" />
+               </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </children>
