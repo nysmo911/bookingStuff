@@ -7,6 +7,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import java.util.ArrayList;
 import java.util.List;
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
@@ -15,6 +16,7 @@ import static com.mongodb.client.model.Filters.eq;
  * HotelDAO implements GenericDAO as an abstraction between the Hotel Class and database operations
  *
  * @author Brandon Brenes
+ * @date   11/26/2024
  * @version 1.0
  **/
 public class HotelDAO implements GenericDAO<Hotel> {
@@ -23,24 +25,37 @@ public class HotelDAO implements GenericDAO<Hotel> {
     private MongoDatabase db = getInstance().getDatabase();
     //Private collection
     final private MongoCollection<Document> collection = db.getCollection("hotels");
+    private RoomDAO roomDAO = new RoomDAO();
 
     /**
      * Receives a Hotel object as an argument and adds to the database if duplicate isn't found.
      * @param hotel
-     * @return Boolean
      */
     @Override
-    public void add(Hotel hotel) {
+    public void add(Hotel hotel){
         //Need dedupe
+        //Initialize List of Room Objects, and List of Document Objects
+        List<Room> hotelRooms = hotel.getRooms();
+        List<Document> roomReferences = new ArrayList<>();
 
+        //Using RoomId, create reference object for each room
+        for (Room room : hotelRooms) {
+            roomDAO.add(room);
+            Object roomRefID = roomDAO.getRoomID(room.getTypeName());
+            roomReferences.add(new Document("RoomObjectID", roomRefID)
+                    .append("name", room.getTypeName())
+                    .append("isAvailable", room.isAvailable()));
+        }
+
+        //Create new Hotel document and add to database
         try {
             collection.insertOne( new Document()
-
                     .append("name", hotel.getName())
                     .append("city", hotel.getCity())
                     .append("state", hotel.getState())
-                    .append("number_of_rooms", hotel.getNumOfAvailableRooms())
-                    .append("room_types", hotel.getRooms())
+                    .append("number_of_rooms", hotel.getRooms().size())
+                    .append("number_of_available_rooms", hotel.getNumOfAvailableRooms())
+                    .append("room_references", roomReferences)
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,21 +71,25 @@ public class HotelDAO implements GenericDAO<Hotel> {
      */
     @Override
     public Hotel get(String hotelName) {
-        //Create Projections
-        Bson projection = Projections.fields(
-                Projections.include("name" , "city", "state"),
-                Projections.excludeId()
-        );
+       //Execute the query
+       Document searchResult = collection.find(eq("name", hotelName)).first();
 
-        //Execute the query
-       Document searchResult = collection.find(eq("name", hotelName)).projection(projection).first();
             try {
             String name = searchResult.getString("name");
             String city = searchResult.getString("city");
             String state = searchResult.getString("state");
-            //int number_of_rooms = searchResult.getInteger("number_of_rooms"); //check for null values
-            List<Room> rooms = searchResult.getList("room_types", Room.class);
-            return new Hotel(name, city, state, 5, rooms);
+            int number_of_available_rooms = searchResult.getInteger("number_of_available_rooms"); //need to check for null values
+            List<Document> roomReferences = searchResult.getList("room_references", Document.class);
+            List<Room> resultRooms = new ArrayList<>();
+
+            //Use Room references to query room collection
+            for (Document roomReference : roomReferences) {
+                String roomRefID = roomReference.getObjectId("RoomObjectID").toString();
+                resultRooms.add(roomDAO.get(roomRefID));
+
+            }
+
+            return new Hotel(name, city, state, number_of_available_rooms, resultRooms);
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -80,24 +99,107 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     }
 
-   // @Override
-    //public List<Hotel> getAll() {
-        //complete later
-   // }
+    /*
+    /**
+     * Queries the database, by "name" for a specified field and returns the value
+     * @param fieldName
+     * @param fieldValue
+     * @return Generic
+     */
+    public <Thing> Thing getValueFromName(String name, String fieldName) throws IllegalArgumentException {
+        //Ensure fieldName is valid
+        if (fieldName != "city" && fieldName != "state" && fieldName != "room_references" && fieldName != "number_of_available_rooms") {
+            throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: city, room_references, or number_of_available_rooms");
+        }
+
+        //Execute query and return
+        Document queryDoc = collection.find(eq("name", name)).first();
+        if (queryDoc == null) {
+            return null;
+        }
+        switch (fieldName) {
+            case "city":
+                return (Thing) queryDoc.getString("city");
+            case "state":
+                return (Thing) queryDoc.getString("state");
+            case "room_references":
+                List<Object> room_references = queryDoc.getList("room_references", Object.class);
+                return (Thing) room_references;
+            case "number_of_available_rooms":
+                return (Thing) queryDoc.getInteger("number_of_available_rooms");
+            default:
+                return null;
+        }
+    }
+
 
     /**
-     * Updates database entry matching the name of the passed Hotel object, with the passed Hotel object.
+     * Searches for a hotel document with a matching name and returns the ID
+     *
+     * @param hotelName
+     * @return Object
+     */
+    public Object getID(String hotelName) {
+        //Query using passed parameter
+        Document queryDoc = collection.find(eq("name", hotelName)).first();
+
+        // Check if null
+        if (queryDoc == null) {
+            return null;
+        }
+        // return resulting Object
+            Object hotelID = queryDoc.get("_id");
+            return hotelID;
+
+
+
+    }
+
+    /**
+     * Updates a single field, specified by the fieldName parameter, with the fieldValue parameter
+     * fieldName (fieldValue type) must be one of the following: (String) name, (String) city, (String) state, (Integer) number_of_rooms, (List) room_references, or (Integer) number_of_available_rooms
+     * @param hotel
+     * @param fieldName
+     * @param fieldValue
+     */
+    @Override
+    public <Thing> void update(Hotel hotel, String fieldName, Thing fieldValue) throws IllegalArgumentException {
+        //Ensure fieldName is a valid field
+        if (fieldName != "name" && fieldName != "city" && fieldName != "state" && fieldName != "room_references" && fieldName != "number_of_available_rooms") {
+            throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: name, city, description, capacity, or isAvailable");
+        }
+        //Get roomID
+        Object hotelID = this.getID(hotel.getName());
+
+        //Create filter and update
+        Document filter = new Document("_id", hotelID);
+        Document update = new Document("$set", new Document(fieldName,fieldValue));
+
+        //Execute update
+        try{
+            collection.updateOne(filter, update);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    /**
+     * Replaces database entry matching the name of the passed Hotel object, with the passed Hotel object.
      * @param hotel
      * @return void
      */
-    @Override
-    public void update(Hotel hotel) {
-        Document doc = new Document(new Document()
+    public void replace(Hotel hotel) {
+        //Create updated Document from Hotel Object
+        //Eventually create another update class so individual fields can be edited instead of the whole doc (take in an ID)
+        Document doc = new Document()
                 .append("name", hotel.getName())
                 .append("city", hotel.getCity())
                 .append("state", hotel.getState())
-                .append("number_of_rooms", hotel.getNumOfAvailableRooms())
-                .append("room_types", hotel.getRooms())
+                .append("number_of_rooms", hotel.getRooms().size())
+                .append("number_of_available_rooms", hotel.getNumOfAvailableRooms())
+                .append("room_references", hotel.getRooms()
         );
         try {
             collection.replaceOne(eq("name", hotel.getName()), doc);

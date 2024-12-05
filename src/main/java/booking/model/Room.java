@@ -7,7 +7,8 @@ package booking.model;
  * @version 1.0
  */
 public class Room {
-    private String typeName ;       // The name of the room type (e.g., Single, Double, Suite)
+    private String typeName;       // The name of the room type (e.g., Single, Double, Suite)
+    private String description;    // Description of the room
     private double price;          // Price of the room per night
     private boolean isAvailable;   // Indicates if the room is available
     private int capacity;          // The maximum capacity of this room
@@ -15,14 +16,16 @@ public class Room {
     /**
      * Constructor to create a Room object with price, availability, type, and capacity.
      * @param typeName the type of the room
+     * @param description description of the room
      * @param price the price of the room
      * @param isAvailable whether the room is available
      * @param capacity the maximum capacity of the room
      */
-    public Room(double price, boolean isAvailable, String typeName, int capacity) {
+    public Room(String typeName, String description, boolean isAvailable, double price, int capacity) {
         this.typeName = typeName;
-        this.price = price;
+        this.description = description;
         this.isAvailable = isAvailable;
+        this.price = price;
         this.capacity = capacity;
     }
 
@@ -30,6 +33,23 @@ public class Room {
      * No Argument Constructor
      */
     public Room(){}
+
+
+    /**
+     * Retrieves the name of the room type.
+     * @return the room type name
+     */
+    public String getTypeName() {
+        return typeName;
+    }
+
+    /**
+     * Retrieves the description of the room.
+     * @return the room description
+     */
+    public String getDescription() {
+        return description;
+    }
 
     /**
      * Retrieves the price of the room.
@@ -47,13 +67,6 @@ public class Room {
         return isAvailable;
     }
 
-    /**
-     * Retrieves the name of the room type.
-     * @return the room type name
-     */
-    public String getTypeName() {
-        return typeName;
-    }
 
     /**
      * Retrieves the capacity of the room.

@@ -34,6 +34,14 @@ public class Hotel {
         this.rooms = rooms;
     }
 
+    public Hotel(String name, String city, String state, List<Room> rooms) {
+        this.name = name;
+        this.city = city;
+        this.state = state;
+        this.numOfAvailableRooms = 0;
+        this.rooms = rooms;
+    }
+
     public Hotel(String name, String city, String state) {
         this.name = name;
         this.city = city;
@@ -111,6 +119,14 @@ public class Hotel {
      * Retrieves the number of available rooms.
      * @return number of Available Rooms
      */
-    public int getNumOfAvailableRooms() {return numOfAvailableRooms;}
+    public int getNumOfAvailableRooms() {
+        int availableRooms = 0;
+        for (Room room : rooms) {
+            if (room.isAvailable()) {
+                availableRooms++;
+            }
+        }
+        return availableRooms;
+    }
 }
 
