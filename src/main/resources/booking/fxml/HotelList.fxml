@@ -30,7 +30,7 @@
                   </Button>
                   <ImageView fitHeight="67.0" fitWidth="175.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../OneDrive/Pictures/Screenshots/Screenshot%202024-11-26%20174347.png" />
+                        <Image url="@../../../../../../../OneDrive/Pictures/Screenshots/Screenshot%202024-11-26%20174347.png" />
                      </image>
                   </ImageView>
                   <Separator layoutX="-9.0" layoutY="100.0" prefHeight="4.0" prefWidth="609.0" />
