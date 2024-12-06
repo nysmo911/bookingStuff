@@ -50,13 +50,16 @@
       <Label fx:id="selectedPriceLabel" layoutX="28.0" layoutY="304.0" text="Price: $" />
 
       <!-- Reserve Button -->
-      <Button fx:id="reserveButton" layoutX="271.0" layoutY="344.0" mnemonicParsing="false" onAction="#handleReservation" text="Reserve" />
+      <Button fx:id="reserveButton" layoutX="266.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleReservation" text="Reserve">
+         <font>
+            <Font name="Impact" size="14.0" />
+         </font></Button>
       <Button fx:id="backButton" layoutX="19.0" layoutY="18.0" mnemonicParsing="false" text="&lt; BACK">
          <font>
             <Font name="Impact" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="dashboardButton" layoutX="495.0" layoutY="18.0" mnemonicParsing="false" text="Dashboard">
+      <Button fx:id="dashboardButton" layoutX="495.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleDashboardAction" text="Dashboard">
          <font>
             <Font name="Impact" size="13.0" />
          </font>
