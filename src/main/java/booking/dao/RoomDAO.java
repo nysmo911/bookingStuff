@@ -1,6 +1,5 @@
 package booking.dao;
 
-import booking.model.Hotel;
 import booking.model.Room;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -47,26 +46,6 @@ public class RoomDAO implements GenericDAO<Room> {
     }
 
     /**
-     * Searches for a Room document with a matching name and returns the ID in the form of an object
-     * @param roomName
-     * @return Object
-     */
-    public Object getRoomID(String roomName) {
-        //Query using passed parameter
-        Document queryDoc = collection.find(eq("name", roomName)).first();
-
-        //Check if null
-        if (queryDoc == null) {
-            return null;
-        }
-        //Return resulting Object
-        Object result = queryDoc.get("_id");
-        return result;
-
-
-    }
-
-    /**
      * Queries the database for the first item with a name matching the passed parameter and returns a Room Object of that item
      * @param roomName
      * @return Room
@@ -100,38 +79,70 @@ public class RoomDAO implements GenericDAO<Room> {
     }
 
     /**
+     * Searches for a Room document with a matching name and returns the ID in the form of an object
+     * @param roomName
+     * @return Object
+     */
+    public Object getRoomID(String roomName) {
+        //Query using passed parameter
+        Document queryDoc = collection.find(eq("name", roomName)).first();
+
+        //Check if null
+        if (queryDoc == null) {
+            return null;
+        }
+        //Return resulting Object
+        Object result = queryDoc.get("_id");
+        return result;
+
+
+    }
+
+    /**
      * Updates a single field, specified by the fieldName parameter, with the fieldValue parameter
      * fieldName (fieldValue type) must be one of the following:(String) name, (Double) price, (String) description,(int) capacity, or (Boolean) isAvailable
-     * @param room
+     * @param roomName
      * @param fieldName
      * @param fieldValue
      */
     @Override
-    public <Thing> void update(Room room, String fieldName, Thing fieldValue) throws IllegalArgumentException {
+    public <Thing> void update(String roomName, String fieldName, Thing fieldValue) throws IllegalArgumentException {
         //Ensure fieldName is a valid field
         if (fieldName != "name" && fieldName != "description" && fieldName != "price" && fieldName != "capacity" && fieldName != "isAvailable") {
             throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: name, name, price, description, capacity, or isAvailable");
         }
 
         //Get roomID
-        Object roomID = this.getRoomID(room.getTypeName());
+        Object roomID = this.getRoomID(roomName);
 
         //Create filter and update
         Document filter = new Document("_id", roomID);
-        Document update = new Document("$set", new Document(fieldName,fieldValue));
+        Document update = new Document("$set", new Document(fieldName, fieldValue));
 
         //Execute update
-        try{
+        try {
             collection.updateOne(filter, update);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         //Check if availability field was affected and update the associated hotel
-       // if (fieldName == "isAvailable"){
-            //Update Room Reference field in respective Hotel Document
-            //collection.updateOne()
+        if (fieldName == "isAvailable") {
+            //Get hotel entry that contains this room
+            HotelDAO hotelDAO = new HotelDAO();
+            String strID = roomID.toString();
+            String hotelName = hotelDAO.getMatch("room_references", strID);
+
+            //Update Hotel availability field
+            if ((Boolean)fieldValue) {
+                hotelDAO.update(hotelName, "number_of_available_rooms", 1);
+            } else {
+                hotelDAO.update(hotelName, "number_of_available_rooms", -1);
+            }
+
+
         }
+    }
 
     /**
      * Replaces database entry matching the name of the passed Room object, with the passed Hotel object.

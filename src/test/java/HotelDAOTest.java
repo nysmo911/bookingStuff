@@ -60,22 +60,19 @@ public class HotelDAOTest {
 
     @Test
     public void updateDatabaseTest(){
-        //Instantiate a Hotel Object
-        Hotel updatedHotel = new Hotel("randoHotel", "Pasadena", "CA");
-
         //Update hotel
-        TestDAO.update(updatedHotel, "number_of_available_rooms", 5);
+        TestDAO.update("COOLHOTEL", "number_of_available_rooms", 5);
 
         //Assert hotel was updated
-        Hotel resultHotel = TestDAO.get(updatedHotel.getName());
-        Assertions.assertEquals(updatedHotel.getName(), resultHotel.getName());
+        Hotel resultHotel = TestDAO.get("COOLHOTEL");
+        Assertions.assertEquals("COOLHOTEL", resultHotel.getName());
 
     }
 
     @Test
     public void getValueDatabaseTest(){
         //Get specific value
-        String val = TestDAO.getValueFromName("The Langham, Chicago", "city");
+        String val = TestDAO.getValue("The Langham, Chicago", "city");
 
         //Assert
         Assertions.assertEquals("Chicago", val );
