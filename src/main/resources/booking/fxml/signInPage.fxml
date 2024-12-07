@@ -41,7 +41,7 @@
                   <Font name="Impact" size="23.0" />
                </font>
             </Label>
-            <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt; BACK">
+            <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleHomepage" text="&lt; BACK">
                <font>
                   <Font name="Impact" size="13.0" />
                </font>

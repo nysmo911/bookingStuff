@@ -14,7 +14,6 @@ public class userProfile {
 	private String email;
 	private String userName;
 	private String password;
-	private List<String> reservationHistory;
 	
 	
 	/**
@@ -25,14 +24,13 @@ public class userProfile {
 	 * @param userName User's Username
 	 * @param password User's Password
 	 */
-	public userProfile(String fName, String lName, String email, String userName, String password, List<String> reservationHistory)
+	public userProfile(String fName, String lName, String email, String userName, String password)
 	{
 	    this.fName = fName;
 	    this.lName = lName;
 	    this.email = email;
 	    this.userName = userName;
 	    this.password = password;
-		this.reservationHistory = reservationHistory;
 	    System.out.println("New User has been created.");
 	}
 	
@@ -116,22 +114,6 @@ public class userProfile {
 		this.password = password;
 	}
 
-	/**
-	 * Method used for getting Reservation History
-	 * @return reservationHistory
-	 */
-	public List<String> getReservationHistory() {
-		return reservationHistory;
-	}
-
-	/**
-	 * Method used for setting userName
-	 * @param reservationHistory User's reservationHistory
-	 */
-	public void setReservationHistory(List<String> reservationHistory) {
-		this.reservationHistory = reservationHistory;
-	}
-
 	// Convert User object to MongoDB Document
 	public Document toDocument() {
 		return new Document("user_id", this.userName)
@@ -139,8 +121,8 @@ public class userProfile {
 				.append("lastname", this.lName)
 				.append("username", this.userName)
 				.append("password", this.password)
-				.append("email", this.email)
-				.append("reservation_history", this.reservationHistory);
+				.append("email", this.email);
+				//.append("reservation_history", this.reservationHistory);
 	}
 
 	// Convert MongoDB Document to User object
@@ -150,8 +132,7 @@ public class userProfile {
 				doc.getString("lName"),
 				doc.getString("email"),
 				doc.getString("userName"),
-				doc.getString("password"),
-				(List<String>) doc.get("reservation_history")
+				doc.getString("password")
 		);
 	}
 	
