@@ -4,31 +4,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.SignUpController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.SignUpController" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Label layoutX="184.0" layoutY="91.0" text="Username" />
-            <Label layoutX="186.0" layoutY="124.0" text="Password" />
-            <Label layoutX="207.0" layoutY="33.0" text="Create an Account">
-               <font>
-                  <Font size="23.0" />
-               </font>
-            </Label>
-            <TextField fx:id="usernameField" layoutX="268.0" layoutY="87.0" />
-            <TextField fx:id="passwordField" layoutX="268.0" layoutY="120.0" />
-            <Label layoutX="186.0" layoutY="156.0" text="Firstname" />
-            <TextField fx:id="fnameField" layoutX="268.0" layoutY="152.0" />
-            <Label layoutX="187.0" layoutY="192.0" text="Lastname" />
-            <TextField fx:id="lnameField" layoutX="268.0" layoutY="188.0" />
-            <TextField fx:id="emailField" layoutX="268.0" layoutY="220.0" />
-            <Label layoutX="198.0" layoutY="224.0" text="Email" />
-            <Button fx:id="submitButton" layoutX="274.0" layoutY="285.0" mnemonicParsing="false" onAction="#handleCreateUser" text="Submit" />
-            <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleHomepage" text="&lt; Back" />
-         </children>
-      </AnchorPane>
+      <Label layoutX="124.0" layoutY="27.0" text="CREATE AN ACCOUNT" textFill="#c63434" style="-fx-font-family: 'Impact'; -fx-font-size: 44;" />
+      <Label layoutX="184.0" layoutY="91.0" text="Username:" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" />
+      <TextField fx:id="usernameField" layoutX="266.0" layoutY="87.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+      <Label layoutX="184.0" layoutY="124.0" text="Password:" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" />
+      <TextField fx:id="passwordField" layoutX="266.0" layoutY="120.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+      <Label layoutX="184.0" layoutY="204.0" text="First Name:" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" />
+      <TextField fx:id="fnameField" layoutX="266.0" layoutY="200.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+      <Label layoutX="185.0" layoutY="240.0" text="Last Name:" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" />
+      <TextField fx:id="lnameField" layoutX="267.0" layoutY="235.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+      <Label layoutX="186.0" layoutY="322.0" text="Email:" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" />
+      <TextField fx:id="emailField" layoutX="266.0" layoutY="318.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+      <Button fx:id="submitButton" layoutX="500.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleCreateUser" text="Submit" style="-fx-background-color: #c63434; -fx-text-fill: white; -fx-font-family: 'Impact'; -fx-font-size: 14; -fx-background-radius: 10;" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleHomepage" text="&lt; Back" style="-fx-background-color: #333; -fx-text-fill: white; -fx-font-family: 'Impact'; -fx-font-size: 14; -fx-background-radius: 10;" />
    </children>
-</VBox>
+</AnchorPane>
