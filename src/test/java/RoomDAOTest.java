@@ -45,7 +45,7 @@ public class RoomDAOTest {
     @Test
     public void getRoomIdTest(){
         //Get ID
-        Object pulledID = RoomDAO.getRoomID("The Suite");
+        Object pulledID = RoomDAO.getID("The Suite");
         System.out.println(pulledID);
         String stringID = pulledID.toString();
 
@@ -58,7 +58,7 @@ public class RoomDAOTest {
         //Call update method
         RoomDAO.update("The Pent", "isAvailable", false);
         HotelDAO hotelDAO = new HotelDAO();
-        String roomID = RoomDAO.getRoomID("The Pent").toString();
+        String roomID = RoomDAO.getID("The Pent").toString();
         String hotelName = hotelDAO.getMatch("room_references", roomID);
 
 

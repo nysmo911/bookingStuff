@@ -6,6 +6,9 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+
+import java.util.Set;
+
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
@@ -22,7 +25,7 @@ public class RoomDAO implements GenericDAO<Room> {
     private MongoDatabase db = getInstance().getDatabase();
     //Private room collection
     final private MongoCollection<Document> collection = db.getCollection("rooms");
-
+    private static final Set<String> validFieldNames = Set.of("name", "price", "description", "capacity", "isAvailable");
     /**
      * Translates a Room object into an acceptable format and inserts that into the database
      * @param room
@@ -60,9 +63,8 @@ public class RoomDAO implements GenericDAO<Room> {
         //Execute the query
         Document searchResult = collection.find(eq("name", roomName)).projection(projection).first();
 
-                if (searchResult == null) {
-                    return null;
-                }
+                if (searchResult == null) { return null; }
+
                 try {
                     String name = searchResult.getString("name");
                     String description = searchResult.getString("description");
@@ -82,7 +84,7 @@ public class RoomDAO implements GenericDAO<Room> {
      * @param roomName
      * @return Object
      */
-    public Object getRoomID(String roomName) {
+    public <Thing> Thing getID(String roomName) {
         //Query using passed parameter
         Document queryDoc = collection.find(eq("name", roomName)).first();
 
@@ -92,7 +94,7 @@ public class RoomDAO implements GenericDAO<Room> {
         }
         //Return resulting Object
         Object result = queryDoc.get("_id");
-        return result;
+        return (Thing) result;
 
 
     }
@@ -106,19 +108,16 @@ public class RoomDAO implements GenericDAO<Room> {
      */
     @Override
     public <Thing> void update(String roomName, String fieldName, Thing fieldValue) throws IllegalArgumentException {
-        //Ensure fieldName is a valid field
-        if (fieldName != "name" && fieldName != "description" && fieldName != "price" && fieldName != "capacity" && fieldName != "isAvailable") {
-            throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: name, name, price, description, capacity, or isAvailable");
+        //Validate Input
+        if (!validFieldNames.contains(fieldName)) {
+            throw new IllegalArgumentException("Invalid fieldName. Please pass one of the following: " + String.join(", ", validFieldNames));
         }
 
-        //Get roomID
-        Object roomID = this.getRoomID(roomName);
+        Object roomID = this.getID(roomName);
 
-        //Create filter and update
+        //Create filter and Update
         Document filter = new Document("_id", roomID);
         Document update = new Document("$set", new Document(fieldName, fieldValue));
-
-        //Execute update
         try {
             collection.updateOne(filter, update);
         } catch (Exception e) {
@@ -133,11 +132,8 @@ public class RoomDAO implements GenericDAO<Room> {
             String hotelName = hotelDAO.getMatch("room_references", strID);
 
             //Update Hotel availability field
-            if ((Boolean)fieldValue) {
-                hotelDAO.update(hotelName, "number_of_available_rooms", 1);
-            } else {
-                hotelDAO.update(hotelName, "number_of_available_rooms", -1);
-            }
+            int newAvailability = (Boolean) fieldValue ? 1 : -1;
+            hotelDAO.update(hotelName, "number_of_available_rooms", newAvailability);
 
 
         }

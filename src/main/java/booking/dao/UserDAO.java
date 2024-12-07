@@ -4,13 +4,14 @@ import booking.model.UserProfile;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static booking.util.DbConnection.getInstance;
-
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class UserDAO implements GenericDAO<UserProfile>{
 
@@ -18,7 +19,7 @@ public class UserDAO implements GenericDAO<UserProfile>{
     private MongoDatabase db = getInstance().getDatabase();
     //Private user collection
     final private MongoCollection<Document> collection = db.getCollection("users");
-
+    private static final Set<String> validFieldNames = Set.of("first_name", "last_name", "email", "phone", "username", "password", "reservation_history");
 
     /**
      * Translates a User object into an acceptable format and inserts that into the database
@@ -37,6 +38,7 @@ public class UserDAO implements GenericDAO<UserProfile>{
                     .append("reservation_history", user.getReservationHistory())
 
             );
+
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -72,7 +74,15 @@ public class UserDAO implements GenericDAO<UserProfile>{
         return null;
     }
 
+    /**
+     * Overloaded get method to query the database for an entry with a matching first and last name and return it as
+     * a UserProfile object
+     * @param firstName
+     * @param lastName
+     * @return
+     */
     public UserProfile get(String firstName, String lastName){
+
         //Query for a document that has a matching first and last name
         Bson query = Filters.and(
                 Filters.eq("first_name", firstName),
@@ -97,10 +107,58 @@ public class UserDAO implements GenericDAO<UserProfile>{
         return null;
     }
 
-    public <Thing> void update(String name, String fieldName, Thing fieldValue) {
+    /**
+     * Queries the database for a document with matching first and last name fields and returns the ID of that Document
+     * @param firstName
+     * @param lastName
+     * @return
+     * @param <Thing>
+     */
+    public <Thing> Thing getID(String firstName, String lastName){
+
+        //Query for a document with a matching first and last name
+        Bson query = Filters.and(
+                Filters.eq("first_name", firstName),
+                Filters.eq("last_name", lastName)
+        );
+        Document queryDoc = collection.find(query).first();
+
+        if(queryDoc == null) {
+            return null;
+        }
+        Object id = queryDoc.get("_id");
+        return (Thing)id;
 
     }
 
+    @Override
+    public <Thing> void update(String id, String fieldName, Thing fieldValue) throws IllegalArgumentException {
+        //Validate fieldName input
+        if(!validFieldNames.contains(fieldName)) {
+            throw new IllegalArgumentException("Invalid fieldName. Please pass one of the following: " + String.join(", ", validFieldNames));
+        }
+
+        //Create filter and update
+        Document filter = new Document("_id", new ObjectId(id));
+        Document update = new Document("$set", new Document(fieldName, fieldValue));
+        try {
+            collection.updateOne(filter, update);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+    }
+
+    public <Thing> void update(String firstName, String lastName, String fieldName, Thing fieldValue) throws IllegalArgumentException {
+        //Ensure fieldName is a valid field
+    }
+
+    @Override
     public void delete(String name) {
 
     }
