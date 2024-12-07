@@ -4,7 +4,6 @@ import booking.model.Room;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
-import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import static booking.util.DbConnection.getInstance;
@@ -21,7 +20,7 @@ public class RoomDAO implements GenericDAO<Room> {
 
     //Private instance of db (from DbConnection)
     private MongoDatabase db = getInstance().getDatabase();
-    //Private collection
+    //Private room collection
     final private MongoCollection<Document> collection = db.getCollection("rooms");
 
     /**
@@ -147,7 +146,6 @@ public class RoomDAO implements GenericDAO<Room> {
     /**
      * Replaces database entry matching the name of the passed Room object, with the passed Hotel object.
      * 'typeName' in Room must match the name of an existing database item
-     *
      * @param room
      */
     public void replace(Room room) {
