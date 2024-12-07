@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import java.io.IOException;
+import booking.model.userProfile;
 
 public class SignUpController {
     @FXML
@@ -29,21 +30,30 @@ public class SignUpController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private String username;
+    private String password;
+    private String fname;
+    private String lname;
+    private String email;
+
 
     @FXML
-    private void handleCreateUser(ActionEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        String fname = fnameField.getText();
-        String lname = lnameField.getText();
-        String email = emailField.getText();
+    private void handleCreateUser(ActionEvent event) throws IOException {
+        username = usernameField.getText();
+        password = passwordField.getText();
+        fname = fnameField.getText();
+        lname = lnameField.getText();
+        email = emailField.getText();
 
-        // For testing
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
-        System.out.println("Fname: " + fname);
-        System.out.println("Lname: " + lname);
-        System.out.println("Email: " + email);
+        userProfile userProfile1 = new userProfile(fname, lname, email, username, password);
+
+        // Loads Sign In Page
+        root = FXMLLoader.load(getClass().getResource("/booking/fxml/signInPage.fxml"));
+        System.out.println("Loading SignInPage.fxml");
+        stage = (Stage) submitButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

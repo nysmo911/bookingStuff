@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.18467336683417085" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.18467336683417085" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.ProfileSettingsController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <Label contentDisplay="CENTER" layoutX="166.0" prefHeight="70.0" prefWidth="266.0" text="DASHBOARD" textAlignment="CENTER" textFill="#c63434">
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="71.0" prefWidth="600.0" text="DASHBOARD" textFill="#e82a2a">
                <font>
                   <Font name="Impact" size="55.0" />
                </font>
@@ -24,25 +24,21 @@
          <children>
             <ListView layoutX="14.0" layoutY="13.0" prefHeight="295.0" prefWidth="405.0" />
             <Label layoutX="29.0" layoutY="47.0" text="First Name:" />
-            <TextField fx:id="fNameField" layoutX="94.0" layoutY="43.0" prefHeight="26.0" prefWidth="302.0" />
             <Label layoutX="29.0" layoutY="76.0" text="Last Name:" />
-            <TextField fx:id="LNameField" layoutX="94.0" layoutY="72.0" prefHeight="26.0" prefWidth="302.0" />
-            <Label layoutX="29.0" layoutY="119.0" text="Address:" />
-            <TextField layoutX="94.0" layoutY="115.0" prefHeight="26.0" prefWidth="302.0" />
-            <Label layoutX="29.0" layoutY="159.0" text="Password:" />
-            <TextField layoutX="130.0" layoutY="154.0" prefHeight="26.0" prefWidth="266.0" />
-            <Label layoutX="29.0" layoutY="191.0" text="NewPassword:" />
-            <TextField layoutX="130.0" layoutY="186.0" prefHeight="26.0" prefWidth="266.0" />
+            <Label layoutX="29.0" layoutY="119.0" text="Email:" />
             <VBox layoutX="454.0" layoutY="22.0" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </VBox>
-            <Button layoutX="477.0" layoutY="128.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="54.0" text="EDIT">
+            <Button layoutX="477.0" layoutY="110.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="54.0" text="EDIT">
                <font>
                   <Font name="Bebas Neue Regular" size="13.0" />
                </font>
             </Button>
+            <TextField fx:id="fnameField" layoutX="131.0" layoutY="43.0" prefHeight="26.0" prefWidth="280.0" />
+            <TextField fx:id="lnameField" layoutX="131.0" layoutY="72.0" prefHeight="26.0" prefWidth="280.0" />
+            <TextField fx:id="emailField" layoutX="131.0" layoutY="116.0" prefHeight="26.0" prefWidth="280.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>

@@ -42,7 +42,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.HomepageController">
    <children>
-      <AnchorPane fx:id="loggedOutPane" prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane fx:id="loggedOutPane" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
             <Button fx:id="signinButton" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSignInAction" text="Sign In" />
             <Label layoutX="206.0" layoutY="15.0" text="BookingStuff">
@@ -51,18 +51,18 @@
                </font>
             </Label>
             <TextField fx:id="searchTextField1" layoutX="12.0" layoutY="75.0" onAction="#submit" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" />
-            <TableView layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0">
+            <TableView fx:id="hotelTableView" layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0">
               <columns>
-                <TableColumn prefWidth="294.0" text="Hotel" />
-                  <TableColumn prefWidth="140.0" text="City" />
-                <TableColumn prefWidth="140.0" text="State" />
+                <TableColumn fx:id="hotelColumn" prefWidth="294.0" text="Hotel" />
+                  <TableColumn fx:id="cityColumn" prefWidth="140.0" text="City" />
+                <TableColumn fx:id="stateColumn" prefWidth="140.0" text="State" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="loggedInPane" prefHeight="400.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="loggedInPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Button fx:id="dashboardButton" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" text="Dashboard" />
+            <Button fx:id="dashboardButton" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleDashboard" text="Dashboard" />
             <Label alignment="TOP_CENTER" layoutX="206.0" layoutY="15.0" text="BookingStuff">
                <font>
                   <Font size="33.0" />
