@@ -44,7 +44,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
         //Using RoomId, create reference object for each room
         for (Room room : hotelRooms) {
             roomDAO.add(room);
-            Object roomRefID = roomDAO.getRoomID(room.getTypeName());
+            Object roomRefID = roomDAO.getID(room.getTypeName());
             roomReferences.add(new Document("RoomObjectID", roomRefID)
                     .append("name", room.getTypeName()));
         }

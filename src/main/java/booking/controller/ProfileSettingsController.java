@@ -1,6 +1,6 @@
 package booking.controller;
 
-import booking.model.userProfile;
+import booking.model.UserProfile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,10 +17,10 @@ public class ProfileSettingsController {
     @FXML
     private Button editButton;
 
-    private userProfile userProfile;
+    private UserProfile userProfile;
 
     // Method to initialize the profile settings with existing data
-    public void initialize(userProfile userProfile) {
+    public void initialize(UserProfile userProfile) {
         this.userProfile = userProfile;
         fNameField.setText(userProfile.getFName());
         lNameField.setText(userProfile.getLName());

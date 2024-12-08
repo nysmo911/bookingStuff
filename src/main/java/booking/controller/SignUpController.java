@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import java.io.IOException;
-import booking.model.userProfile;
+import booking.model.UserProfile;
 
 public class SignUpController {
     @FXML
@@ -45,7 +45,8 @@ public class SignUpController {
         lname = lnameField.getText();
         email = emailField.getText();
 
-        userProfile userProfile1 = new userProfile(fname, lname, email, username, password);
+
+        UserProfile userProfile1 = new UserProfile(fname, lname, email, username, password);
 
         // Loads Sign In Page
         root = FXMLLoader.load(getClass().getResource("/booking/fxml/signInPage.fxml"));

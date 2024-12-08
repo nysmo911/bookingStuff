@@ -11,7 +11,6 @@ public class UserProfile {
 
 	private String fName;
 	private String lName;
-	private String phone;
 	private String email;
 	private String userName;
 	private String password;
@@ -26,12 +25,11 @@ public class UserProfile {
 	 * @param userName User's Username
 	 * @param password User's Password
 	 */
-	public UserProfile(String fName, String lName, String email, String phone, String userName, String password, List<String> reservationHistory)
+	public UserProfile(String fName, String lName, String email, String userName, String password, List<String> reservationHistory)
 	{
 	    this.fName = fName;
 	    this.lName = lName;
 	    this.email = email;
-		this.phone = phone;
 	    this.userName = userName;
 	    this.password = password;
 		this.reservationHistory = reservationHistory;
@@ -44,10 +42,12 @@ public class UserProfile {
 	 * @param lName
 	 * @param email
 	 */
-	public UserProfile(String fName, String lName, String email) {
+	public UserProfile(String fName, String lName, String email, String userName, String password) {
 		this.fName = fName;
 		this.lName = lName;
 		this.email = email;
+		this.userName = userName;
+		this.password = password;
 	}
 
 	/**
@@ -90,13 +90,10 @@ public class UserProfile {
 		this.lName = lName;
 	}
 
-	public void setPhone(String phone) { this.phone = phone; }
 	/**
 	 * Method used for getting email
 	 * @return email
 	 */
-
-	public String getPhone() { return phone; }
 
 	public String getEmail() {
 		return email;

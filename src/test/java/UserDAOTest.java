@@ -18,7 +18,7 @@ public class UserDAOTest {
         List<String>res_history = new ArrayList<>();
         res_history.add("4/12-4/15:room1");
         res_history.add("5/30-6/1: room2");
-        UserProfile testUser = new UserProfile("Elina", "Hossain","ellyH@gmail.com", "8187613935", "elina", "passy123", res_history);
+        UserProfile testUser = new UserProfile("Elina", "Hossain","ellyH@gmail.com", "elina", "passy123", res_history);
 
         //Add to database
         userDAO.add(testUser);

@@ -19,7 +19,7 @@ public class UserDAO implements GenericDAO<UserProfile>{
     private MongoDatabase db = getInstance().getDatabase();
     //Private user collection
     final private MongoCollection<Document> collection = db.getCollection("users");
-    private static final Set<String> validFieldNames = Set.of("first_name", "last_name", "email", "phone", "username", "password", "reservation_history");
+    private static final Set<String> validFieldNames = Set.of("first_name", "last_name", "email", "username", "password", "reservation_history");
 
     /**
      * Translates a User object into an acceptable format and inserts that into the database
@@ -32,7 +32,6 @@ public class UserDAO implements GenericDAO<UserProfile>{
                     .append("first_name", user.getFName())
                     .append("last_name", user.getLName())
                     .append("email", user.getEmail())
-                    .append("phone", user.getPhone())
                     .append("username", user.getUserName())
                     .append("password", user.getPassword())
                     .append("reservation_history", user.getReservationHistory())
@@ -60,12 +59,11 @@ public class UserDAO implements GenericDAO<UserProfile>{
             String firstName = searchResult.getString("first_name");
             String lastName = searchResult.getString("last_name");
             String email = searchResult.getString("email");
-            String phone = searchResult.getString("phone");
             String password = searchResult.getString("password");
             //Later on create a reservation class and update this to process reservations by reference
             List<String> reservationHistory = searchResult.getList("reservation_history", String.class);
 
-            return new UserProfile(firstName, lastName, email, phone, username, password, reservationHistory);
+            return new UserProfile(firstName, lastName, email, username, password, reservationHistory);
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -93,12 +91,11 @@ public class UserDAO implements GenericDAO<UserProfile>{
         try {
             String username = searchResult.getString("username");
             String email = searchResult.getString("email");
-            String phone = searchResult.getString("phone");
             String password = searchResult.getString("password");
             //Later on create a reservation class and update this to process reservations by reference
             List<String> reservationHistory = searchResult.getList("reservation_history", String.class);
 
-            return new UserProfile(firstName, lastName, email, phone, username, password, reservationHistory);
+            return new UserProfile(firstName, lastName, email, username, password, reservationHistory);
 
         } catch(Exception e) {
             e.printStackTrace();
