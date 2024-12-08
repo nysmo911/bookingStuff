@@ -24,14 +24,13 @@ import static com.mongodb.client.model.Filters.eq;
  **/
 public class HotelDAO implements GenericDAO<Hotel> {
 
-    //Private instance of db (from DbConnection)
     private MongoDatabase db = getInstance().getDatabase();
-    //Private collection
     final private MongoCollection<Document> collection = db.getCollection("hotels");
     private RoomDAO roomDAO = new RoomDAO();
 
     /**
      * Receives a Hotel object as an argument and adds to the database if duplicate isn't found.
+     *
      * @param hotel
      */
     @Override
@@ -67,7 +66,8 @@ public class HotelDAO implements GenericDAO<Hotel> {
     }
 
     /**
-     * Searches the Database for the first database entry matching the passed string. Returns the found entry in the form of a Hotel object.
+     * Searches the Database for the first document matching the passed string. Returns the found document in the form of a Hotel object.
+     *
      * @param hotelName
      * @return Hotel
      */
@@ -88,7 +88,6 @@ public class HotelDAO implements GenericDAO<Hotel> {
             for (Document roomReference : roomReferences) {
                 String roomRefID = roomReference.getObjectId("RoomObjectID").toString();
                 resultRooms.add(roomDAO.get(roomRefID));
-
             }
 
             return new Hotel(name, city, state, number_of_available_rooms, resultRooms);
@@ -108,22 +107,19 @@ public class HotelDAO implements GenericDAO<Hotel> {
      * @return Object
      */
     public Object getID(String hotelName) {
-        //Query using passed parameter
+
         Document queryDoc = collection.find(eq("name", hotelName)).first();
 
-        // Check if null
-        if (queryDoc == null) {
+        if (queryDoc != null) {
+            Object hotelID = queryDoc.get("_id");
+            return hotelID;
+        } else {
             return null;
         }
-        // return resulting Object
-        Object hotelID = queryDoc.get("_id");
-        return hotelID;
-
-
     }
 
     /**
-     * Queries the database for a Document with a matching parameter and returns the name of it
+     * Queries the database for a document with a matching parameter and returns the name of it
      *
      * @param fieldName
      * @param fieldValue
@@ -165,7 +161,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Queries the database, by "name" for a specified field and returns the value
-     *
+
      * @param name
      * @param fieldName
      * @return Generic
@@ -201,6 +197,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
     /**
      * Updates a single field, specified by the fieldName parameter, with the fieldValue parameter
      * fieldName (fieldValue type) must be one of the following: (String) name, (String) city, (String) state, (Integer) number_of_rooms, (List) room_references, or (Integer) number_of_available_rooms
+     *
      * @param hotelName
      * @param fieldName
      * @param fieldValue
@@ -238,6 +235,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Replaces database entry matching the name of the passed Hotel object, with the passed Hotel object.
+     *
      * @param hotel
      * @return void
      */
@@ -261,6 +259,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Deletes first database entry with a name that matches the string parameter
+     *
      * @param name
      */
     @Override

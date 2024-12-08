@@ -1,5 +1,7 @@
 package booking.controller;
 
+import booking.dao.HotelDAO;
+import booking.model.Hotel;
 import booking.util.HotelSearchModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -123,7 +125,6 @@ public class HomepageController {
 
         //Execute the query
         FindIterable<Document> searchResult = collection.find(filter).projection(projection);
-
 
         //Print result if city is found in the database
         if (searchResult != null) {

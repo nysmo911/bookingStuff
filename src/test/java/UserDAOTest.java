@@ -43,16 +43,24 @@ public class UserDAOTest {
         Assertions.assertEquals("Donald Obama", fullName);
     }
 
-    @Disabled("Will do later")
+
     @Test
     public void updateDatabaseTest(){
+        //Execute update
+        userDAO.update("prezy", "first_name", "snoop");
+
+        //Assert
+        UserProfile assertUsername = userDAO.get("prezy");
+        Assertions.assertEquals("snoop", assertUsername.getFName());
 
     }
 
-    @Disabled("Will do later")
     @Test
     public void deleteDatabaseTest(){
+        userDAO.delete("prezy");
+        UserProfile assertUsername = userDAO.get("prezy");
 
+        Assertions.assertNull(assertUsername);
     }
 
 }
