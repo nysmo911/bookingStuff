@@ -1,25 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.ProfileSettingsController">
     <children>
-        <StackPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
+        <!-- Header -->
+        <VBox alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
             <children>
-                <Label style="-fx-font-family: 'Impact'; -fx-font-size: 44;" text="PROFILE" textFill="white" />
+                <Label text="PROFILE SETTINGS" textFill="white">
+                    <font>
+                        <Font name="Impact" size="30.0" />
+                    </font>
+                </Label>
             </children>
-        </StackPane>
-        <AnchorPane layoutY="100.0" prefHeight="300.0" prefWidth="600.0">
+        </VBox>
+
+        <!-- Back Button -->
+        <Button fx:id="backButton" layoutX="20.0" layoutY="20.0" onAction="#handleBackAction" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="&lt; BACK" />
+
+        <!-- Form Fields -->
+        <VBox layoutX="50.0" layoutY="100.0" spacing="25.0">
             <children>
-                <Label layoutX="29.0" layoutY="47.0" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" text="First Name:" />
-                <Label layoutX="29.0" layoutY="77.0" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" text="Last Name:" />
-                <Label layoutX="29.0" layoutY="107.0" style="-fx-font-family: 'Impact'; -fx-font-size: 13;" text="Email:" />
-                <Label fx:id="firstNameLabel" layoutX="120.0" layoutY="47.0" style="-fx-font-family: 'Impact'; -fx-font-size: 13; -fx-text-fill: #333;" text="FName" />
-                <Label fx:id="lastNameLabel" layoutX="120.0" layoutY="77.0" style="-fx-font-family: 'Impact'; -fx-font-size: 13; -fx-text-fill: #333;" text="LName" />
-                <Label fx:id="emailLabel" layoutX="120.0" layoutY="107.0" style="-fx-font-family: 'Impact'; -fx-font-size: 13; -fx-text-fill: #333;" text="Email" />
+                <HBox spacing="20.0">
+                    <Label alignment="CENTER_RIGHT" prefWidth="120.0" style="-fx-font-size: 14; -fx-text-fill: #333;" text="First Name:" />
+                    <TextField fx:id="fnameField" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc; -fx-padding: 5;" />
+                </HBox>
+                <HBox spacing="20.0">
+                    <Label alignment="CENTER_RIGHT" prefWidth="120.0" style="-fx-font-size: 14; -fx-text-fill: #333;" text="Last Name:" />
+                    <TextField fx:id="lnameField" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc; -fx-padding: 5;" />
+                </HBox>
+                <HBox spacing="20.0">
+                    <Label alignment="CENTER_RIGHT" prefWidth="120.0" style="-fx-font-size: 14; -fx-text-fill: #333;" text="Email:" />
+                    <TextField fx:id="emailField" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc; -fx-padding: 5;" />
+                </HBox>
+                <HBox spacing="20.0">
+                    <Label alignment="CENTER_RIGHT" prefWidth="120.0" style="-fx-font-size: 14; -fx-text-fill: #333;" text="Username:" />
+                    <TextField fx:id="usernameField" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc; -fx-padding: 5;" />
+                </HBox>
+                <HBox spacing="20.0">
+                    <Label alignment="CENTER_RIGHT" prefWidth="120.0" style="-fx-font-size: 14; -fx-text-fill: #333;" text="Password:" />
+                    <TextField fx:id="passwordField" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc; -fx-padding: 5;" />
+                </HBox>
             </children>
-        </AnchorPane>
+        </VBox>
+
+        <!-- Action Buttons -->
+        <HBox alignment="CENTER" layoutX="150.0" layoutY="350.0" spacing="30.0" />
+          <Button fx:id="saveButton" layoutX="316.0" layoutY="360.0" onAction="#handleSave" prefWidth="120.0" style="-fx-background-color: #c63434; -fx-text-fill: white; -fx-background-radius: 10;" text="Save Changes" />
+          <Button fx:id="cancelButton" layoutX="466.0" layoutY="360.0" onAction="#handleCancel" prefWidth="120.0" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="Cancel" />
     </children>
 </AnchorPane>
