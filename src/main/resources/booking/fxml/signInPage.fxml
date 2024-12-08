@@ -34,7 +34,7 @@
          </children>
       </VBox>
       <VBox alignment="CENTER" layoutX="0.0" layoutY="260.0" prefWidth="600.0" spacing="15.0" />
-      <Button fx:id="backButton" layoutX="20.0" layoutY="20.0" onAction="#handleBack" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="&lt; BACK" />
+      <Button fx:id="backButton" layoutX="20.0" layoutY="20.0" onAction="#handleHomepage" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="&lt; BACK" />
       <Button fx:id="signUpButton" layoutX="225.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #333; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 10;" text="CREATE ACCOUNT" />
       <Button fx:id="signInButton" layoutX="225.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #c63434; -fx-text-fill: white; -fx-font-size: 14; -fx-background-radius: 10;" text="SIGN IN" />
    </children>
