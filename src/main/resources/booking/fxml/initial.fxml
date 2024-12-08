@@ -1,80 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.HomepageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.HomepageController" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);">
    <children>
+      <!-- Logged-Out Pane -->
       <AnchorPane fx:id="loggedOutPane" prefHeight="400.0" prefWidth="600.0" visible="false">
          <children>
-            <Button fx:id="signinButton" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSignInAction" text="Sign In" />
-            <Label layoutX="206.0" layoutY="15.0" text="BookingStuff">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <TextField fx:id="searchTextField1" layoutX="12.0" layoutY="75.0" onAction="#submit" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" />
-            <TableView fx:id="hotelTableView" layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0">
-              <columns>
-                <TableColumn fx:id="hotelColumn" prefWidth="294.0" text="Hotel" />
+            <StackPane layoutX="0.0" layoutY="0.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
+               <children>
+                  <AnchorPane prefHeight="60.0" prefWidth="600.0">
+                     <Label layoutX="20.0" layoutY="15.0" text="BookingStuff" textFill="white" style="-fx-font-family: 'Impact'; -fx-font-size: 33;" />
+                     <Button fx:id="signinButton" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleSignInAction" text="Sign In" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" />
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <TextField fx:id="searchTextField1" layoutX="12.0" layoutY="75.0" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+            <TableView fx:id="hotelTableView" layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;">
+               <columns>
+                  <TableColumn fx:id="hotelColumn" prefWidth="294.0" text="Hotel" />
                   <TableColumn fx:id="cityColumn" prefWidth="140.0" text="City" />
-                <TableColumn fx:id="stateColumn" prefWidth="140.0" text="State" />
-              </columns>
+                  <TableColumn fx:id="stateColumn" prefWidth="140.0" text="State" />
+               </columns>
             </TableView>
          </children>
       </AnchorPane>
+
+      <!-- Logged-In Pane -->
       <AnchorPane fx:id="loggedInPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Button fx:id="dashboardButton" layoutX="460.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleDashboard" text="Dashboard" />
-            <Label alignment="TOP_CENTER" layoutX="206.0" layoutY="15.0" text="BookingStuff">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="405.0" layoutY="14.0" prefHeight="21.0" prefWidth="183.0" text="Welcome, Joephis!">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <TextField fx:id="searchTextField" layoutX="12.0" layoutY="75.0" onAction="#submit" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" />
-            <TableView layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0">
+            <StackPane layoutX="0.0" layoutY="0.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
+               <children>
+                  <AnchorPane prefHeight="60.0" prefWidth="600.0">
+                     <Label layoutX="20.0" layoutY="15.0" text="BookingStuff" textFill="white" style="-fx-font-family: 'Impact'; -fx-font-size: 33;" />
+                     <Label fx:id="welcomeLabel" layoutX="350.0" layoutY="15.0" prefHeight="21.0" prefWidth="200.0" text="Welcome, Joephis!" textFill="white" style="-fx-font-family: 'Impact'; -fx-font-size: 15;" />
+                     <Button fx:id="dashboardButton" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleDashboard" text="Dashboard" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" />
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <TextField fx:id="searchTextField" layoutX="12.0" layoutY="75.0" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+            <TableView layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;">
                <columns>
                   <TableColumn prefWidth="294.0" text="Hotel" />
                   <TableColumn prefWidth="140.0" text="City" />
