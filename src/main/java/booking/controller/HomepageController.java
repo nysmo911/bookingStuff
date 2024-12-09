@@ -112,6 +112,7 @@ public class HomepageController {
         //SortedList<Hotel> sortedHotels = new SortedList<>(filteredHotels);
         //sortedHotels.comparatorProperty().bind(hotelSearchTable.comparatorProperty());
         hotelSearchTable.setItems(filteredHotels);
+        setupRowClickHandler(hotelSearchTable);
 
 
         //Determine which table to set
@@ -156,7 +157,7 @@ public class HomepageController {
         stage.show();
     }
 
-   /* @FXML
+    @FXML
     private void setupRowClickHandler(TableView<Hotel> tableView) {
         tableView.setRowFactory(tv -> {
             TableRow<Hotel> row = new TableRow<>();
@@ -174,7 +175,7 @@ public class HomepageController {
             });
             return row;
         });
-    } */
+    }
 
     @FXML
     private void openRoomPage(Hotel selectedHotel) throws IOException {

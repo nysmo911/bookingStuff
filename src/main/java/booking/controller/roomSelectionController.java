@@ -1,5 +1,6 @@
 package booking.controller;
 
+import booking.model.Hotel;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import booking.dao.RoomDAO;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+
 public class roomSelectionController {
 
     RoomDAO roomDAO = new RoomDAO();
@@ -17,8 +19,13 @@ public class roomSelectionController {
     @FXML
     private Label hotelNameLabel;
 
-    public void setHotelName(String hotelName) {
+    private void initialize(){
+        setHotelName(hotelName);
+    }
+
+    public void setHotelName(Hotel hotelName) {
         this.hotelName = hotelName;
         hotelNameLabel.setText(hotelName);
+        System.out.println(hotelName);
     }
 }
