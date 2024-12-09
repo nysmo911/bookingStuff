@@ -1,18 +1,21 @@
 package booking.controller;
 
+import booking.dao.HotelDAO;
+import booking.dao.RoomDAO;
+import booking.model.Hotel;
+import booking.model.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
-import java.io.IOException;
 
+import java.io.IOException;
+import java.util.List;
 
 public class ReservationPageController {
 
@@ -20,80 +23,110 @@ public class ReservationPageController {
     private Label hotelNameLabel;
 
     @FXML
-    private DatePicker checkInDate;
+    private Label selectedRoomTypeLabel;
 
     @FXML
-    private DatePicker checkOutDate;
+    private Label selectedPriceLabel;
 
     @FXML
-    private Label priceLabel;
+    private DatePicker checkInDatePicker;
 
     @FXML
-    private ComboBox<String> roomTypeComboBox;
+    private DatePicker checkOutDatePicker;
 
     @FXML
     private Button reserveButton;
 
     @FXML
-    private Button dashboardButton;
-
-    @FXML
     private Button backButton;
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    @FXML
+    private Button dashboardButton;
+
+    private HotelDAO hotelDAO;
+    private RoomDAO roomDAO;
+
+    private String hotelId;
+    private String roomType;
+    private String roomPrice;
 
     @FXML
     private void initialize() {
-        // Initialize room types
+        // Initialize DAOs
+        hotelDAO = new HotelDAO();
+        roomDAO = new RoomDAO();
+    }
 
-        // Set hotel name
-        // Replace with actual value from database
+    public void setReservationDetails(String hotelName, String roomType) {
+        this.roomType = roomType;
 
-        // Update price based on default room type
+        // Fetch hotel
+        Hotel hotel = hotelDAO.get(hotelName);
+        if (hotel != null) {
+            hotelId = String.valueOf(hotelDAO.getID(hotelName)); // Store hotel ID for reservation
+            hotelNameLabel.setText(hotel.getName());
 
-        // Handle reservation logic
-        @FXML
-        private void handleReservation () {
-            String checkIn = checkInDate.getValue() != null ? checkInDate.getValue().toString() : null;
-            String checkOut = checkOutDate.getValue() != null ? checkOutDate.getValue().toString() : null;
-            String roomType = roomTypeComboBox.getValue();
-            String price = priceLabel.getText();
+            // Fetch Room
+            Long hotelIdLong = Long.parseLong(hotelId);
+            Object roomId = roomDAO.getID(roomType, hotelIdLong);
 
+            if (roomId != null) {
+                Room room = roomDAO.get(roomId.toString());
+                if (room != null) {
+                    selectedRoomTypeLabel.setText("Selected Room: " + room.getTypeName());
+                    selectedPriceLabel.setText("Price: $" + room.getPrice());
+                    roomPrice = String.valueOf(room.getPrice());
+                } else {
+                    selectedRoomTypeLabel.setText("Room not found");
+                    selectedPriceLabel.setText("Price: N/A");
+                }
+            } else {
+                selectedRoomTypeLabel.setText("Room not found");
+                selectedPriceLabel.setText("Price: N/A");
+            }
+        } else {
+            hotelNameLabel.setText("Hotel not found");
+            selectedRoomTypeLabel.setText("Room: N/A");
+            selectedPriceLabel.setText("Price: N/A");
+        }
+    }
 
-            // Print reservation details (placeholder for actual logic)
-            System.out.println("Reservation Details:");
-            System.out.println("Hotel: " + hotelNameLabel.getText());
-            System.out.println("Check-In: " + checkIn);
-            System.out.println("Check-Out: " + checkOut);
-            System.out.println("Price: " + price);
-            System.out.println("Room Type: " + roomType);
+    // Handle reservation logic
+    @FXML
+    private void handleReservation() {
+        String checkInDate = (checkInDatePicker.getValue() != null) ? checkInDatePicker.getValue().toString() : null;
+        String checkOutDate = (checkOutDatePicker.getValue() != null) ? checkOutDatePicker.getValue().toString() : null;
 
-
-            // Add further reservation processing
+        if (checkInDate == null || checkOutDate == null) {
+            System.out.println("Error: Check-in and Check-out dates are required.");
+            return;
         }
 
-        //Dashboard page
-        @FXML
-        public void handleDashboardAction (ActionEvent event) throws IOException {
-            Pane root = FXMLLoader.load(getClass().getResource("/booking/fxml/userDashboard.fxml"));
-            Stage stage = (Stage) dashboardButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        //Previous page
-        @FXML
-        private void handleHomepage(ActionEvent event) throws IOException {
-            root = FXMLLoader.load(getClass().getResource("/booking/fxml/initial.fxml"));
-            System.out.println("Loading initial.fxml");
-            stage = (Stage) backButton.getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
+        System.out.println("Reservation successful!");
+        System.out.println("Hotel: " + hotelNameLabel.getText());
+        System.out.println("Check-In: " + checkInDate);
+        System.out.println("Check-Out: " + checkOutDate);
+        System.out.println("Room Type: " + roomType);
+        System.out.println("Price: $" + roomPrice);
+    }
 
-        // Update price from the database based on room type
+    // Navigate to the dashboard
+    @FXML
+    private void handleDashboardAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/booking/fxml/userDashboard.fxml"));
+        Stage stage = (Stage) dashboardButton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    // Navigate back to the homepage
+    @FXML
+    private void handleHomepage(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/booking/fxml/initial.fxml"));
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
