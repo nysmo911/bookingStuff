@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.roomSelectionController">
+   <children>
+      <Label fx:id="hotelNameLabel" layoutX="14.0" layoutY="14.0" text="HotelName">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="140.0" layoutY="94.0" text="Room1" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="140.0" layoutY="227.0" text="Room3" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="94.0" text="Room2" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="227.0" text="Room4" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

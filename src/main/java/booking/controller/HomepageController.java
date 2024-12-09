@@ -11,14 +11,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import org.bson.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import org.bson.conversions.Bson;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,8 +25,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
@@ -73,6 +70,7 @@ public class HomepageController {
     private TableColumn<Hotel, String> cityColumn1;
     @FXML
     private TableColumn<Hotel, String> stateColumn1;
+    private String selectedHotelName;
 
 
     private Stage stage;
@@ -152,6 +150,36 @@ public class HomepageController {
     private void handleDashboard(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/booking/fxml/userDashboard.fxml"));
         System.out.println("Loading userDashboard.fxml");
+        stage = (Stage) dashboardButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+   /* @FXML
+    private void setupRowClickHandler(TableView<Hotel> tableView) {
+        tableView.setRowFactory(tv -> {
+            TableRow<Hotel> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty() && event.getClickCount() == 1) {
+                    Hotel selectedHotel = row.getItem();
+                    selectedHotelName = selectedHotel.getName();
+                    System.out.println("Selected Hotel: " + selectedHotelName);
+                    try {
+                        openRoomPage(selectedHotel);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            return row;
+        });
+    } */
+
+    @FXML
+    private void openRoomPage(Hotel selectedHotel) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/booking/fxml/roomSelection.fxml"));
+        System.out.println("Loading roomSelection.fxml");
         stage = (Stage) dashboardButton.getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
