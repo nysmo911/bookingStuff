@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.HomepageController" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.HomepageController">
    <children>
       <!-- Logged-Out Pane -->
       <AnchorPane fx:id="loggedOutPane" prefHeight="400.0" prefWidth="600.0" visible="false">
@@ -17,13 +11,13 @@
             <StackPane layoutX="0.0" layoutY="0.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
                <children>
                   <AnchorPane prefHeight="60.0" prefWidth="600.0">
-                     <Label layoutX="20.0" layoutY="15.0" text="BookingStuff" textFill="white" style="-fx-font-family: 'Impact'; -fx-font-size: 33;" />
-                     <Button fx:id="signinButton" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleSignInAction" text="Sign In" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" />
+                     <Label layoutX="20.0" layoutY="15.0" style="-fx-font-family: 'Impact'; -fx-font-size: 33;" text="BookingStuff" textFill="white" />
+                     <Button fx:id="signinButton" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleSignInAction" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="Sign In" />
                   </AnchorPane>
                </children>
             </StackPane>
-            <TextField fx:id="searchTextField1" layoutX="12.0" layoutY="75.0" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
-            <TableView fx:id="hotelTableView" layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;">
+            <TextField fx:id="searchTextField" layoutX="12.0" layoutY="75.0" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+            <TableView fx:id="hotelSearchTable" layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;">
                <columns>
                   <TableColumn fx:id="hotelColumn" prefWidth="294.0" text="Hotel" />
                   <TableColumn fx:id="cityColumn" prefWidth="140.0" text="City" />
@@ -39,18 +33,18 @@
             <StackPane layoutX="0.0" layoutY="0.0" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
                <children>
                   <AnchorPane prefHeight="60.0" prefWidth="600.0">
-                     <Label layoutX="20.0" layoutY="15.0" text="BookingStuff" textFill="white" style="-fx-font-family: 'Impact'; -fx-font-size: 33;" />
-                     <Label fx:id="welcomeLabel" layoutX="350.0" layoutY="15.0" prefHeight="21.0" prefWidth="200.0" text="Welcome, Joephis!" textFill="white" style="-fx-font-family: 'Impact'; -fx-font-size: 15;" />
-                     <Button fx:id="dashboardButton" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleDashboard" text="Dashboard" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" />
+                     <Label layoutX="20.0" layoutY="15.0" style="-fx-font-family: 'Impact'; -fx-font-size: 33;" text="BookingStuff" textFill="white" />
+                     <Label fx:id="welcomeLabel" layoutX="350.0" layoutY="15.0" prefHeight="21.0" prefWidth="200.0" style="-fx-font-family: 'Impact'; -fx-font-size: 15;" text="Welcome, Joephis!" textFill="white" />
+                     <Button fx:id="dashboardButton" layoutX="500.0" layoutY="15.0" mnemonicParsing="false" onAction="#handleDashboard" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="Dashboard" />
                   </AnchorPane>
                </children>
             </StackPane>
-            <TextField fx:id="searchTextField" layoutX="12.0" layoutY="75.0" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
-            <TableView layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;">
+            <TextField fx:id="searchTextField1" layoutX="12.0" layoutY="75.0" prefHeight="25.0" prefWidth="577.0" promptText="Enter a Hotel, City, or State" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
+            <TableView fx:id="hotelSearchTable1" layoutX="12.0" layoutY="109.0" prefHeight="278.0" prefWidth="577.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;">
                <columns>
-                  <TableColumn prefWidth="294.0" text="Hotel" />
-                  <TableColumn prefWidth="140.0" text="City" />
-                  <TableColumn prefWidth="140.0" text="State" />
+                  <TableColumn fx:id="hotelColumn1" prefWidth="294.0" text="Hotel" />
+                  <TableColumn fx:id="cityColumn1" prefWidth="140.0" text="City" />
+                  <TableColumn fx:id="stateColumn1" prefWidth="140.0" text="State" />
                </columns>
             </TableView>
          </children>

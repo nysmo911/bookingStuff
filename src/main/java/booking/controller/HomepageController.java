@@ -2,16 +2,18 @@ package booking.controller;
 
 import booking.dao.HotelDAO;
 import booking.model.Hotel;
-import booking.util.HotelSearchModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.FindIterable;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import org.bson.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +24,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import javafx.collections.FXCollections;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -43,6 +46,8 @@ public class HomepageController {
     @FXML
     private TextField searchTextField;
     @FXML
+    private TextField searchTextField1;
+    @FXML
     private Button signinButton;
     @FXML
     private AnchorPane loggedOutPane;
@@ -53,15 +58,23 @@ public class HomepageController {
     @FXML
     private Button dashboardButton;
     @FXML
-    private TableView<HotelSearchModel> hotelTableView;
+    private TableView<Hotel> hotelSearchTable;
     @FXML
-    private TableColumn<HotelSearchModel, String> hotelColumn;
+    private TableColumn<Hotel, String> hotelColumn;
     @FXML
-    private TableColumn<HotelSearchModel, String> cityColumn;
+    private TableColumn<Hotel, String> cityColumn;
     @FXML
-    private TableColumn<HotelSearchModel, String> stateColumn;
+    private TableColumn<Hotel, String> stateColumn;
+    @FXML
+    private TableView<Hotel> hotelSearchTable1;
+    @FXML
+    private TableColumn<Hotel, String> hotelColumn1;
+    @FXML
+    private TableColumn<Hotel, String> cityColumn1;
+    @FXML
+    private TableColumn<Hotel, String> stateColumn1;
 
-    ObservableList<HotelSearchModel> hotelSearchModelObservableList = FXCollections.observableArrayList();
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -69,21 +82,42 @@ public class HomepageController {
 
     public void initialize() {
         refreshUI();
-       /* MongoDatabase database = getInstance().getDatabase();
-        String hotelViewQuery = "";
-        try{
+        //Get all hotels from database
+        HotelDAO HotelDAO = new HotelDAO();
+        List<Hotel> db_hotels = HotelDAO.getAll(false);
+        ObservableList<Hotel> hotelObservableList = FXCollections.observableArrayList();
+        hotelObservableList.addAll(db_hotels);
+
+        //Set Column names
+        hotelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
+        stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
+
+        //Wrap with filter list to show filtered results
+        FilteredList<Hotel> filteredHotels = new FilteredList<>(hotelObservableList, h -> true);
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> filteredHotels.setPredicate(Hotel -> {
+                            if (newValue == null || newValue.isBlank()) {
+                                return true;
+                            }
+
+                            String searchEntry = newValue.toLowerCase();
+                            Boolean nameMatch = Hotel.getName().toLowerCase().contains(searchEntry);
+                            Boolean cityMatch = Hotel.getCity().toLowerCase().contains(searchEntry);
+                            Boolean stateMatch = Hotel.getState().toLowerCase().contains(searchEntry);
+
+                            return nameMatch || stateMatch || cityMatch;
+                            }));
+        });
+
+        //Sort Filtered List Sorted List doesn't filter ) fix later
+        //SortedList<Hotel> sortedHotels = new SortedList<>(filteredHotels);
+        //sortedHotels.comparatorProperty().bind(hotelSearchTable.comparatorProperty());
+        hotelSearchTable.setItems(filteredHotels);
 
 
-
-            while (queryOutput.next()){
-                hotelSearchModelObservableList.add(new HotelSearchModel());
-            }
-
-
-        } catch (Exception e) {
-
-        } */
-    }
+        //Determine which table to set
+        }
 
     public void refreshUI() {
         if (UserSession.getInstance().isLoggedIn()) {
@@ -102,39 +136,6 @@ public class HomepageController {
             loggedInPane.setVisible(false);
             loggedInPane.setManaged(false);
         }
-    }
-
-    /**
-     *
-     * @param event event parameter that is passed from the fxml file
-     */
-    public void submit(ActionEvent event) {
-        //Create instance of the database
-        MongoDatabase database = getInstance().getDatabase();
-
-        //Get user input from TextField
-        String cityName = searchTextField.getText();
-
-        //Get hotel collection from mongoDB and filter query
-        MongoCollection<Document> collection = database.getCollection("hotels");
-        Bson filter = new Document("city", cityName);
-        Bson projection = Projections.fields(
-                Projections.include("name" , "city", "state"),
-                Projections.excludeId()
-        );
-
-        //Execute the query
-        FindIterable<Document> searchResult = collection.find(filter).projection(projection);
-
-        //Print result if city is found in the database
-        if (searchResult != null) {
-            for (Document doc : searchResult) {
-                searchTextField.setText(doc.toJson());
-            }
-        } else {
-            searchTextField.setText("Awww we don't support that city yet :(....but maybe one day!");
-        }
-
     }
 
     public void handleSignInAction(ActionEvent event) throws IOException {

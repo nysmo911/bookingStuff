@@ -36,5 +36,13 @@ public class UserSession {
     public void setLoggedInUser(String username) {
         this.loggedInUser = username;
     }
-}
 
+    /**
+     * Clears the session data, effectively logging the user out.
+     */
+    public void signOut() {
+        isLoggedIn = false;
+        loggedInUser = "";
+        System.out.println("User session has been cleared. User signed out.");
+    }
+}

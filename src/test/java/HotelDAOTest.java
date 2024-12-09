@@ -59,6 +59,15 @@ public class HotelDAOTest {
     }
 
     @Test
+    public void getAllDatabaseTest(){
+        List<Hotel> testHotels = TestDAO.getAll(true);
+        //for (Hotel testHotel : testHotels) {
+            //testHotel.displayHotelInfo();
+        //};
+        Assertions. assertEquals(38, testHotels.size());
+    }
+
+    @Test
     public void updateDatabaseTest(){
         //Update hotel
         TestDAO.update("COOLHOTEL", "number_of_available_rooms", 5);
@@ -66,6 +75,7 @@ public class HotelDAOTest {
         //Assert hotel was updated
         Hotel resultHotel = TestDAO.get("COOLHOTEL");
         Assertions.assertEquals("COOLHOTEL", resultHotel.getName());
+
 
     }
 

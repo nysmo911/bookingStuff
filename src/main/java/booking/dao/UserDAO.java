@@ -1,6 +1,7 @@
 package booking.dao;
 
 import booking.model.UserProfile;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static booking.util.DbConnection.getInstance;
@@ -30,7 +31,6 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Translates a User object into an acceptable format and inserts that into the database
-     *
      * @param user
      */
     @Override
@@ -54,7 +54,6 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Queries the database for an entry with a matching username and returns it as a UserProfile Object
-     *
      * @param username
      * @return
      */
@@ -85,7 +84,6 @@ public class UserDAO implements GenericDAO<UserProfile>{
     /**
      * Overloaded get method to query the database for an entry with a matching first and last name and return it as
      * a UserProfile object
-     *
      * @param firstName
      * @param lastName
      * @return
@@ -115,8 +113,35 @@ public class UserDAO implements GenericDAO<UserProfile>{
     }
 
     /**
+     * Retrieves all documents in the users collection, in the form of UserProfile objects
+     * @return List of UserProfile objects
+     */
+    public List<UserProfile> getAll() {
+        //Get all UserProfile Documents
+        FindIterable<Document> userDocuments = collection.find();
+
+        //Convert into UserProfile Objects
+        List<UserProfile> userProfileObjects = new ArrayList<>();
+        try {
+            for (Document userDocument : userDocuments) {
+                String firstName = userDocument.getString("first_name");
+                String lastName = userDocument.getString("last_name");
+                String username = userDocument.getString("username");
+                String email = userDocument.getString("email");
+                String password = userDocument.getString("password");
+                //Later on create a reservation class and update this to process reservations by reference
+                List<String> reservationHistory = userDocument.getList("reservation_history", String.class);
+
+                userProfileObjects.add(new UserProfile(firstName, lastName, username, email, password, reservationHistory));
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+            return userProfileObjects;
+    }
+
+    /**
      * Queries the database for a document with matching username and returns the ID of that Document
-     *
      * @param username
      * @return
      * @param <Thing>
@@ -135,7 +160,6 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Queries the database by username for a specified field and returns the value of that field
-     *
      * @param username
      * @param fieldName
      * @return
@@ -171,7 +195,6 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Updates a single field of the document with the matching passed parameter, username.
-     *
      * @param username
      * @param fieldName
      * @param fieldValue
@@ -200,7 +223,6 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Deletes the first document with a matching username
-     *
      * @param username
      */
     @Override
