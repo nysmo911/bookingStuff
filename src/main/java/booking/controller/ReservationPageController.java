@@ -63,7 +63,7 @@ public class ReservationPageController {
         // Fetch hotel
         Hotel hotel = hotelDAO.get(hotelName);
         if (hotel != null) {
-            hotelId = String.valueOf(hotelDAO.getID(hotelName)); // Store hotel ID for reservation
+            hotelId = String.valueOf(hotelDAO.getID(hotelName));
             hotelNameLabel.setText(hotel.getName());
 
             // Fetch Room
@@ -76,18 +76,8 @@ public class ReservationPageController {
                     selectedRoomTypeLabel.setText("Selected Room: " + room.getTypeName());
                     selectedPriceLabel.setText("Price: $" + room.getPrice());
                     roomPrice = String.valueOf(room.getPrice());
-                } else {
-                    selectedRoomTypeLabel.setText("Room not found");
-                    selectedPriceLabel.setText("Price: N/A");
                 }
-            } else {
-                selectedRoomTypeLabel.setText("Room not found");
-                selectedPriceLabel.setText("Price: N/A");
             }
-        } else {
-            hotelNameLabel.setText("Hotel not found");
-            selectedRoomTypeLabel.setText("Room: N/A");
-            selectedPriceLabel.setText("Price: N/A");
         }
     }
 
