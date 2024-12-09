@@ -1,3 +1,4 @@
+import booking.dao.HotelDAO;
 import booking.dao.RoomDAO;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ public class RoomDAOTest {
     @Test
     public void getRoomIdTest(){
         //Get ID
-        Object pulledID = RoomDAO.getRoomID("The Suite");
+        Object pulledID = RoomDAO.getID("The Suite");
         System.out.println(pulledID);
         String stringID = pulledID.toString();
 
@@ -54,14 +55,20 @@ public class RoomDAOTest {
 
     @Test
     public void updateDatabaseTest(){
-        //Create instance of Room
-        Room updatedRoom = new Room("The Suite", "An upgraded version of The Suite", true, 220, 5 );
-
         //Call update method
-        RoomDAO.update(updatedRoom, "description", "An even more upgraded BLAH");
+        RoomDAO.update("The Pent", "isAvailable", false);
+        HotelDAO hotelDAO = new HotelDAO();
+        String roomID = RoomDAO.getID("The Pent").toString();
+        String hotelName = hotelDAO.getMatch("room_references", roomID);
+
 
         //Assert that room has been updated
-        Room resultRoom = RoomDAO.get(updatedRoom.getTypeName());
-        Assertions.assertEquals(updatedRoom.getTypeName(), resultRoom.getTypeName());
+        Room resultRoom = RoomDAO.get("The Pent");
+        Assertions.assertEquals(false, resultRoom.isAvailable());
+
+        //Assert that associated hotel availability has also been updated
+        int hotelValue = hotelDAO.getValue(hotelName, "number_of_available_rooms");
+        Assertions.assertEquals(1, (hotelValue));
     }
+
 }

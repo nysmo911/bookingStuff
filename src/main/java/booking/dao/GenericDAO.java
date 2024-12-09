@@ -20,7 +20,7 @@ public interface GenericDAO<Thing> {
     Thing get(String name);
 
     //Update
-    <OtherThing> void update(Thing thing, String fieldName, OtherThing fieldValue) throws IllegalArgumentException;
+    <OtherThing> void update(String name, String fieldName, OtherThing fieldValue) throws IllegalArgumentException;
 
     //Delete
     void delete(String name);

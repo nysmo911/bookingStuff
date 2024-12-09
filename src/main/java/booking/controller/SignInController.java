@@ -1,9 +1,12 @@
 package booking.controller;
 
+import booking.dao.UserDAO;
+import booking.model.UserProfile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -26,27 +29,42 @@ public class SignInController {
     private Scene scene;
     private Parent root;
 
+    // Instance of UserDAO to access the database
+    private UserDAO userDAO = new UserDAO();
+
     @FXML
     private void handleLogin(ActionEvent event) throws IOException {
-        // Saves entries
+        // Retrieve username and password from text fields
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // For testing
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
+        // Input validation
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Login Error", "Username and password cannot be empty.");
+            return;
+        }
 
-        UserSession.getInstance().setLoggedIn(true);
-        UserSession.getInstance().setLoggedInUser(username);
-        System.out.println(UserSession.getInstance().getLoggedInUser());
-        System.out.println(UserSession.getInstance().isLoggedIn());
+        // Retrieve the user from the database
+        UserProfile user = userDAO.get(username);
 
-        root = FXMLLoader.load(getClass().getResource("/booking/fxml/initial.fxml"));
-        System.out.println("Loading initial.fxml");
-        stage = (Stage) signInButton.getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        // Check if the user exists and the password matches
+        if (user == null) {
+            showAlert(Alert.AlertType.ERROR, "Login Error", "User does not exist.");
+        } else if (!user.getPassword().equals(password)) {
+            showAlert(Alert.AlertType.ERROR, "Login Error", "Incorrect password. Please try again.");
+        } else {
+            // Set the logged-in user in the session
+            UserSession.getInstance().setLoggedIn(true);
+            UserSession.getInstance().setLoggedInUser(username);
+
+            // Redirect to the homepage
+            root = FXMLLoader.load(getClass().getResource("/booking/fxml/initial.fxml"));
+            System.out.println("Loading initial.fxml");
+            stage = (Stage) signInButton.getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     @FXML
@@ -68,5 +86,19 @@ public class SignInController {
         stage.setScene(scene);
         stage.show();
     }
-}
 
+    /**
+     * Utility method to show an alert dialog.
+     *
+     * @param alertType The type of alert (e.g., ERROR, INFORMATION).
+     * @param title     The title of the alert.
+     * @param message   The message to display in the alert.
+     */
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+}

@@ -1,9 +1,13 @@
 package booking.controller;
 
+import booking.dao.HotelDAO;
+import booking.model.Hotel;
+import booking.util.HotelSearchModel;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.FindIterable;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -17,10 +21,11 @@ import org.bson.conversions.Bson;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
@@ -47,8 +52,16 @@ public class HomepageController {
     private Label welcomeLabel;
     @FXML
     private Button dashboardButton;
+    @FXML
+    private TableView<HotelSearchModel> hotelTableView;
+    @FXML
+    private TableColumn<HotelSearchModel, String> hotelColumn;
+    @FXML
+    private TableColumn<HotelSearchModel, String> cityColumn;
+    @FXML
+    private TableColumn<HotelSearchModel, String> stateColumn;
 
-
+    ObservableList<HotelSearchModel> hotelSearchModelObservableList = FXCollections.observableArrayList();
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -56,6 +69,20 @@ public class HomepageController {
 
     public void initialize() {
         refreshUI();
+       /* MongoDatabase database = getInstance().getDatabase();
+        String hotelViewQuery = "";
+        try{
+
+
+
+            while (queryOutput.next()){
+                hotelSearchModelObservableList.add(new HotelSearchModel());
+            }
+
+
+        } catch (Exception e) {
+
+        } */
     }
 
     public void refreshUI() {
@@ -86,7 +113,7 @@ public class HomepageController {
         MongoDatabase database = getInstance().getDatabase();
 
         //Get user input from TextField
-            String cityName = searchTextField.getText();
+        String cityName = searchTextField.getText();
 
         //Get hotel collection from mongoDB and filter query
         MongoCollection<Document> collection = database.getCollection("hotels");
@@ -98,7 +125,6 @@ public class HomepageController {
 
         //Execute the query
         FindIterable<Document> searchResult = collection.find(filter).projection(projection);
-
 
         //Print result if city is found in the database
         if (searchResult != null) {
@@ -121,5 +147,13 @@ public class HomepageController {
             stage.show();
     }
 
-
+    @FXML
+    private void handleDashboard(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/booking/fxml/userDashboard.fxml"));
+        System.out.println("Loading userDashboard.fxml");
+        stage = (Stage) dashboardButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

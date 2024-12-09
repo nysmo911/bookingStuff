@@ -1,5 +1,5 @@
 package booking.model;
-import org.bson.Document;
+
 import java.util.List;
 
 /** booking.model.userProfile.java
@@ -7,7 +7,7 @@ import java.util.List;
  * @version 2.0
  */
 
-public class userProfile {
+public class UserProfile {
 
 	private String fName;
 	private String lName;
@@ -25,7 +25,7 @@ public class userProfile {
 	 * @param userName User's Username
 	 * @param password User's Password
 	 */
-	public userProfile(String fName, String lName, String email, String userName, String password, List<String> reservationHistory)
+	public UserProfile(String fName, String lName, String email, String userName, String password, List<String> reservationHistory)
 	{
 	    this.fName = fName;
 	    this.lName = lName;
@@ -35,6 +35,28 @@ public class userProfile {
 		this.reservationHistory = reservationHistory;
 	    System.out.println("New User has been created.");
 	}
+
+	/**
+	 * Constructor method
+	 * @param fName
+	 * @param lName
+	 * @param email
+	 */
+	public UserProfile(String fName, String lName, String email, String userName, String password) {
+		this.fName = fName;
+		this.lName = lName;
+		this.email = email;
+		this.userName = userName;
+		this.password = password;
+	}
+
+	/**
+	 * No argument constructor
+	 */
+	public UserProfile() {
+	}
+
+
 	
 	/**
 	 * Method used for getting fname
@@ -67,11 +89,12 @@ public class userProfile {
 	public void setLName(String lName) {
 		this.lName = lName;
 	}
-	
+
 	/**
 	 * Method used for getting email
 	 * @return email
 	 */
+
 	public String getEmail() {
 		return email;
 	}
@@ -130,29 +153,6 @@ public class userProfile {
 	 */
 	public void setReservationHistory(List<String> reservationHistory) {
 		this.reservationHistory = reservationHistory;
-	}
-
-	// Convert User object to MongoDB Document
-	public Document toDocument() {
-		return new Document("user_id", this.userName)
-				.append("firstname", this.fName)
-				.append("lastname", this.lName)
-				.append("username", this.userName)
-				.append("password", this.password)
-				.append("email", this.email)
-				.append("reservation_history", this.reservationHistory);
-	}
-
-	// Convert MongoDB Document to User object
-	public static userProfile fromDocument(Document doc) {
-		return new userProfile(
-				doc.getString("fName"),
-				doc.getString("lName"),
-				doc.getString("email"),
-				doc.getString("userName"),
-				doc.getString("password"),
-				(List<String>) doc.get("reservation_history")
-		);
 	}
 	
 }
