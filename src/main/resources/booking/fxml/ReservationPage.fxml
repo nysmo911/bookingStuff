@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.ReservationPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.ReservationPageController">
    <children>
       <!-- Header Label -->
       <Label layoutX="178.0" layoutY="14.0" prefHeight="34.0" prefWidth="243.0" text="Pending Reservation">
@@ -28,23 +31,17 @@
       <DatePicker fx:id="checkOutDatePicker" layoutX="183.0" layoutY="136.0" />
 
       <!-- Single Room HBox (Room Type + Button) -->
-      <HBox layoutX="28.0" layoutY="200.0" spacing="20.0">
-         <Label text="Single Room - $ per night" />
-         <Button fx:id="selectSingleRoomButton" onAction="#selectSingleRoom" text="Select" />
-      </HBox>
+      <HBox layoutX="28.0" layoutY="200.0" spacing="20.0" />
 
       <!-- Double Room HBox (Room Type + Button) -->
-      <HBox layoutX="28.0" layoutY="240.0" spacing="20.0">
-         <Label text="Double Room - $ per night" />
-         <Button fx:id="selectDoubleRoomButton" onAction="#selectDoubleRoom" text="Select" />
-      </HBox>
+      <HBox layoutX="28.0" layoutY="240.0" spacing="20.0" />
 
       <!-- Suite Room HBox (Room Type + Button) -->
       <HBox layoutX="28.0" layoutY="280.0" spacing="20.0" />
 
       <!-- Selected Room Info -->
-      <Label fx:id="selectedRoomTypeLabel" layoutX="28.0" layoutY="280.0" text="Selected Room: None" />
-      <Label fx:id="selectedPriceLabel" layoutX="28.0" layoutY="304.0" text="Price: $" />
+      <Label fx:id="selectedRoomTypeLabel" layoutX="28.0" layoutY="206.0" text="Selected Room: None" />
+      <Label fx:id="selectedPriceLabel" layoutX="29.0" layoutY="231.0" text="Price: $" />
 
       <!-- Reserve Button -->
       <Button fx:id="reserveButton" layoutX="266.0" layoutY="346.0" mnemonicParsing="false" onAction="#handleReservation" text="Reserve">
