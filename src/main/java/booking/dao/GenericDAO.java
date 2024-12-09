@@ -1,5 +1,7 @@
 package booking.dao;
 
+import java.util.List;
+
 /**
  * Generic DAO (Data Access Object) is an abstract interface to the database.
  *

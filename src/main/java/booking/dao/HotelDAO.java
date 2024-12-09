@@ -25,32 +25,35 @@ import static com.mongodb.client.model.Filters.eq;
 public class HotelDAO implements GenericDAO<Hotel> {
 
     private MongoDatabase db = getInstance().getDatabase();
-    final private MongoCollection<Document> collection = db.getCollection("hotels");
+    final private  MongoCollection<Document> collection = db.getCollection("hotels");
     private RoomDAO roomDAO = new RoomDAO();
 
     /**
      * Receives a Hotel object as an argument and adds to the database if duplicate isn't found.
-     *
      * @param hotel
      */
     @Override
     public void add(Hotel hotel){
-        //Need dedupe
         //Initialize List of Room Objects, and List of Document Objects
         List<Room> hotelRooms = hotel.getRooms();
         List<Document> roomReferences = new ArrayList<>();
 
+        //Create ID
+        long objectIDCount = collection.countDocuments();
+        objectIDCount++;
+
         //Using RoomId, create reference object for each room
         for (Room room : hotelRooms) {
-            roomDAO.add(room);
-            Object roomRefID = roomDAO.getID(room.getTypeName());
-            roomReferences.add(new Document("RoomObjectID", roomRefID)
+            roomDAO.add(room, objectIDCount);
+            Object roomRefID = roomDAO.getID(room.getTypeName(),objectIDCount);
+            roomReferences.add(new Document("RoomID", roomRefID)
                     .append("name", room.getTypeName()));
         }
 
         //Create new Hotel document and add to database
         try {
             collection.insertOne( new Document()
+                    .append("_id", objectIDCount)
                     .append("name", hotel.getName())
                     .append("city", hotel.getCity())
                     .append("state", hotel.getState())
@@ -67,7 +70,6 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Searches the Database for the first document matching the passed string. Returns the found document in the form of a Hotel object.
-     *
      * @param hotelName
      * @return Hotel
      */
@@ -101,8 +103,46 @@ public class HotelDAO implements GenericDAO<Hotel> {
     }
 
     /**
+     * Retrieves all hotel documents as a List of Hotel objects. Parameter determines if rooms will be returned as well
+     * @param returnRooms
+     * @return List
+     */
+    public List<Hotel> getAll(Boolean returnRooms) {
+        //Query for all documents
+        FindIterable<Document> hotelsDocuments = collection.find();
+        List<Hotel> hotelObjects = new ArrayList<>();
+
+       //Get hotelName, city, and state
+        for (Document hotelDocument : hotelsDocuments) {
+            String name = hotelDocument.getString("name");
+            String city = hotelDocument.getString("city");
+            String state = hotelDocument.getString("state");
+
+
+            //Return list of
+            if (returnRooms) {
+                List<Room> resultRooms = new ArrayList<>();
+                int number_of_available_rooms = hotelDocument.getInteger("number_of_available_rooms"); //need to check for null values
+                List<Document> roomReferences = hotelDocument.getList("room_references", Document.class);
+                 //Add rooms to List
+                for (Document roomReference : roomReferences) {
+                     Long roomRefID = roomReference.getLong("RoomID");
+                     String roomRefIDString = roomRefID.toString();
+                     Room room = roomDAO.get(roomRefIDString);
+                     resultRooms.add(roomDAO.get(roomRefIDString)); }
+                 //Add to hotelObjects list with rooms
+                hotelObjects.add(new Hotel(name, city, state, number_of_available_rooms, resultRooms));
+             } else {
+                //Add to the list of objects without rooms
+                hotelObjects.add(new Hotel(name, city, state));
+            }
+        }
+
+        return hotelObjects;
+    }
+
+    /**
      * Searches for a hotel document with a matching name and returns the ID
-     *
      * @param hotelName
      * @return Object
      */
@@ -120,7 +160,6 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Queries the database for a document with a matching parameter and returns the name of it
-     *
      * @param fieldName
      * @param fieldValue
      * @return String
@@ -161,7 +200,6 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Queries the database, by "name" for a specified field and returns the value
-
      * @param name
      * @param fieldName
      * @return Generic
@@ -197,7 +235,6 @@ public class HotelDAO implements GenericDAO<Hotel> {
     /**
      * Updates a single field, specified by the fieldName parameter, with the fieldValue parameter
      * fieldName (fieldValue type) must be one of the following: (String) name, (String) city, (String) state, (Integer) number_of_rooms, (List) room_references, or (Integer) number_of_available_rooms
-     *
      * @param hotelName
      * @param fieldName
      * @param fieldValue
@@ -235,7 +272,6 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Replaces database entry matching the name of the passed Hotel object, with the passed Hotel object.
-     *
      * @param hotel
      * @return void
      */
@@ -259,7 +295,6 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Deletes first database entry with a name that matches the string parameter
-     *
      * @param name
      */
     @Override
