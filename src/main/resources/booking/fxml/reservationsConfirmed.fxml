@@ -5,23 +5,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.fxml.ReservationsConfirmed" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.ReservationsController">
     <children>
         <StackPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
             <children>
-                <Label text="RESERVATIONS" textFill="white" textAlignment="CENTER" style="-fx-font-size: 50; -fx-font-family: 'Impact';" />
+                <Label style="-fx-font-size: 50; -fx-font-family: 'Impact';" text="RESERVATIONS" textAlignment="CENTER" textFill="white" />
             </children>
         </StackPane>
-        <VBox alignment="CENTER" layoutX="0.0" layoutY="100.0" spacing="30.0" prefWidth="600.0" style="-fx-padding: 20;">
+        <VBox alignment="CENTER" layoutX="0.0" layoutY="100.0" prefWidth="600.0" spacing="30.0" style="-fx-padding: 20;">
             <children>
-                <VBox alignment="CENTER" spacing="10.0" prefWidth="300.0" style="-fx-padding: 10;">
-                    <Label text="CURRENT" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                <VBox alignment="CENTER" prefWidth="300.0" spacing="10.0" style="-fx-padding: 10;">
+                    <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="CURRENT" />
                     <ListView fx:id="currentReservationsList" prefHeight="150.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
                 </VBox>
-                <VBox alignment="CENTER" spacing="10.0" prefWidth="300.0" style="-fx-padding: 10;">
-                    <Label text="PAST" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                <VBox alignment="CENTER" prefWidth="300.0" spacing="10.0" style="-fx-padding: 10;">
+                    <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="PAST" />
                     <ListView fx:id="pastReservationsList" prefHeight="150.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
                 </VBox>
             </children>

@@ -115,7 +115,7 @@ public class roomSelectionController {
         capacityLabel.setText("Capacity: " + String.valueOf(room.getCapacity()));
         descriptionLabel.setText(room.getDescription());
         roomVbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(hotel, room);
+            openReservationConfirmation(h, room);
         });
 
         //Room 1
@@ -124,7 +124,7 @@ public class roomSelectionController {
         capacityLabel1.setText("Capacity: " + String.valueOf(room1.getCapacity()));
         descriptionLabel1.setText(room1.getDescription());
         room1Vbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(hotel, room1);
+            openReservationConfirmation(h, room1);
         });
 
         //Room 2
@@ -133,7 +133,7 @@ public class roomSelectionController {
         capacityLabel2.setText("Capacity: " + String.valueOf(room2.getCapacity()));
         descriptionLabel2.setText(room2.getDescription());
         room2Vbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(hotel, room2);
+            openReservationConfirmation(h, room2);
         });
 
         //Room 3
@@ -142,7 +142,7 @@ public class roomSelectionController {
         capacityLabel3.setText("Capacity: " + String.valueOf(room3.getCapacity()));
         descriptionLabel3.setText(room3.getDescription());
         room3Vbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(hotel, room3);
+            openReservationConfirmation(h, room3);
         });
     }
 
@@ -151,7 +151,7 @@ public class roomSelectionController {
 
         try {
             // Load the new FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/roomSelection.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/bookingConfirm.fxml"));
             Parent root = loader.load();
 
             // Get the controller of the new scene
