@@ -21,10 +21,6 @@
                     <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="CURRENT" />
                     <ListView fx:id="currentReservationsList" prefHeight="150.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
                 </VBox>
-                <VBox alignment="CENTER" prefWidth="300.0" spacing="10.0" style="-fx-padding: 10;">
-                    <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="PAST" />
-                    <ListView fx:id="pastReservationsList" prefHeight="150.0" prefWidth="300.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ccc;" />
-                </VBox>
             </children>
         </VBox>
     </children>

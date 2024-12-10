@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.UserDashboardController" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.UserDashboardController">
     <children>
         <StackPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
             <children>
-                <Label text="DASHBOARD" textFill="white" textAlignment="CENTER">
+                <Label text="DASHBOARD" textAlignment="CENTER" textFill="white">
                     <font>
                         <Font name="Impact" size="50.0" />
                     </font>
@@ -19,18 +19,12 @@
             </children>
         </StackPane>
         <Button fx:id="backButton" layoutX="20.0" layoutY="20.0" onAction="#handleHomepage" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="&lt; BACK" />
-        <VBox layoutX="0.0" layoutY="100.0" spacing="30.0" alignment="CENTER" prefWidth="600.0" style="-fx-padding: 20;">
+        <VBox alignment="CENTER" layoutX="0.0" layoutY="100.0" prefWidth="600.0" spacing="30.0" style="-fx-padding: 20;">
             <children>
-                <Label fx:id="welcomeLabel" text="WELCOME USER" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" />
-                <Button fx:id="profileSettingsButton" mnemonicParsing="false" onAction="#handleProfileSettingsButton"
-                        prefHeight="60.0" prefWidth="300.0" text="PROFILE SETTINGS"
-                        style="-fx-background-color: #c63434; -fx-text-fill: white; -fx-font-size: 18; -fx-background-radius: 10;" />
-                <Button fx:id="reservationsButton" mnemonicParsing="false" onAction="#handleReservationsAction"
-                        prefHeight="60.0" prefWidth="300.0" text="PAST &amp; UPCOMING RESERVATIONS"
-                        style="-fx-background-color: #333; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 10;" />
-                <Button fx:id="signOutButton" mnemonicParsing="false" onAction="#handleSignOutAction"
-                        prefHeight="60.0" prefWidth="300.0" text="SIGN OUT"
-                        style="-fx-background-color: #555; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 10;" />
+                <Label fx:id="welcomeLabel" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="WELCOME USER" />
+                <Button fx:id="profileSettingsButton" mnemonicParsing="false" onAction="#handleProfileSettingsButton" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #c63434; -fx-text-fill: white; -fx-font-size: 18; -fx-background-radius: 10;" text="PROFILE SETTINGS" />
+                <Button fx:id="reservationsButton" mnemonicParsing="false" onAction="#handleReservationsAction" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #333; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 10;" text="UPCOMING RESERVATIONS" />
+                <Button fx:id="signOutButton" mnemonicParsing="false" onAction="#handleSignOutAction" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: #555; -fx-text-fill: white; -fx-font-size: 16; -fx-background-radius: 10;" text="SIGN OUT" />
             </children>
         </VBox>
     </children>
