@@ -82,6 +82,11 @@ public class roomSelectionController {
     private VBox room2Vbox;
     @FXML
     private VBox room3Vbox;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    @FXML
+    private Button backButton;
 
     public void setHotel(Hotel h) {
         if(h == null){

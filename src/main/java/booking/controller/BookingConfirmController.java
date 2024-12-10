@@ -38,15 +38,15 @@ public class BookingConfirmController {
 
     public void setHotelRoom(Hotel h, Room r) {
         if (r == null) {
-            roomNameLabel.setText("");
+            //roomNameLabel.setText("");
             return;
         }
         if (h == null) {
-            hotelNameLabel.setText("");
+            //hotelNameLabel.setText("");
             return;
         }
 
-        //Set Hotel name label
+      /*  //Set Hotel name label
         hotelNameLabel.setText(h.getName());
 
         //Set Room name label
@@ -55,6 +55,6 @@ public class BookingConfirmController {
         //Get hotel with Room references
         System.out.println("hotel" + h.getName());
 
-        roomPriceLabel.setText("$" + String.valueOf(Math.round(room.getPrice())));
+        roomPriceLabel.setText("$" + String.valueOf(Math.round(room.getPrice())));*/
     }
 }

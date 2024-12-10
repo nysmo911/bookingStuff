@@ -204,16 +204,3 @@ public class HomepageController {
         }
     }
 }
-    /*
-    @FXML
-    private void openRoomPage(Hotel selectedHotel) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/booking/fxml/roomSelection.fxml"));
-        System.out.println("Loading roomSelection.fxml");
-        stage = (Stage) dashboardButton.getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-     */
-

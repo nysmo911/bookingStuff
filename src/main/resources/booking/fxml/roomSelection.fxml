@@ -12,7 +12,7 @@
       <!-- Header -->
       <HBox alignment="CENTER_LEFT" layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #c63434;">
          <children>
-            <Button fx:id="backButton" onAction="#handleBackAction" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 5 15;" text="&lt; Back" />
+            <Button fx:id="backButton" onAction="#handleHomepage" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 5 15;" text="&lt; Back" />
             <Label fx:id="hotelNameLabel" alignment="CENTER" text="Hotel Name" textFill="white">
                <font>
                   <Font name="Impact" size="30.0" />
@@ -25,7 +25,7 @@
       <VBox layoutX="17.0" layoutY="87.0" prefHeight="550.0" prefWidth="566.0" spacing="15.0">
          <children>
             <!-- Room 1 -->
-            <VBox fx:id="room1VBox" alignment="CENTER_LEFT" onMouseClicked="#handleRoom1Selection" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
+            <VBox fx:id="roomVBox" alignment="CENTER_LEFT" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
                <children>
                   <Label fx:id="roomLabel" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Single Room" />
                   <Label fx:id="priceLabel" style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $100" />
@@ -35,7 +35,7 @@
             </VBox>
 
             <!-- Room 2 -->
-            <VBox fx:id="room2VBox" alignment="CENTER_LEFT" onMouseClicked="#handleRoom2Selection" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
+            <VBox fx:id="room1VBox" alignment="CENTER_LEFT" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
                <children>
                   <Label fx:id="roomLabel1" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Double Room" />
                   <Label fx:id="priceLabel1" style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $150" />
@@ -45,7 +45,7 @@
             </VBox>
 
             <!-- Room 3 -->
-            <VBox fx:id="room3VBox" alignment="CENTER_LEFT" onMouseClicked="#handleRoom3Selection" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
+            <VBox fx:id="room2VBox" alignment="CENTER_LEFT" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
                <children>
                   <Label fx:id="roomLabel2" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Suite" />
                   <Label fx:id="priceLabel2" style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $250" />
@@ -55,7 +55,7 @@
             </VBox>
 
             <!-- Room 4 -->
-            <VBox fx:id="room4VBox" alignment="CENTER_LEFT" onMouseClicked="#handleRoom4Selection" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
+            <VBox fx:id="room3VBox" alignment="CENTER_LEFT" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10; -fx-cursor: hand;">
                <children>
                   <Label fx:id="roomLabel3" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Deluxe Room" />
                   <Label fx:id="priceLabel3" style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $200" />
