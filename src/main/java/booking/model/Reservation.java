@@ -2,6 +2,7 @@ package booking.model;
 
 import java.time.LocalDate;
 
+
 /**
  * The Reservation class represents a booking made by a user.
  * It contains details about the reservation's start date, end date,

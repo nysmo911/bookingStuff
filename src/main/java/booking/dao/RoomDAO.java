@@ -10,6 +10,7 @@ import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static booking.util.DbConnection.getInstance;
@@ -191,7 +192,7 @@ public class RoomDAO implements GenericDAO<Room> {
         }
 
         //Check if availability field was affected and update the associated hotel
-        if (fieldName == "isAvailable") {
+        if (Objects.equals(fieldName, "isAvailable")) {
             //Get hotel entry that contains this room
             HotelDAO hotelDAO = new HotelDAO();
             String strID = id.toString();
@@ -244,7 +245,6 @@ public class RoomDAO implements GenericDAO<Room> {
      */
     @Override
     public void delete(String typeName) {
-        //Execute deletion
         try {
             collection.deleteOne(eq("name", typeName));
         } catch (Exception e) {

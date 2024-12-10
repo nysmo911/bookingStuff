@@ -35,9 +35,14 @@ public class UserDAO implements GenericDAO<UserProfile>{
      */
     @Override
     public void add(UserProfile user) {
+        //Create objectID
+        //Create ID
+        long objectIDCount = collection.countDocuments();
+        objectIDCount++;
 
         try {
             collection.insertOne(new Document()
+                    .append("_id", objectIDCount)
                     .append("first_name", user.getFName())
                     .append("last_name", user.getLName())
                     .append("email", user.getEmail())
@@ -157,6 +162,16 @@ public class UserDAO implements GenericDAO<UserProfile>{
         return (Thing)id;
 
     }
+
+
+    public String getUsername (Long uid){
+
+        Document queryDoc = collection.find(eq("_id", uid)).first();
+
+        if(queryDoc == null) { return null; }
+        return queryDoc.getString("username");
+    }
+
 
     /**
      * Queries the database by username for a specified field and returns the value of that field
