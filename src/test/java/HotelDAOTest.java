@@ -90,6 +90,15 @@ public class HotelDAOTest {
     }
 
     @Test
+    public void getMatchTest() {
+        String hotelName = TestDAO.getMatch("room_references", "1");
+        Hotel resultHotel = TestDAO.get(hotelName);
+
+        Assertions.assertEquals("The St. Regis New York", resultHotel.getName());
+    }
+
+
+    @Test
     public void deleteDatabaseTest(){
         //Delete hotel
         TestDAO.delete("newTestHotel");

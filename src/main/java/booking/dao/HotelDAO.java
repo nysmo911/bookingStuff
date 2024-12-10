@@ -178,10 +178,11 @@ public class HotelDAO implements GenericDAO<Hotel> {
             case null:
                 return null;
             case "room_references":
+                long fieldValueLong = Long.parseLong(fieldValue);
                 Document query = new Document("room_references",
                         new Document("$elemMatch",
-                                new Document("RoomObjectID",
-                                        new ObjectId(fieldValue))
+                                new Document("RoomID",
+                                        (fieldValueLong))
                                 )
                 );
 
