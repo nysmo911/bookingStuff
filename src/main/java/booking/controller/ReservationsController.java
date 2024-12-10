@@ -77,7 +77,20 @@ public class ReservationsController {
             }
         });
     }
+    @FXML
+    private Button backButton;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
-
-
+    @FXML
+    private void handleDashboard(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/booking/fxml/userDashboard.fxml"));
+        System.out.println("Loading userDashboard.fxml");
+        stage = (Stage) backButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
+
