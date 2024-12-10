@@ -146,17 +146,24 @@ public class HotelDAO implements GenericDAO<Hotel> {
      * @param hotelName
      * @return Object
      */
-    public Object getID(String hotelName) {
-
+    public <Thing> Thing getID(String hotelName) {
+        //Need dedupe
         Document queryDoc = collection.find(eq("name", hotelName)).first();
 
         if (queryDoc != null) {
-            Object hotelID = queryDoc.get("_id");
-            return hotelID;
+            return (Thing) queryDoc.get("_id");
         } else {
             return null;
         }
     }
+
+    public String getName(Long hid) {
+
+        Document queryDoc = collection.find(eq("_id", hid)).first();
+        if (queryDoc != null) { return null;}
+        return queryDoc.getString("name");
+    }
+
 
     /**
      * Queries the database for a document with a matching parameter and returns the name of it
