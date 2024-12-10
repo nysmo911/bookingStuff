@@ -146,7 +146,6 @@ public class Reservation {
         return "Reservation{" +
                 "startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", user=" + user.getUserName() +
                 ", hotel=" + hotel.getName() +
                 ", room=" + room.getTypeName() +
                 '}';

@@ -53,7 +53,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
         //Create new Hotel document and add to database
         try {
             collection.insertOne( new Document()
-                    .append("_id", objectIDCount)
+
                     .append("name", hotel.getName())
                     .append("city", hotel.getCity())
                     .append("state", hotel.getState())
@@ -160,7 +160,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
     public String getName(Long hid) {
 
         Document queryDoc = collection.find(eq("_id", hid)).first();
-        if (queryDoc != null) { return null;}
+        if (queryDoc == null) { return null;}
         return queryDoc.getString("name");
     }
 
