@@ -31,6 +31,7 @@ public class RoomDAO implements GenericDAO<Room> {
     final private MongoCollection<Document> collection = db.getCollection("rooms");
     private static final Set<String> validFieldNames = Set.of("name", "price", "description", "capacity", "isAvailable");
 
+
     /**
      * Translates a Room object into an acceptable format and inserts that into the database. This add method will not reference a hotel.
      * @param room

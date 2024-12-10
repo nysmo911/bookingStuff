@@ -16,7 +16,7 @@ public interface GenericDAO<Thing> {
     //CRUD Methods
 
     //Add method
-    void add(Thing object);
+    void add(Thing someThing);
 
     //Get method
     Thing get(String name);

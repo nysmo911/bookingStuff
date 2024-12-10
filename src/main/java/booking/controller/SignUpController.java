@@ -62,6 +62,7 @@ public class SignUpController {
         UserProfile newUser = new UserProfile(fname, lname, email, username, password);
         userDAO.add(newUser);
 
+
         // Show success message
         showAlert(Alert.AlertType.INFORMATION, "Sign-Up Successful", "Account created successfully! Please sign in.");
 
