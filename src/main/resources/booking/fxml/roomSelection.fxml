@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.roomSelectionController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.roomSelectionController">
    <children>
       <!-- Header -->
       <VBox alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
@@ -25,10 +23,10 @@
             <!-- Room 1 -->
             <VBox alignment="CENTER" prefWidth="120.0" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10;">
                <children>
-                  <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Single Room" />
-                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $100" />
-                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Capacity: 2 people" />
-                  <Label style="-fx-font-size: 12; -fx-text-fill: #999; -fx-wrap-text: true;" text="A cozy single room with modern amenities." />
+                  <Label fx:id="roomLabel" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Single Room" />
+                  <Label fx:id="priceLabel" style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $100" />
+                  <Label fx:id="capacityLabel" style="-fx-font-size: 14; -fx-text-fill: #666;" text="Capacity: 2 people" />
+                  <Label fx:id="descriptionLabel" style="-fx-font-size: 12; -fx-text-fill: #999; -fx-wrap-text: true;" text="A cozy single room with modern amenities." />
                </children>
             </VBox>
 
