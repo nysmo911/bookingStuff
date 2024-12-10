@@ -3,8 +3,12 @@ package booking.controller;
 import booking.application.Main;
 import booking.dao.HotelDAO;
 import booking.dao.RoomDAO;
+import booking.dao.UserDAO;
+import booking.dao.ReservationDAO;
 import booking.model.Hotel;
+import booking.model.Reservation;
 import booking.model.Room;
+import booking.model.UserProfile;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
@@ -26,16 +30,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookingConfirmController {
-    private RoomDAO roomDAO = new RoomDAO(); // Presuming you use this later for fetching rooms.
-    private HotelDAO hotelDAO = new HotelDAO();
-    private Hotel hotel = new Hotel();
-    private Room room = new Room();
-    private String hotelName;
-    private Hotel selectedHotel;
+    Hotel selectedHotel;
+    Room selectedRoom;
     @FXML
     private Label hotelNameLabel;
     @FXML
@@ -60,7 +61,10 @@ public class BookingConfirmController {
             return;
         }
 
+        //making passed hotel and room available outside immediate method
         selectedHotel = h;
+        selectedRoom = r;
+
         //Set Hotel name label
         hotelNameLabel.setText(h.getName());
 
@@ -105,6 +109,26 @@ public class BookingConfirmController {
     @FXML
     public void handleConfirmButton(ActionEvent event) throws IOException {
         if(UserSession.getInstance().isLoggedIn() == true) {
+            //Initializing DAOs
+            UserDAO userDAO = new UserDAO();
+            HotelDAO hotelDAO = new HotelDAO();
+            RoomDAO roomDAO = new RoomDAO();
+            ReservationDAO ReservationDAO = new ReservationDAO();
+
+
+
+            //Get Date Input
+            LocalDate today = LocalDate.now();
+            LocalDate dayAfterTomorrow = today.plusDays(2);
+
+            //Get User
+            String loggedInUser = UserSession.getInstance().getLoggedInUser();
+            UserProfile dbUser = userDAO.get(loggedInUser);
+
+            //Create Reservation
+            Reservation newReservation = new Reservation(today, dayAfterTomorrow, dbUser, selectedHotel, selectedRoom);
+            ReservationDAO.add(newReservation);
+
             root = FXMLLoader.load(getClass().getResource("/booking/fxml/reservationsConfirmed.fxml"));
             System.out.println("Navigating to Reservations...");
             stage = (Stage) confirmButton.getScene().getWindow();

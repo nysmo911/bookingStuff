@@ -29,4 +29,14 @@ public class ReservationDAOTest {
         Reservation resultResy = reservationDAO.get("1");
         Assertions.assertEquals(resultResy.getStartDate(), reservation.getStartDate() );
     }
+
+    @Test
+    public void getByFieldTest(){
+        List<Reservation> testResList = reservationDAO.getByField("UserID", 1L);
+        System.out.println("TesrResList (getbyfieldtest): " +testResList);
+
+        //Asert
+        Assertions.assertEquals(testResList.size(), 7);
+
+    }
 }
