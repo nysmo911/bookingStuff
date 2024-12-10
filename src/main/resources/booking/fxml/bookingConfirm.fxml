@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.BookingConfirmController">
     <children>
         <!-- Header -->
         <StackPane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
             <children>
-                <Label text="HOTEL NAME" textFill="white" textAlignment="CENTER">
+                <Label fx:id="hotelNameLabel" text="HOTEL NAME" textAlignment="CENTER" textFill="white">
                     <font>
                         <Font name="Impact" size="50.0" />
                     </font>
@@ -21,17 +21,17 @@
         </StackPane>
 
         <!-- Back Button -->
-        <Button layoutX="20.0" layoutY="20.0" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="&lt; BACK" />
+        <Button fx:id="backButton" layoutX="20.0" layoutY="20.0" onAction="#handleReservationConfirmation" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="&lt; BACK" />
 
         <!-- Booking Confirmation Details -->
-        <VBox layoutX="50.0" layoutY="120.0" spacing="30.0" alignment="CENTER" prefWidth="500.0">
+        <VBox alignment="CENTER" layoutX="50.0" layoutY="120.0" prefWidth="500.0" spacing="30.0">
             <children>
-                <Label text="Room Type: Suite" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" />
-                <Label text="Price: $250" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                <Label fx:id="roomNameLabel" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="Room Type: Suite" />
+                <Label fx:id="roomPriceLabel" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="Price: $250" />
             </children>
         </VBox>
 
         <!-- Confirm Button -->
-        <Button layoutX="230.0" layoutY="330.0" prefWidth="140.0" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="CONFIRM" />
+        <Button fx:id="confirmButton" layoutX="230.0" layoutY="330.0" onAction="#handleConfirmButton" prefWidth="140.0" style="-fx-background-color: #333; -fx-text-fill: white; -fx-background-radius: 10;" text="CONFIRM" />
     </children>
 </AnchorPane>

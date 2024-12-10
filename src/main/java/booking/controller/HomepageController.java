@@ -86,34 +86,56 @@ public class HomepageController {
         ObservableList<Hotel> hotelObservableList = FXCollections.observableArrayList();
         hotelObservableList.addAll(db_hotels);
 
-        //Set Column names
-        hotelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
-        stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
-
         //Wrap with filter list to show filtered results
-        FilteredList<Hotel> filteredHotels = new FilteredList<>(hotelObservableList, h -> true);
-        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> filteredHotels.setPredicate(Hotel -> {
-                            if (newValue == null || newValue.isBlank()) {
-                                return true;
-                            }
+        if (loggedInUser == null) {
+            hotelColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
+            stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
+            FilteredList<Hotel> filteredHotels = new FilteredList<>(hotelObservableList, h -> true);
 
-                            String searchEntry = newValue.toLowerCase();
-                            Boolean nameMatch = Hotel.getName().toLowerCase().contains(searchEntry);
-                            Boolean cityMatch = Hotel.getCity().toLowerCase().contains(searchEntry);
-                            Boolean stateMatch = Hotel.getState().toLowerCase().contains(searchEntry);
+            searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                Platform.runLater(() -> filteredHotels.setPredicate(Hotel -> {
+                    if (newValue == null || newValue.isBlank()) {
+                        return true;
+                    }
 
-                            return nameMatch || stateMatch || cityMatch;
-                            }));
-        });
+                    String searchEntry = newValue.toLowerCase();
+                    Boolean nameMatch = Hotel.getName().toLowerCase().contains(searchEntry);
+                    Boolean cityMatch = Hotel.getCity().toLowerCase().contains(searchEntry);
+                    Boolean stateMatch = Hotel.getState().toLowerCase().contains(searchEntry);
 
-        //Sort Filtered List Sorted List doesn't filter ) fix later
-        //SortedList<Hotel> sortedHotels = new SortedList<>(filteredHotels);
-        //sortedHotels.comparatorProperty().bind(hotelSearchTable.comparatorProperty());
-        hotelSearchTable.setItems(filteredHotels);
-        setupRowClickHandler(hotelSearchTable);
+                    return nameMatch || stateMatch || cityMatch;
+                }));
+            });
 
+            hotelSearchTable.setItems(filteredHotels);
+            setupRowClickHandler(hotelSearchTable);
+        }
+        else {
+            //Set Column names
+            hotelColumn1.setCellValueFactory(new PropertyValueFactory<>("name"));
+            cityColumn1.setCellValueFactory(new PropertyValueFactory<>("city"));
+            stateColumn1.setCellValueFactory(new PropertyValueFactory<>("state"));
+            FilteredList<Hotel> filteredHotels = new FilteredList<>(hotelObservableList, h -> true);
+
+            searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                Platform.runLater(() -> filteredHotels.setPredicate(Hotel -> {
+                    if (newValue == null || newValue.isBlank()) {
+                        return true;
+                    }
+
+                    String searchEntry = newValue.toLowerCase();
+                    Boolean nameMatch = Hotel.getName().toLowerCase().contains(searchEntry);
+                    Boolean cityMatch = Hotel.getCity().toLowerCase().contains(searchEntry);
+                    Boolean stateMatch = Hotel.getState().toLowerCase().contains(searchEntry);
+
+                    return nameMatch || stateMatch || cityMatch;
+                }));
+            });
+
+            hotelSearchTable1.setItems(filteredHotels);
+            setupRowClickHandler(hotelSearchTable1);
+        }
 
         //Determine which table to set
         }
@@ -175,7 +197,12 @@ public class HomepageController {
 
     @FXML
     private void openHotelDetails(Hotel hotel) {
-        Hotel selectedHotel = hotelSearchTable.getSelectionModel().getSelectedItem();
+        Hotel selectedHotel = null;
+        if (loggedInUser == null) {
+            selectedHotel = hotelSearchTable.getSelectionModel().getSelectedItem();
+        } else {
+            selectedHotel = hotelSearchTable1.getSelectionModel().getSelectedItem();
+        }
 
         try {
             // Load the new FXML
@@ -204,16 +231,3 @@ public class HomepageController {
         }
     }
 }
-    /*
-    @FXML
-    private void openRoomPage(Hotel selectedHotel) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/booking/fxml/roomSelection.fxml"));
-        System.out.println("Loading roomSelection.fxml");
-        stage = (Stage) dashboardButton.getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-     */
-

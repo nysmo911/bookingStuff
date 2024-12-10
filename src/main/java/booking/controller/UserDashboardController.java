@@ -71,7 +71,7 @@ public class UserDashboardController {
      */
     @FXML
     public void handleReservationsAction(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/booking/fxml/reservations.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/booking/fxml/reservationsConfirmed.fxml"));
         System.out.println("Navigating to Reservations...");
         stage = (Stage) reservationsButton.getScene().getWindow();
         scene = new Scene(root);
