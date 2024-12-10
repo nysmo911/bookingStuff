@@ -27,9 +27,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
-
-
-
 import static booking.application.Main.scene;
 
 public class roomSelectionController {
@@ -37,8 +34,6 @@ public class roomSelectionController {
     private RoomDAO roomDAO = new RoomDAO(); // Presuming you use this later for fetching rooms.
     private HotelDAO hotelDAO = new HotelDAO();
     private Hotel hotel = new Hotel();
-
-
 
     @FXML
     private Label hotelNameLabel;
