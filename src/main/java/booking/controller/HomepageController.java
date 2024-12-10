@@ -189,7 +189,7 @@ public class HomepageController {
             roomSelectioncontroller.setHotel(selectedHotel);
 
             // Create and show the new stage
-           // Stage roomSelectionStage = (Stage) dashboardButton.getScene().getWindow();
+            Stage roomSelectionStage = (Stage) dashboardButton.getScene().getWindow();
             roomSelectionStage.setScene(new Scene(root));
             roomSelectionStage.show();
         } catch (IOException e) {
