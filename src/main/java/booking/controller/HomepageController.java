@@ -164,19 +164,47 @@ public class HomepageController {
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
                     Hotel selectedHotel = row.getItem();
-                    selectedHotelName = selectedHotel.getName();
+                    openHotelDetails(selectedHotel);
                     System.out.println("Selected Hotel: " + selectedHotelName);
-                    try {
-                        openRoomPage(selectedHotel);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+
                 }
             });
             return row;
         });
     }
 
+    @FXML
+    private void openHotelDetails(Hotel hotel) {
+        Hotel selectedHotel = hotelSearchTable.getSelectionModel().getSelectedItem();
+
+        try {
+            // Load the new FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/roomSelection.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller of the new scene
+            roomSelectionController roomSelectioncontroller = loader.getController();
+
+            // Inject the selected hotel
+            roomSelectioncontroller.setHotel(selectedHotel);
+
+            // Create and show the new stage
+            Stage roomSelectionStage = (Stage) dashboardButton.getScene().getWindow();
+            roomSelectionStage.setScene(new Scene(root));
+            roomSelectionStage.show();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not open Room Selection");
+            alert.setContentText("An error occurred while opening the room selection screen.");
+            alert.showAndWait();
+
+            // Handle exception (show error dialog, log, etc.)
+            e.printStackTrace();
+        }
+    }
+}
+    /*
     @FXML
     private void openRoomPage(Hotel selectedHotel) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/booking/fxml/roomSelection.fxml"));
@@ -186,4 +214,6 @@ public class HomepageController {
         stage.setScene(scene);
         stage.show();
     }
-}
+
+     */
+
