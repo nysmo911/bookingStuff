@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import org.bson.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,8 +73,14 @@ public class roomSelectionController {
     private Label capacityLabel3;
     @FXML
     private Label descriptionLabel3;
-
-
+    @FXML
+    private VBox roomVbox;
+    @FXML
+    private VBox room1Vbox;
+    @FXML
+    private VBox room2Vbox;
+    @FXML
+    private VBox room3Vbox;
 
     public void setHotel(Hotel h) {
         if(h == null){
@@ -101,25 +108,66 @@ public class roomSelectionController {
         priceLabel.setText("$" + String.valueOf(Math.round(room.getPrice())));
         capacityLabel.setText("Capacity: " + String.valueOf(room.getCapacity()));
         descriptionLabel.setText(room.getDescription());
+        roomVbox.setOnMouseClicked(event -> {
+            openReservationConfirmation(room);
+        });
 
         //Room 1
         roomLabel1.setText(room1.getTypeName());
         priceLabel1.setText("$" + String.valueOf(Math.round(room1.getPrice())));
         capacityLabel1.setText("Capacity: " + String.valueOf(room1.getCapacity()));
         descriptionLabel1.setText(room1.getDescription());
+        room1Vbox.setOnMouseClicked(event -> {
+            openReservationConfirmation(room1);
+        });
 
         //Room 2
         roomLabel2.setText(room2.getTypeName());
         priceLabel2.setText("$" + String.valueOf(Math.round(room2.getPrice())));
         capacityLabel2.setText("Capacity: " + String.valueOf(room2.getCapacity()));
         descriptionLabel2.setText(room2.getDescription());
+        room2Vbox.setOnMouseClicked(event -> {
+            openReservationConfirmation(room2);
+        });
 
         //Room 3
         roomLabel3.setText(room3.getTypeName());
         priceLabel3.setText("$" + String.valueOf(Math.round(room3.getPrice())));
         capacityLabel3.setText("Capacity: " + String.valueOf(room3.getCapacity()));
         descriptionLabel3.setText(room3.getDescription());
+        room3Vbox.setOnMouseClicked(event -> {
+            openReservationConfirmation(room3);
+        });
     }
 
+    @FXML
+    private void openReservationConfirmation(Room room) {
+
+        try {
+            // Load the new FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/booking/fxml/roomSelection.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller of the new scene
+            BookingConfirmController BookingConfirmController = loader.getController();
+
+            // Inject the selected hotel
+            BookingConfirmController.setHotelRoom(room);
+
+            // Create and show the new stage
+            Stage bookingConfirmStage = (Stage) backButton.getScene().getWindow();
+            bookingConfirmStage.setScene(new Scene(root));
+            bookingConfirmStage.show();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not open Room Selection");
+            alert.setContentText("An error occurred while opening the room selection screen.");
+            alert.showAndWait();
+
+            // Handle exception (show error dialog, log, etc.)
+            e.printStackTrace();
+        }
+    }
 
 }
