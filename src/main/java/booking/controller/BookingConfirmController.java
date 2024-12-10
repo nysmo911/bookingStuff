@@ -34,24 +34,27 @@ public class BookingConfirmController {
     private HotelDAO hotelDAO = new HotelDAO();
     private Hotel hotel = new Hotel();
     private Room room = new Room();
+    private String hotelName;
 
-    public void setHotelRoom(Room r) {
+    public void setHotelRoom(Hotel h, Room r) {
         if (r == null) {
             roomNameLabel.setText("");
             return;
         }
-
-        hotelNameLabel.setText("");
+        if (h == null) {
+            hotelNameLabel.setText("");
+            return;
+        }
 
         //Set Hotel name label
-        hotelNameLabel.setText(r.get());
+        hotelNameLabel.setText(h.getName());
 
         //Set Room name label
         roomNameLabel.setText(r.getTypeName());
 
         //Get hotel with Room references
-        System.out.println("hotel" + hotel);
-        Hotel hotelWithRooms = ;
-        System.out.println("hotelWithRooms" + hotelWithRooms);
+        System.out.println("hotel" + h.getName());
+
+        roomPriceLabel.setText("$" + String.valueOf(Math.round(room.getPrice())));
     }
 }

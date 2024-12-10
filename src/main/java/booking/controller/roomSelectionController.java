@@ -26,8 +26,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+
+
 
 import static booking.application.Main.scene;
 
@@ -109,7 +110,7 @@ public class roomSelectionController {
         capacityLabel.setText("Capacity: " + String.valueOf(room.getCapacity()));
         descriptionLabel.setText(room.getDescription());
         roomVbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(room);
+            openReservationConfirmation(hotel, room);
         });
 
         //Room 1
@@ -118,7 +119,7 @@ public class roomSelectionController {
         capacityLabel1.setText("Capacity: " + String.valueOf(room1.getCapacity()));
         descriptionLabel1.setText(room1.getDescription());
         room1Vbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(room1);
+            openReservationConfirmation(hotel, room1);
         });
 
         //Room 2
@@ -127,7 +128,7 @@ public class roomSelectionController {
         capacityLabel2.setText("Capacity: " + String.valueOf(room2.getCapacity()));
         descriptionLabel2.setText(room2.getDescription());
         room2Vbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(room2);
+            openReservationConfirmation(hotel, room2);
         });
 
         //Room 3
@@ -136,12 +137,12 @@ public class roomSelectionController {
         capacityLabel3.setText("Capacity: " + String.valueOf(room3.getCapacity()));
         descriptionLabel3.setText(room3.getDescription());
         room3Vbox.setOnMouseClicked(event -> {
-            openReservationConfirmation(room3);
+            openReservationConfirmation(hotel, room3);
         });
     }
 
     @FXML
-    private void openReservationConfirmation(Room room) {
+    private void openReservationConfirmation(Hotel hotel, Room room) {
 
         try {
             // Load the new FXML
@@ -152,7 +153,7 @@ public class roomSelectionController {
             BookingConfirmController BookingConfirmController = loader.getController();
 
             // Inject the selected hotel
-            BookingConfirmController.setHotelRoom(room);
+            BookingConfirmController.setHotelRoom(hotel, room);
 
             // Create and show the new stage
             Stage bookingConfirmStage = (Stage) backButton.getScene().getWindow();
@@ -168,6 +169,16 @@ public class roomSelectionController {
             // Handle exception (show error dialog, log, etc.)
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleHomepage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/booking/fxml/initial.fxml"));
+        System.out.println("Loading initial.fxml");
+        stage = (Stage) backButton.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
