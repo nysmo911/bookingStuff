@@ -3,7 +3,7 @@ package booking.dao;
 import booking.model.*;
 
 
-public class ReservationDAO<Reservation> implements GenericDAO<Reservation> {
+/**public class ReservationDAO<Reservation> implements GenericDAO<Reservation> {
 
     @Override
     public void add(Reservation reservation){
@@ -12,7 +12,8 @@ public class ReservationDAO<Reservation> implements GenericDAO<Reservation> {
 
     @Override
     public Reservation get(String reservationID) {
-        return Reservation;
+        Reservation resy = new Reservation();
+        return resy;
     }
 
     @Override
@@ -29,3 +30,4 @@ public class ReservationDAO<Reservation> implements GenericDAO<Reservation> {
 
 
 }
+ */

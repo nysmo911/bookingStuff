@@ -165,7 +165,7 @@ public class HomepageController {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
                     Hotel selectedHotel = row.getItem();
                     openHotelDetails(selectedHotel);
-                    System.out.println("Selected Hotel: " + selectedHotelName);
+                    System.out.println("Selected Hotel: " + selectedHotel.getName());
 
                 }
             });

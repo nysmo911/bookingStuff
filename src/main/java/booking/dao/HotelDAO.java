@@ -88,7 +88,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
             //Use Room references to query room collection
             for (Document roomReference : roomReferences) {
-                String roomRefID = roomReference.getObjectId("RoomObjectID").toString();
+                String roomRefID = roomReference.getLong("RoomID").toString();
                 resultRooms.add(roomDAO.get(roomRefID));
             }
 

@@ -37,6 +37,14 @@ public class Reservation {
         }
     }
 
+    public Reservation(){
+        this.startDate = LocalDate.now();
+        this.endDate = LocalDate.now();
+        this.user = null;
+        this.hotel = null;
+        this.room = null;
+    }
+
     /**
      * Retrieves the start date of the reservation.
      *
