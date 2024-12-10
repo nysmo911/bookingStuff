@@ -18,6 +18,14 @@ public class Hotel {
     private int numOfAvailableRooms; //number of available rooms
     private List<Room> rooms; // List of rooms in the hotel
 
+    public Hotel() {
+        this.name = null;
+        this.city = null;
+        this.state = null;
+        this.numOfAvailableRooms = 0;
+        this.rooms = new ArrayList<>();
+    }
+
     /**
      * Constructor to create a booking.model.Hotel object with a name and location.
      * @param name the name of the hotel

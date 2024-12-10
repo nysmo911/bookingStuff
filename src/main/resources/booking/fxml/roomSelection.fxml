@@ -2,35 +2,66 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.roomSelectionController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom, #f0f0f0, #d6d6d6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="booking.controller.roomSelectionController">
    <children>
-      <Label fx:id="hotelNameLabel" layoutX="14.0" layoutY="14.0" text="HotelName">
-         <font>
-            <Font size="33.0" />
-         </font>
-      </Label>
-      <Label layoutX="140.0" layoutY="94.0" text="Room1" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="140.0" layoutY="227.0" text="Room3" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="390.0" layoutY="94.0" text="Room2" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="390.0" layoutY="227.0" text="Room4" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <!-- Header -->
+      <VBox alignment="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: #c63434;">
+         <children>
+            <Label fx:id="hotelNameLabel" text="Hotel Name" textFill="white">
+               <font>
+                  <Font name="Impact" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+
+      <!-- Room Options -->
+      <HBox alignment="CENTER" layoutX="30.0" layoutY="103.0" prefHeight="265.0" prefWidth="540.0" spacing="20.0">
+         <children>
+            <!-- Room 1 -->
+            <VBox alignment="CENTER" prefWidth="120.0" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10;">
+               <children>
+                  <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Single Room" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $100" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Capacity: 2 people" />
+                  <Label style="-fx-font-size: 12; -fx-text-fill: #999; -fx-wrap-text: true;" text="A cozy single room with modern amenities." />
+               </children>
+            </VBox>
+
+            <!-- Room 2 -->
+            <VBox alignment="CENTER" prefWidth="120.0" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10;">
+               <children>
+                  <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Double Room" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $150" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Capacity: 4 people" />
+                  <Label style="-fx-font-size: 12; -fx-text-fill: #999; -fx-wrap-text: true;" text="Spacious room with two beds and modern amenities." />
+               </children>
+            </VBox>
+
+            <!-- Room 3 -->
+            <VBox alignment="CENTER" prefWidth="120.0" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10;">
+               <children>
+                  <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Suite" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $250" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Capacity: 4 people" />
+                  <Label style="-fx-font-size: 12; -fx-text-fill: #999; -fx-wrap-text: true;" text="Luxurious suite with separate living area and premium features." />
+               </children>
+            </VBox>
+
+            <!-- Room 4 -->
+            <VBox alignment="CENTER" prefWidth="120.0" spacing="10.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: white; -fx-padding: 10;">
+               <children>
+                  <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Deluxe Room" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Price: $200" />
+                  <Label style="-fx-font-size: 14; -fx-text-fill: #666;" text="Capacity: 3 people" />
+                  <Label style="-fx-font-size: 12; -fx-text-fill: #999; -fx-wrap-text: true;" text="Elegant room with deluxe features and a comfortable stay." />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

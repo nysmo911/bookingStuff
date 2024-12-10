@@ -176,7 +176,7 @@ public class HomepageController {
             return row;
         });
     }
-
+    /*
     @FXML
     private void openRoomPage(Hotel selectedHotel) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/booking/fxml/roomSelection.fxml"));
@@ -186,4 +186,6 @@ public class HomepageController {
         stage.setScene(scene);
         stage.show();
     }
+
+     */
 }
