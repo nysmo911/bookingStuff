@@ -5,13 +5,11 @@ import booking.model.Room;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Projections;
 import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
@@ -26,11 +24,13 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     private MongoDatabase db = getInstance().getDatabase();
     final private  MongoCollection<Document> collection = db.getCollection("hotels");
+    private static final Set<String> validFieldNames = Set.of("city", "state", "number_of_rooms", "number_of_available_rooms", "room_references");
     private RoomDAO roomDAO = new RoomDAO();
+
 
     /**
      * Receives a Hotel object as an argument and adds to the database if duplicate isn't found.
-     * @param hotel
+     * @param hotel Hotel Object
      */
     @Override
     public void add(Hotel hotel){
@@ -70,8 +70,8 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Searches the Database for the first document matching the passed string. Returns the found document in the form of a Hotel object.
-     * @param hotelName
-     * @return Hotel
+     * @param hotelName name of hotel
+     * @return Hotel object
      */
     @Override
     public Hotel get(String hotelName) {
@@ -104,7 +104,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Retrieves all hotel documents as a List of Hotel objects. Parameter determines if rooms will be returned as well
-     * @param returnRooms
+     * @param returnRooms boolean
      * @return List
      */
     public List<Hotel> getAll(Boolean returnRooms) {
@@ -143,8 +143,8 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Searches for a hotel document with a matching name and returns the ID
-     * @param hotelName
-     * @return Object
+     * @param hotelName name of hotel
+     * @return Generic
      */
     public <Thing> Thing getID(String hotelName) {
         //Need dedupe
@@ -167,39 +167,35 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Queries the database for a document with a matching parameter and returns the name of it
-     * @param fieldName
-     * @param fieldValue
+     * @param fieldName name of document field
+     * @param fieldValue name of document value
      * @return String
      * @throws IllegalArgumentException
      */
     public String getMatch(String fieldName, String fieldValue) throws IllegalArgumentException {
         //Ensure fieldName is valid
-        if (fieldName != "city" && fieldName != "state" && fieldName != "room_references" && fieldName != "number_of_available_rooms") {
-            throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: city, room_references, or number_of_available_rooms");
+        if (!validFieldNames.contains(fieldName)) {
+            throw new IllegalArgumentException("Invalid fieldName. Please pass one of the following: " + String.join(", ", validFieldNames));
         }
 
         //Execute query and return
         Document queryDoc;
         String hotelName;
-        switch (fieldName) {
-            case null:
-                return null;
-            case "room_references":
-                long fieldValueLong = Long.parseLong(fieldValue);
-                Document query = new Document("room_references",
-                        new Document("$elemMatch",
-                                new Document("RoomID",
-                                        (fieldValueLong))
-                                )
-                );
+        if (fieldName.equals("room_references")) {
+            long fieldValueLong = Long.parseLong(fieldValue);
+            Document query = new Document("room_references",
+                    new Document("$elemMatch",
+                            new Document("RoomID",
+                                    (fieldValueLong))
+                    )
+            );
 
-                // Find the first matching document
-                Document resultDoc = collection.find(query).first();
-                hotelName = resultDoc.getString("name");
-                break;
-            default:
-                queryDoc = collection.find(eq(fieldName, fieldValue)).first();
-                hotelName = queryDoc.getString("name");
+            // Find the first matching document
+            Document resultDoc = collection.find(query).first();
+            hotelName = resultDoc.getString("name");
+        } else {
+            queryDoc = collection.find(eq(fieldName, fieldValue)).first();
+            hotelName = queryDoc.getString("name");
         }
         return hotelName;
 
@@ -214,8 +210,8 @@ public class HotelDAO implements GenericDAO<Hotel> {
      */
     public <Thing> Thing getValue(String name, String fieldName) throws IllegalArgumentException {
         //Ensure fieldName is valid
-        if (fieldName != "city" && fieldName != "state" && fieldName != "room_references" && fieldName != "number_of_available_rooms") {
-            throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: city, room_references, or number_of_available_rooms");
+        if (!validFieldNames.contains(fieldName)) {
+            throw new IllegalArgumentException("Invalid fieldName. Please pass one of the following: " + String.join(", ", validFieldNames));
         }
 
         //Execute query and return
@@ -251,8 +247,8 @@ public class HotelDAO implements GenericDAO<Hotel> {
     @Override
     public <Thing> void update(String hotelName, String fieldName, Thing fieldValue) throws IllegalArgumentException {
         //Ensure fieldName is a valid field
-        if (fieldName != "name" && fieldName != "city" && fieldName != "state" && fieldName != "room_references" && fieldName != "number_of_available_rooms") {
-            throw new IllegalArgumentException("Invalid Input for fieldName. Please pass one of the following: name, city, description, capacity, or isAvailable");
+        if (!validFieldNames.contains(fieldName)) {
+            throw new IllegalArgumentException("Invalid fieldName. Please pass one of the following: " + String.join(", ", validFieldNames));
         }
         //Get roomID
         Object hotelID = this.getID(hotelName);

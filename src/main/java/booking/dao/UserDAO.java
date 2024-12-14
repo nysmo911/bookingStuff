@@ -30,8 +30,8 @@ public class UserDAO implements GenericDAO<UserProfile>{
     private static final Set<String> validFieldNames = Set.of("first_name", "last_name", "email", "username", "password", "reservation_history");
 
     /**
-     * Translates a User object into an acceptable format and inserts that into the database
-     * @param user
+     * Translates a UserProfile object into an acceptable format and inserts that into the database
+     * @param user UserProfile object
      */
     @Override
     public void add(UserProfile user) {
@@ -59,7 +59,7 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Queries the database for an entry with a matching username and returns it as a UserProfile Object
-     * @param username
+     * @param username username field of the user
      * @return
      */
     @Override
@@ -89,9 +89,9 @@ public class UserDAO implements GenericDAO<UserProfile>{
     /**
      * Overloaded get method to query the database for an entry with a matching first and last name and return it as
      * a UserProfile object
-     * @param firstName
-     * @param lastName
-     * @return
+     * @param firstName first name of the user
+     * @param lastName  last name of the user
+     * @return UserProfile Object
      */
     public UserProfile get(String firstName, String lastName){
         //Query for a document that has a matching first and last name
@@ -147,9 +147,8 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Queries the database for a document with matching username and returns the ID of that Document
-     * @param username
-     * @return
-     * @param <Thing>
+     * @param username user name of the user
+     * @return generic User document ID
      */
     public <Thing> Thing getID(String username){
 
@@ -175,10 +174,9 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Queries the database by username for a specified field and returns the value of that field
-     * @param username
-     * @param fieldName
-     * @return
-     * @param <Thing>
+     * @param username username of the user
+     * @param fieldName user document field name
+     * @return generic value of specified field
      */
     public <Thing> Thing getValue (String username, String fieldName){
         //Validate fieldName input
@@ -210,10 +208,9 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Updates a single field of the document with the matching passed parameter, username.
-     * @param username
-     * @param fieldName
-     * @param fieldValue
-     * @param <Thing>
+     * @param username username of user
+     * @param fieldName user document field
+     * @param fieldValue document field value
      * @throws IllegalArgumentException
      */
     @Override
@@ -238,7 +235,7 @@ public class UserDAO implements GenericDAO<UserProfile>{
 
     /**
      * Deletes the first document with a matching username
-     * @param username
+     * @param username username of the user
      */
     @Override
     public void delete(String username) {

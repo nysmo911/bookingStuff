@@ -4,7 +4,6 @@ import booking.model.Hotel;
 import booking.model.Reservation;
 import booking.model.Room;
 import booking.model.UserProfile;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -38,7 +37,7 @@ public class ReservationDAO implements GenericDAO<Reservation> {
 
     /**
      * Receives a Reservation object as an argument and adds to the database
-     * @param resy
+     * @param resy Reservation object
      */
     @Override
     public void add(Reservation resy){
@@ -79,7 +78,7 @@ public class ReservationDAO implements GenericDAO<Reservation> {
 
     /**
      * Searches for a reservation, by reservationID and then returns the document in the form of a Reservation Object
-     * @param reservationID
+     * @param reservationID reservation document ID
      * @return Reservation object
      */
     @Override
@@ -122,7 +121,13 @@ public class ReservationDAO implements GenericDAO<Reservation> {
 
     }
 
-    public <Thing> List<Reservation> getByField(String fieldName, Thing fieldValue) {
+    /**
+     * Returns a list of Reservation objects whose passed fieldname equals the passed field value
+     * @param fieldName name of a Reservation document field
+     * @param fieldValue value of that field
+     * @return List of Reservations</Reservation></Reservations>
+     */
+    public <Thing> List<Reservation> getByField(String fieldName, Thing fieldValue) throws IllegalArgumentException {
         //Validate fieldName input
         if(!validFieldNames.contains(fieldName)){
             throw new IllegalArgumentException("Invalid fieldName. Please pass one of the following: " + String.join(", ", validFieldNames));
@@ -162,9 +167,9 @@ public class ReservationDAO implements GenericDAO<Reservation> {
 
     /**
      * Updates a single field, specified by the fieldName parameter, with the fieldValue paramter.
-     * @param reservationID
-     * @param fieldName
-     * @param fieldValue
+     * @param reservationID reservation document ID
+     * @param fieldName name of reservation document field
+     * @param fieldValue value of that field
      */
     @Override
     public <Thing> void update(String reservationID, String fieldName, Thing fieldValue){
@@ -188,7 +193,7 @@ public class ReservationDAO implements GenericDAO<Reservation> {
 
     /**
      * Deletes first database entry with a name that matches the string parameter
-     * @param reservationID
+     * @param reservationID reservation document ID
      */
     @Override
     public void delete(String reservationID) {
