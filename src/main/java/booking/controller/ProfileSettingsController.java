@@ -16,6 +16,8 @@ import java.io.IOException;
 
 /**
  * Controller class for Profile Settings Page.
+ * @author Andres Feldstedt
+ * @version 1.0
  */
 public class ProfileSettingsController {
 

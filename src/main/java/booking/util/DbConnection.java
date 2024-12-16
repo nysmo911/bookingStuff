@@ -15,13 +15,12 @@ import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 /**
- * The booking.dbConnection class establishes a connection to the database.
- * This allows other class & methods within booking to create instances of this database object without having to
+ * Establishes a connection to the database.
+ * This allows other classes within booking to create instances of this database object without having to
  * establish connection each time the database needs to be accessed.
  *
  *  @author Brandon Brenes
  *  @version 1.0
- *  @date 11/09/2024
  */
 public class DbConnection {
 

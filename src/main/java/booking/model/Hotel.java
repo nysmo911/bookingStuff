@@ -9,7 +9,6 @@ import java.util.*;
  *
  * @author Elina Hossain
  * @version 1.0
- * @date 10/27/2024
  */
 public class Hotel {
     private String name;    // The name of the hotel

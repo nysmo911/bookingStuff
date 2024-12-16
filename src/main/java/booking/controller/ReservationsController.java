@@ -4,9 +4,7 @@ import booking.dao.HotelDAO;
 import booking.dao.ReservationDAO;
 import booking.dao.RoomDAO;
 import booking.dao.UserDAO;
-import booking.model.Hotel;
 import booking.model.Reservation;
-import booking.model.UserProfile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,18 +12,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-
+/**
+ * Displays the user's reservations
+ * @author Andres Feldstedt, Brandon Brenes, and Joseph Salama
+ * @version 1.0
+ */
 public class ReservationsController {
     @FXML
     private ListView<Reservation> currentReservationsList;
@@ -39,7 +37,7 @@ public class ReservationsController {
     @FXML
     public void initialize() {
         try {
-            currentReservation(); // Call your reservation-loading logic here
+            currentReservation();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,14 +50,6 @@ public class ReservationsController {
         //Get all reservations with userID
         List<Reservation> reservations = reservationDAO.getByField("UserID",uid);
 
-        //Get current reservations (have not happened yet)
-        //List<Reservation> curRes = new ArrayList<>();
-       // for (Reservation r : reservations) {
-         //   if (r.getStartDate().isAfter(LocalDate.now())){
-           //     curRes.add(r);
-        //    }
-      //  }
-        //Set fields to curRes
         ObservableList<Reservation> reservationsObservableList = FXCollections.observableList(reservations);
         currentReservationsList.setItems(reservationsObservableList);
 

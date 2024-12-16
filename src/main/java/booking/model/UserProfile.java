@@ -2,9 +2,10 @@ package booking.model;
 
 import java.util.List;
 
-/** booking.model.userProfile.java
+/**
+ * User Profile class
  * @author Joseph Salama
- * @version 2.0
+ * @version 1.0
  */
 
 public class UserProfile {

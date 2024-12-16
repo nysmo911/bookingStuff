@@ -2,22 +2,15 @@ package booking.controller;
 
 import booking.dao.HotelDAO;
 import booking.model.Hotel;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Projections;
-import com.mongodb.client.FindIterable;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import org.bson.Document;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import org.bson.conversions.Bson;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -30,10 +23,9 @@ import static booking.util.DbConnection.getInstance;
 import static com.mongodb.client.model.Filters.eq;
 
 /**
- * The booking.controller.HomepageController class provides the functionality to the first page of our application.
- * @author Brandon Brenes
+ * Provides functionality to the first page of our application, namely displaying and searching for hotels
+ * @author Brandon Brenes and Joseph Salama
  * @version 1.0
- * @date 11/11/2024
  */
 
 public class HomepageController {

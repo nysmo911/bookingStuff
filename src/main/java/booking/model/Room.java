@@ -44,6 +44,12 @@ public class Room {
     }
 
     /**
+     * Sets the room type
+     * @param typeName (room type)
+     */
+    public void setTypeName(String typeName) {this.typeName = typeName;}
+
+    /**
      * Retrieves the description of the room.
      * @return the room description
      */
@@ -51,6 +57,11 @@ public class Room {
         return description;
     }
 
+    /**
+     * Sets the room's description
+     * @param description of the room
+     */
+    public void setDescription(String description) {this.description = description;}
     /**
      * Retrieves the price of the room.
      * @return the room price
@@ -60,6 +71,12 @@ public class Room {
     }
 
     /**
+     * Sets the price
+     * @param price of the room
+     */
+    public void setPrice(double price) {this.price = price;}
+
+    /**
      * Checks if the room is available.
      * @return true if available, false otherwise
      */
@@ -67,6 +84,11 @@ public class Room {
         return isAvailable;
     }
 
+    /**
+     * Changes the rooms availability
+     * @param availability of the room
+     */
+    public void setAvailability(boolean availability) {this.isAvailable = availability;}
 
     /**
      * Retrieves the capacity of the room.
@@ -76,6 +98,11 @@ public class Room {
         return capacity;
     }
 
+    /**
+     * Sets the capacity of the room
+     * @param capacity of room
+     */
+    public void setCapacity(int capacity) {this.capacity = capacity;}
     /**
      * Returns a string representation of the room, including price, availability, type, and capacity.
      * @return a string describing the room

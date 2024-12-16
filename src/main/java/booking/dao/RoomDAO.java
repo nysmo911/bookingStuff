@@ -21,7 +21,6 @@ import static com.mongodb.client.model.Filters.eq;
  * RoomDAO implements GenericDAO as an abstraction between the Room Class and database operations
  *
  * @author Brandon Brenes
- * @date   12/2/2024
  * @version 1.0
  **/
 public class RoomDAO implements GenericDAO<Room> {

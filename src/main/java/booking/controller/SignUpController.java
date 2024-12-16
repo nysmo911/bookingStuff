@@ -14,6 +14,11 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 
+/**
+ * Controls the signup page. Allows the user to sign into bookingStuf
+ * @author Andres Feldstedt and Joseph Salama
+ * @version 1.0
+ */
 public class SignUpController {
     @FXML
     private TextField usernameField; // Links to TextField in scene

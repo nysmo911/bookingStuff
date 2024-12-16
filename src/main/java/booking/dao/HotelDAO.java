@@ -17,7 +17,6 @@ import static com.mongodb.client.model.Filters.eq;
  * HotelDAO implements GenericDAO as an abstraction between the Hotel Class and database operations
  *
  * @author Brandon Brenes
- * @date   11/26/2024
  * @version 1.0
  **/
 public class HotelDAO implements GenericDAO<Hotel> {
@@ -170,7 +169,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
      * @param fieldName name of document field
      * @param fieldValue name of document value
      * @return String
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException for fieldnames that are valid db fields
      */
     public String getMatch(String fieldName, String fieldValue) throws IllegalArgumentException {
         //Ensure fieldName is valid
@@ -204,8 +203,8 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Queries the database, by "name" for a specified field and returns the value
-     * @param name
-     * @param fieldName
+     * @param name of document
+     * @param fieldName specified field
      * @return Generic
      */
     public <Thing> Thing getValue(String name, String fieldName) throws IllegalArgumentException {
@@ -239,10 +238,10 @@ public class HotelDAO implements GenericDAO<Hotel> {
     /**
      * Updates a single field, specified by the fieldName parameter, with the fieldValue parameter
      * fieldName (fieldValue type) must be one of the following: (String) name, (String) city, (String) state, (Integer) number_of_rooms, (List) room_references, or (Integer) number_of_available_rooms
-     * @param hotelName
-     * @param fieldName
-     * @param fieldValue
-     * @throws IllegalArgumentException
+     * @param hotelName name of hotel
+     * @param fieldName name of specified field
+     * @param fieldValue value of field
+     * @throws IllegalArgumentException for passed fieldName that isn't a valid db field
      */
     @Override
     public <Thing> void update(String hotelName, String fieldName, Thing fieldValue) throws IllegalArgumentException {
@@ -276,8 +275,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Replaces database entry matching the name of the passed Hotel object, with the passed Hotel object.
-     * @param hotel
-     * @return void
+     * @param hotel Hotel object
      */
     public void replace(Hotel hotel) {
         //Create updated Document from Hotel Object
@@ -299,7 +297,7 @@ public class HotelDAO implements GenericDAO<Hotel> {
 
     /**
      * Deletes first database entry with a name that matches the string parameter
-     * @param name
+     * @param name of hotel
      */
     @Override
     public void delete(String name) {

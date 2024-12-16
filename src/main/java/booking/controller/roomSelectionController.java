@@ -29,6 +29,11 @@ import java.io.IOException;
 import java.util.List;
 import static booking.application.Main.scene;
 
+/**
+ * Displays the rooms of a specific hotel
+ * @author Andres Feldstedt, Brandon Brenes, and Joseph Salama
+ * @version 1.0
+ */
 public class roomSelectionController {
 
     private RoomDAO roomDAO = new RoomDAO(); // Presuming you use this later for fetching rooms.

@@ -34,6 +34,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the booking confirmation page logic
+ * @author Brandon Brenes and Joseph Salama
+ * @version 1.0
+ */
 public class BookingConfirmController {
     Hotel selectedHotel;
     Room selectedRoom;

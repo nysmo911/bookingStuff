@@ -7,6 +7,8 @@ import java.time.LocalDate;
  * The Reservation class represents a booking made by a user.
  * It contains details about the reservation's start date, end date,
  * associated user, hotel, and room.
+ * @author Andres Feldstedt
+ * @version 1.0
  */
 public class Reservation {
 

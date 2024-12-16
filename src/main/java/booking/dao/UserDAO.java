@@ -20,7 +20,6 @@ import java.util.Set;
  * UserDAO implements GenericDAO as an abstraction between the UserProfile class and database operations
  *
  * @author Brandon Brenes
- * @date 12/05/2024
  * @version 1.0
  */
 public class UserDAO implements GenericDAO<UserProfile>{

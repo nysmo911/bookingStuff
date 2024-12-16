@@ -13,6 +13,11 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import java.io.IOException;
 
+/**
+ * Allows the user to sign in to the platform
+ * @author Andres Feldstedt and Joseph Salama
+ * @version 1.0
+ */
 public class SignInController {
     @FXML
     private TextField usernameField; // Links to TextField in scene

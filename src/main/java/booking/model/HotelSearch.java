@@ -8,7 +8,6 @@ import java.util.*;
  *
  *  @author Elina Hossain
  *  @version 1.0
- *  @date 10/31/2024
  */
 class HotelSearch {
 

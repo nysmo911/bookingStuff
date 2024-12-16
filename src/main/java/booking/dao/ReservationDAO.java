@@ -22,7 +22,6 @@ import static com.mongodb.client.model.Filters.eq;
  * ReservationDAO implements GenericDAO as an abstraction between the Hotel Class and database operations
  *
  * @author Brandon Brenes
- * @date 12/9/2024
  * @version 1.0
  */
 public class ReservationDAO implements GenericDAO<Reservation> {
@@ -125,7 +124,7 @@ public class ReservationDAO implements GenericDAO<Reservation> {
      * Returns a list of Reservation objects whose passed fieldname equals the passed field value
      * @param fieldName name of a Reservation document field
      * @param fieldValue value of that field
-     * @return List of Reservations</Reservation></Reservations>
+     * @return List of Reservations
      */
     public <Thing> List<Reservation> getByField(String fieldName, Thing fieldValue) throws IllegalArgumentException {
         //Validate fieldName input

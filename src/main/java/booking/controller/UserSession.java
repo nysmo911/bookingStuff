@@ -1,5 +1,10 @@
 package booking.controller;
 
+/**
+ * Handles user login and login status
+ * @author Joseph Salama
+ * @version 1.0
+ */
 public class UserSession {
     // Singleton instance
     private static UserSession instance;

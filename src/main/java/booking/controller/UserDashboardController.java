@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import java.io.IOException;
 
+/**
+ * Handles the dashboard logic which includes the profile settings button, reservation button, signOut button, and back button
+ * @author Andres Feldstedt and Joseph Salama
+ * @version 1.0
+ */
 public class UserDashboardController {
 
     @FXML
